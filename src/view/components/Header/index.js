@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
+import {Link} from 'react-router-dom';
 import {IconLogo} from "../../../icons";
 import SearchBox from "../SearchBox";
 import Nav from "./Nav";
@@ -8,8 +9,10 @@ const Header = () => {
 
     return (
         <Container>
-            <Logo><IconLogo/></Logo>
-            <SearchBox/>
+            <Logo to={"/"}>
+                <IconLogo/>
+            </Logo>
+            <SearchBox shape="round"/>
             <Nav/>
         </Container>
     )
@@ -21,7 +24,7 @@ const Container = styled.div`
   align-items: center;
   padding: 0 20px;s
 `;
-const Logo = styled.div`
+const Logo = styled(Link)`
     margin-right: 20px;
 `
 

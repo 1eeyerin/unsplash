@@ -2,8 +2,9 @@ import React, {useState} from "react";
 import styled from "styled-components";
 import {IconSearch} from "../../../icons";
 import {navigate} from "../../../lib/History";
+import cn from "classnames";
 
-function SearchBox() {
+function SearchBox({shape}) {
 
     const [value, setValue] = useState('');
 
@@ -17,7 +18,7 @@ function SearchBox() {
     }
 
     return (
-        <Container>
+        <Container classname={cn('SearchBox', shape)}>
             <Form onSubmit={onSubmit}>
                 <Button>
                     <IconSearch/>
@@ -42,11 +43,26 @@ const Form = styled.form`
   display: flex;
   background: #eeeeee;
   border-radius: 19px;
-  padding-left: 6px;s
+  padding-left: 6px;
+  .round & {
+    background: #eee;
+    border-radius: 19px;
+  }
+  .square & {
+    background: #fff;
+    border-radius: 4px;
+  }
 `
 const Label = styled.label`
   display: block;
   height: 38px;
+  width: 100%;
+  .round & {
+    height: 38px;
+  }
+  .square & {
+    height: 54px;
+  }
 `
 const Button = styled.div`
   background: transparent;
@@ -59,6 +75,12 @@ const Button = styled.div`
 
   svg {
     width: 20px;
+    .round & {
+      width: 100%;
+    }
+    .square & {
+      width: 100%;
+    }
   }
 `
 const Input = styled.input`
