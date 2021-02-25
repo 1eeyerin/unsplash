@@ -22,10 +22,15 @@ const Container = styled.div`
   display: flex;
   height: 62px;
   align-items: center;
-  padding: 0 20px;s
+  padding: 0 20px;
 `;
 const Logo = styled(Link)`
-    margin-right: 20px;
+  margin-right: 18px;
+
+  svg {
+    width: 32px;
+    height: auto;
+  }
 `
 
 export default Header;
