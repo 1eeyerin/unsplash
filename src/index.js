@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
 import App from './view/App';
 import {Router} from "react-router-dom";
 import {Provider} from 'react-redux';

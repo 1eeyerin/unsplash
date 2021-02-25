@@ -3,9 +3,9 @@ import styled from "styled-components";
 import {IconSearch} from "../../../icons";
 import {navigate} from "../../../lib/History";
 import cn from "classnames";
+import {font} from "../../../styled/Font.Styled";
 
 function SearchBox({shape}) {
-
     const [value, setValue] = useState('');
 
     const onChange = (e) => {
@@ -18,7 +18,7 @@ function SearchBox({shape}) {
     }
 
     return (
-        <Container classname={cn('SearchBox', shape)}>
+        <Container className={cn('SearchBox', shape)}>
             <Form onSubmit={onSubmit}>
                 <Button>
                     <IconSearch/>
@@ -28,7 +28,7 @@ function SearchBox({shape}) {
                         type="text"
                         value={value}
                         onChange={onChange}
-                        placeholder={"Search photos"}
+                        placeholder={"Search free high-resolution photos"}
                     />
                 </Label>
             </Form>
@@ -44,42 +44,53 @@ const Form = styled.form`
   background: #eeeeee;
   border-radius: 19px;
   padding-left: 6px;
+  height: 40px;
+  align-items: center;
+
   .round & {
     background: #eee;
     border-radius: 19px;
   }
+
   .square & {
     background: #fff;
     border-radius: 4px;
+    height:54px;
   }
 `
 const Label = styled.label`
   display: block;
-  height: 38px;
   width: 100%;
+
   .round & {
     height: 38px;
   }
+
   .square & {
     height: 54px;
   }
 `
-const Button = styled.div`
+const Button = styled.button`
   background: transparent;
   border: 0;
   display: flex;
+  align-items: center;
+  padding-left: 8px;
 
   &:focus {
     outline: 0;
   }
 
   svg {
-    width: 20px;
+    height: auto;
+    fill: #767676;
+
     .round & {
-      width: 100%;
+      width: 20px;
     }
+
     .square & {
-      width: 100%;
+      width: 24px;
     }
   }
 `
@@ -90,6 +101,8 @@ const Input = styled.input`
   border: 0;
   background: transparent;
   padding: 8px;
+  font-family: ${font.en};
+  font-size: 15px;
 
   &:focus {
     outline: 0;
