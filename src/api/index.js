@@ -1,7 +1,16 @@
-import {FetchJson} from "../lib/Fetch";
+import axios from "axios";
+
+const axiosInstance = axios.create({
+    baseURL: process.env.REACT_APP_BASE_API_URL,
+    timeout: 6000,
+});
 
 const API = {
-    getTodo: (data) => FetchJson.get('/todos', data),
+    getPhotos: (data) => axiosInstance({
+        method: 'get',
+        url: '/photos',
+        params: data,
+    })
 }
 
 export default API;
