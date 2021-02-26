@@ -23,6 +23,12 @@ const Container = styled.div`
   height: 62px;
   align-items: center;
   padding: 0 20px;
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 2;
+  background: #fff;
 `;
 const Logo = styled(Link)`
   margin-right: 18px;

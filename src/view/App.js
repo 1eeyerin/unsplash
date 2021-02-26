@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import {GlobalStyle} from "../styled/Reset.Styled";
 import Routes from "./routes/Routes";
 import Header from "./components/Header";
+import Lnb from "./components/Lnb";
 
 const App = () => {
 
@@ -10,6 +11,7 @@ const App = () => {
         <Container>
             <GlobalStyle/>
             <Header/>
+            <Lnb/>
             <Routes/>
         </Container>
     )
