@@ -27,7 +27,6 @@ const Container = styled.div`
   justify-content: center;
   position: relative;
   z-index: 0;
-
   &:after {
     content: "";
     width: 100%;
