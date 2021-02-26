@@ -92,3 +92,28 @@ export const recomposePhotos = (items) => {
 
     return photoGroup;
 }
+
+export const moveSlideMenu = ({slideRef, setBreakPoint}) => {
+
+    const lnbMenu = (arrow) => {
+        let pos = 0;
+        const ani = setInterval(frame, 10);
+        const scrollWidth = slideRef.current.scrollWidth - slideRef.current.clientWidth;
+
+        function handleClassName() {
+            setBreakPoint("active");
+            (slideRef.current.scrollLeft <= 30 || slideRef.current.scrollLeft >= (scrollWidth - 30)) && setBreakPoint(arrow);
+        }
+
+        function frame() {
+            handleClassName();
+            if (pos === 25 || pos === -25) clearInterval(ani);
+            else {
+                arrow === "prev" ? pos-- : pos++;
+                slideRef.current.scrollLeft += pos;
+            }
+        }
+    }
+
+    return {lnbMenu};
+};
