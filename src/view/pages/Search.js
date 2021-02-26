@@ -1,11 +1,12 @@
 import React from "react";
 import styled from "styled-components";
+import SearchPhotoListContainer from "../containers/SearchPhotoListContainer";
 
-function Search(){
+function Search(props){
     
     return(
         <Container>
-            Search
+            <SearchPhotoListContainer {...props} />
         </Container>
     )
 }

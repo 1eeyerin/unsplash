@@ -46,12 +46,10 @@ const Form = styled.form`
   padding-left: 6px;
   height: 40px;
   align-items: center;
-
   .round & {
     background: #eee;
     border-radius: 19px;
   }
-
   .square & {
     background: #fff;
     border-radius: 4px;
@@ -61,11 +59,9 @@ const Form = styled.form`
 const Label = styled.label`
   display: block;
   width: 100%;
-
   .round & {
     height: 38px;
   }
-
   .square & {
     height: 54px;
   }
@@ -76,19 +72,15 @@ const Button = styled.button`
   display: flex;
   align-items: center;
   padding-left: 8px;
-
   &:focus {
     outline: 0;
   }
-
   svg {
     height: auto;
     fill: #767676;
-
     .round & {
       width: 20px;
     }
-
     .square & {
       width: 24px;
     }
@@ -103,7 +95,6 @@ const Input = styled.input`
   padding: 8px;
   font-family: ${font.en};
   font-size: 15px;
-
   &:focus {
     outline: 0;
   }
