@@ -1,17 +1,17 @@
 import React from "react";
 import styled from "styled-components";
 
-function PhotoCard({urls}){
-
+function Lnb(){
+    
     return(
         <Container>
-            <img src={urls.regular} alt=""/>
+            Lnb
         </Container>
     )
 }
 
 const Container = styled.div`
-    padding: 12px 0;
+
 `
 
-export default PhotoCard;
+export default Lnb;

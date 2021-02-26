@@ -4,6 +4,7 @@ import {photosActions} from "../../redux/ActionCreators";
 import PhotoList from "../components/Photos/PhotoList";
 import {useSelector} from "react-redux";
 import {ContentContainer} from "../components/Layout/Layout.Styled";
+import {URL} from "../../constants/Consts";
 
 function MainPhotoListContainer() {
 
@@ -15,7 +16,7 @@ function MainPhotoListContainer() {
 
     const getPhotos = () => {
         photosActions.getPhotos({
-            client_id: process.env.REACT_APP_CLIENT_ID,
+            client_id: URL.API_CLIENT_ID,
             per_page: 20,
         });
     }
