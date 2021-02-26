@@ -13,7 +13,7 @@ const FetchConsts = {
 }
 
 const axiosInstance = axios.create({
-    baseURL: URL.API_BASE_URL,
+    baseURL: URL.BASE_API_URL,
     timeout: 6000,
 });
 
