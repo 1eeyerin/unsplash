@@ -4,12 +4,12 @@ import FixMenu from "./FixMenu";
 import HorizontalSlideMenu from "./HorizontalSlideMenu";
 import {font} from "../../../styled/Font.Styled";
 
-function Lnb() {
+function  Lnb({topicNav}) {
 
     return (
         <Container>
             <FixMenu/>
-            <HorizontalSlideMenu/>
+            <HorizontalSlideMenu topicNav={topicNav}/>
         </Container>
     )
 }

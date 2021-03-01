@@ -7,9 +7,9 @@ const saga = function* () {
         takeLatest(Action.Types.SEARCH_PHOTOS, function* ({data}) {
             try {
                 const result = yield call(API.searchPhotos, data);
-                if(result.data) {
+                if(result) {
                     yield put(Action.Creators.updateState({
-                        searchResults: result.data,
+                        searchResults: result,
                     }))
                 }
             } catch (e) {
