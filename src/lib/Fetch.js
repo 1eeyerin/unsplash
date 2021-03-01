@@ -17,7 +17,7 @@ const axiosInstance = axios.create({
     timeout: 6000,
 });
 
-const request = async (contentType, method, url, data = {}) => {
+const request = async (method, url, data = {}) => {
 
     try {
         const config = {
@@ -31,11 +31,9 @@ const request = async (contentType, method, url, data = {}) => {
             config.data = data;
         }
 
-        console.log('@@[Request Config]', config);
-
         const result = await axiosInstance(config);
-
         return result.data;
+
     } catch (e) {
         console.log("@@ e", e)
     } finally {
@@ -44,10 +42,10 @@ const request = async (contentType, method, url, data = {}) => {
 }
 
 const FetchJson = {
-    get: (url, data) => request(FetchConsts.APPLICATION_JSON, FetchConsts.GET, url, data),
-    post: (url, data) => request(FetchConsts.APPLICATION_JSON, FetchConsts.POST, url, data),
-    put: (url, data) => request(FetchConsts.APPLICATION_JSON, FetchConsts.PUT, url, data),
-    delete: (url, data) => request(FetchConsts.APPLICATION_JSON, FetchConsts.DELETE, url, data),
+    get: (url, data) => request(FetchConsts.GET, url, data),
+    post: (url, data) => request(FetchConsts.POST, url, data),
+    put: (url, data) => request(FetchConsts.PUT, url, data),
+    delete: (url, data) => request(FetchConsts.DELETE, url, data),
 }
 
 export {FetchJson};

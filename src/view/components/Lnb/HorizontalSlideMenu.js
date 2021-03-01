@@ -5,7 +5,7 @@ import {SlideBtnNext, SlideBtnPrev} from "../../../icons";
 import cn from "classnames";
 import {moveSlideMenu} from "../../../lib/Common";
 
-function HorizontalSlideMenu() {
+function HorizontalSlideMenu({topicNav}) {
 
     const slideRef = useRef();
     const [breakPoint, setBreakPoint] = useState("");
@@ -21,29 +21,9 @@ function HorizontalSlideMenu() {
                 <SlideBtnPrev/><span>prev button</span>
             </Button>
             <List ref={slideRef}>
-                <li><Link to="/t/wallpapers">Wallpapers</Link></li>
-                <li><Link to="/t/nature">Nature</Link></li>
-                <li><Link to="/t/people">People</Link></li>
-                <li><Link to="/t/architecture">Architecture</Link></li>
-                <li><Link to="/t/current-events">Current Events</Link></li>
-                <li><Link to="/t/business-work">Business & Work</Link></li>
-                <li><Link to="/t/experimental">Experimental</Link></li>
-                <li><Link to="/t/fashion">Fashion</Link></li>
-                <li><Link to="/t/film">Film</Link></li>
-                <li><Link to="/t/health-wellness">Health & Wellness</Link></li>
-                <li><Link to="/t/interiors">Interiors</Link></li>
-                <li><Link to="/t/street-sphotography">Street Photography</Link></li>
-                <li><Link to="/t/technology">Technology</Link></li>
-                <li><Link to="/t/travel">Travel</Link></li>
-                <li><Link to="/t/textures-patterns">Textures & Patterns</Link></li>
-                <li><Link to="/t/animals">Animals</Link></li>
-                <li><Link to="/t/food-drink">Food & Drink</Link></li>
-                <li><Link to="/t/athletics">Athletics</Link></li>
-                <li><Link to="/t/spirituality">Spirituality</Link></li>
-                <li><Link to="/t/arts-sculture">Arts & Culture</Link></li>
-                <li><Link to="/t/history">History</Link></li>
-                <li><Link to="/t/purple">Purple</Link></li>
-                <li><Link to="/t/yellow">Yellow</Link></li>
+                {
+                    topicNav.map((item, i) => <li><Link to={`/t/${item.slug}`}>{item.title}</Link></li>)
+                }
             </List>
             <Button
                 type="button"
