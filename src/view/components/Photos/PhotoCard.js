@@ -1,11 +1,13 @@
 import React from "react";
 import styled from "styled-components";
+import CardInfo from "./CardInfo";
 
 function PhotoCard({urls}){
 
     return(
         <Container>
             <img src={urls.regular} alt=""/>
+            <CardInfo/>
         </Container>
     )
 }
