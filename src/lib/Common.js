@@ -93,30 +93,20 @@ export const recomposePhotos = (items) => {
     return photoGroup;
 }
 
-export const moveSlideMenu = ({slideRef, setBreakPoint}) => {
+export const scrollMenu = ({maxScroll, scrollLeft, setClassName, setScrollLeft}) => {
 
-    const onScroll = () => {
-        const scrollWidth = slideRef.current.scrollWidth - slideRef.current.clientWidth;
-        setBreakPoint("active");
-        slideRef.current.scrollLeft <= 30 && setBreakPoint("prev");
-        slideRef.current.scrollLeft >= (scrollWidth - 30) && setBreakPoint("next");
+    const onClickLeft = () => {
+        setScrollLeft(Math.max(scrollLeft - 300, 0));
+    }
+    const onClickRight = () => {
+        setScrollLeft(Math.min(scrollLeft + 300, maxScroll));
     }
 
-    const lnbMenu = (arrow) => {
-        let pos = 0;
-        const ani = setInterval(frame, 10);
-
-        function frame() {
-            if (pos === 25 || pos === -25) clearInterval(ani);
-            else {
-                arrow === "prev" ? pos-- : pos++;
-                slideRef.current.scrollLeft += pos;
-            }
-        }
+    const handleClassName = () => {
+        setClassName("");
+        (scrollLeft <= 10) && setClassName("prev");
+        (scrollLeft >= (maxScroll - 10)) && setClassName("next");
     }
 
-    const onClickLeft = () => lnbMenu("prev");
-    const onClickRight = () => lnbMenu("next");
-
-    return {onScroll, onClickLeft, onClickRight};
-};
+    return {onClickLeft, onClickRight, handleClassName}
+}

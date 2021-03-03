@@ -2,32 +2,34 @@ import React, {useRef, useState, useEffect} from "react";
 import styled from "styled-components";
 import {Link} from "react-router-dom";
 import {SlideBtnNext, SlideBtnPrev} from "../../../icons";
+import cn from "classnames";
+import {scrollMenu} from "../../../lib/Common";
 
 function HorizontalSlideMenu({topicNav}) {
 
-    const [scrollLeft, setScrollLeft] = useState(0);
     const Ref = useRef();
+    const [maxScroll, setMaxScroll] = useState(0);
+    const [scrollLeft, setScrollLeft] = useState(0);
+    const [className, setClassName] = useState("");
 
-    const slideMenu = (Ref) => {
-        const maxScroll = Ref.current?.scrollWidth - Ref.current?.clientWidth;
+    useEffect(() => {
+        setMaxScroll(Ref.current?.scrollWidth - Ref.current?.clientWidth);
+    }, [Ref.current?.scrollWidth]);
 
-        const onClickLeft = () => {
-            setScrollLeft(Math.max(scrollLeft - 300, 0));
-        };
+    useEffect(() => {
+        handleClassName();
+    }, [scrollLeft, maxScroll]);
 
-        const onClickRight = () => {
-            setScrollLeft(Math.min(scrollLeft + 300, maxScroll));
-        };
-        console.log('@@ scrollLeft',scrollLeft);
-        console.log('@@ maxScroll',maxScroll);
-        return {onClickLeft, onClickRight}
-    }
-
-    const {onClickLeft, onClickRight, maxScroll} = slideMenu(Ref);
+    const {onClickLeft, onClickRight, handleClassName} = scrollMenu({
+        maxScroll,
+        scrollLeft,
+        setClassName,
+        setScrollLeft
+    });
 
 
     return (
-        <Container>
+        <Container className={cn(className)}>
             {
                 scrollLeft > 0 &&
                 <Button
@@ -85,6 +87,13 @@ const Container = styled.div`
     background: linear-gradient(90deg, hsla(0, 0%, 100%, 0) 0, #fff 95%, #fff);
   }
 
+  &.prev:before {
+    opacity: 0;
+  }
+
+  &.next:after {
+    opacity: 0;
+  }
 
   .btn {
     border: 0;
