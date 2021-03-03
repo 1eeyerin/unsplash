@@ -1,26 +1,50 @@
-import React, {useRef, useState} from "react";
+import React, {useRef, useState, useLayoutEffect} from "react";
 import styled from "styled-components";
 import {Link} from "react-router-dom";
 import {SlideBtnNext, SlideBtnPrev} from "../../../icons";
 import cn from "classnames";
-import {moveSlideMenu} from "../../../lib/Common";
 
 function HorizontalSlideMenu({topicNav}) {
 
     const slideRef = useRef();
-    const [breakPoint, setBreakPoint] = useState("");
+    const [scrollLeft, setScrollLeft] = useState(0);
+    const [scrollMax, setScrollMax] = useState(0);
+    const [slideStateName, setSlideStateName] = useState("");
 
-    const {lnbMenu} = moveSlideMenu({slideRef, setBreakPoint});
+    useLayoutEffect(() => {
+        slideRef.current && slideRef.current.dispatchEvent(new Event("scroll"));
+    }, [slideRef.current]);
+
+    const onScroll = (e) => {
+        setScrollLeft(e.target.scrollLeft);
+        setScrollMax(slideRef.current.scrollWidth - slideRef.current.clientWidth);
+        handleClassName({mount : 50});
+    };
+
+    const onClickLeft = () => {
+        slideRef.current.scrollLeft = Math.max(scrollLeft - 100, 0);
+    };
+
+    const onClickRight = () => {
+        slideRef.current.scrollLeft = Math.min(scrollLeft + 100, scrollMax);
+    };
+
+    const handleClassName = ({mount}) => {
+        setSlideStateName("active");
+        scrollLeft <= mount && setSlideStateName("prev");
+        scrollLeft >= (scrollMax - mount) && setSlideStateName("next");
+    }
 
     return (
-        <Container className={cn(breakPoint)}>
+        <Container className={cn(slideStateName)}>
             <Button
                 type="button"
                 className="btn prev"
-                onClick={() => lnbMenu("prev")}>
-                <SlideBtnPrev/><span>prev button</span>
+                onClick={onClickLeft}>
+                <SlideBtnPrev/>
+                <span>prev button</span>
             </Button>
-            <List ref={slideRef}>
+            <List ref={slideRef} onScroll={onScroll}>
                 {
                     topicNav.map((item, i) => <li><Link to={`/t/${item.slug}`}>{item.title}</Link></li>)
                 }
@@ -28,8 +52,9 @@ function HorizontalSlideMenu({topicNav}) {
             <Button
                 type="button"
                 className="btn next"
-                onClick={() => lnbMenu("next")}>
-                <SlideBtnNext/><span>next button</span>
+                onClick={onClickRight}>
+                <SlideBtnNext/>
+                <span>next button</span>
             </Button>
         </Container>
     )
@@ -139,6 +164,7 @@ const List = styled.ul`
   height: 56px;
   font-size: 14px;
   margin-left: -32px;
+  scroll-behavior: smooth;
 
   &::-webkit-scrollbar {
     display: none;
