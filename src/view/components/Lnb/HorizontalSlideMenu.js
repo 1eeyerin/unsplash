@@ -2,34 +2,32 @@ import React, {useRef, useState, useEffect} from "react";
 import styled from "styled-components";
 import {Link} from "react-router-dom";
 import {SlideBtnNext, SlideBtnPrev} from "../../../icons";
-import cn from "classnames";
 
 function HorizontalSlideMenu({topicNav}) {
 
-    const slideRef = useRef();
-    const [breakPoint, setBreakPoint] = useState("");
     const [scrollLeft, setScrollLeft] = useState(0);
-    const [maxScroll, setMaxScroll] = useState(0);
+    const Ref = useRef();
 
-    useEffect(() => {
-        slideRef.current.dispatchEvent(new Event("scroll"));
-    }, []);
+    const slideMenu = (Ref) => {
+        const maxScroll = Ref.current?.scrollWidth - Ref.current?.clientWidth;
 
-    const onScroll = (e) => {
-        setScrollLeft(e.target.scrollLeft);
-        setMaxScroll(e.target.scrollWidth - e.target.clientWidth);
-    };
+        const onClickLeft = () => {
+            setScrollLeft(Math.max(scrollLeft - 300, 0));
+        };
 
-    const onClickLeft = () => {
-        slideRef.current.scrollLeft = Math.max(scrollLeft - 300, 0);
-    };
+        const onClickRight = () => {
+            setScrollLeft(Math.min(scrollLeft + 300, maxScroll));
+        };
+        console.log('@@ scrollLeft',scrollLeft);
+        console.log('@@ maxScroll',maxScroll);
+        return {onClickLeft, onClickRight}
+    }
 
-    const onClickRight = () => {
-        slideRef.current.scrollLeft = Math.min(scrollLeft + 300, maxScroll);
-    };
+    const {onClickLeft, onClickRight, maxScroll} = slideMenu(Ref);
+
 
     return (
-        <Container className={cn(breakPoint)}>
+        <Container>
             {
                 scrollLeft > 0 &&
                 <Button
@@ -40,7 +38,7 @@ function HorizontalSlideMenu({topicNav}) {
                     <span>prev button</span>
                 </Button>
             }
-            <List ref={slideRef} onScroll={onScroll}>
+            <List ref={Ref} scrollLeft={scrollLeft}>
                 {
                     topicNav.map((item, i) => <li key={i}><Link to={`/t/${item.slug}`}>{item.title}</Link></li>)
                 }
@@ -67,7 +65,6 @@ const Container = styled.div`
 
   &:after, &:before {
     transition: opacity .2s ease-in-out;
-    opacity: 0;
     content: "";
     display: block;
     pointer-events: none;
@@ -122,12 +119,11 @@ const Button = styled.button`
 `
 const List = styled.ul`
   white-space: nowrap;
-  overflow-x: scroll;
-  overflow-y: hidden;
   height: 56px;
   font-size: 14px;
   margin-left: -32px;
-  scroll-behavior: smooth;
+  transition: transform .4s;
+  transform: ${(props) => `translateX(-${props.scrollLeft}px)`};
 
   &::-webkit-scrollbar {
     display: none;
