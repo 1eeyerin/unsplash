@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import styled from "styled-components";
-import {searchActions} from "../../redux/ActionCreators";
+import {topicsActions} from "../../redux/ActionCreators";
 import {URL} from "../../constants/Consts";
 import PhotoList from "../components/Photos/PhotoList";
 import {ContentContainer} from "../components/Layout/Layout.Styled";
@@ -8,23 +8,24 @@ import {useSelector} from "react-redux";
 
 function TopicPhotoListContainer({match}){
     const query = match.params.query;
-    const {searchResults} = useSelector(state => state.search);
+    const {topics} = useSelector(state => state);
 
     useEffect(() => {
-        searchPhotos();
+        getTopic();
     }, [query]);
 
-    const searchPhotos = () => {
-        searchActions.searchPhotos({
+    const getTopic = () => {
+        topicsActions.getTopicPhoto({
             client_id: URL.API_CLIENT_ID,
-            query
+            per_page:20,
+            query,
         });
     }
 
     return(
         <Container>
             <ContentContainer>
-                <PhotoList data={searchResults.results}/>
+                <PhotoList data={topics.topicData}/>
             </ContentContainer>
         </Container>
     )
