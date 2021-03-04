@@ -7,26 +7,27 @@ import {scrollMenu} from "../../../lib/Common";
 
 function HorizontalSlideMenu({topicNav}) {
 
-    const Ref = useRef();
-    const [maxScroll, setMaxScroll] = useState(0);
-    const [scrollLeft, setScrollLeft] = useState(0);
+    const slideRef = useRef();
     const [className, setClassName] = useState("");
+    const [scrollLeft, setScrollLeft] = useState(0);
+    const [maxScroll, setMaxScroll] = useState(0);
 
     useEffect(() => {
-        setMaxScroll(Ref.current?.scrollWidth - Ref.current?.clientWidth);
-    }, [Ref.current?.scrollWidth]);
+        slideRef.current.dispatchEvent(new Event("scroll"));
+    }, [slideRef.current?.scrollWidth]);
 
     useEffect(() => {
         handleClassName();
     }, [scrollLeft, maxScroll]);
 
-    const {onClickLeft, onClickRight, handleClassName} = scrollMenu({
-        maxScroll,
+    const {onScroll, onClickLeft, onClickRight, handleClassName} = scrollMenu({
+        slideRef,
         scrollLeft,
+        setScrollLeft,
         setClassName,
-        setScrollLeft
+        maxScroll,
+        setMaxScroll
     });
-
 
     return (
         <Container className={cn(className)}>
@@ -40,7 +41,7 @@ function HorizontalSlideMenu({topicNav}) {
                     <span>prev button</span>
                 </Button>
             }
-            <List ref={Ref} scrollLeft={scrollLeft}>
+            <List ref={slideRef} onScroll={onScroll}>
                 {
                     topicNav.map((item, i) => <li key={i}><Link to={`/t/${item.slug}`}>{item.title}</Link></li>)
                 }
@@ -66,7 +67,6 @@ const Container = styled.div`
   position: relative;
 
   &:after, &:before {
-    transition: opacity .2s ease-in-out;
     content: "";
     display: block;
     pointer-events: none;
@@ -77,6 +77,14 @@ const Container = styled.div`
     width: 100px;
   }
 
+  &.prev:before {
+    opacity: 0;
+  }
+
+  &.next:after {
+    opacity: 0;
+  }
+
   &:before {
     left: 0;
     background: linear-gradient(270deg, hsla(0, 0%, 100%, 0) 0, #fff 95%, #fff);
@@ -85,14 +93,6 @@ const Container = styled.div`
   &:after {
     right: 0;
     background: linear-gradient(90deg, hsla(0, 0%, 100%, 0) 0, #fff 95%, #fff);
-  }
-
-  &.prev:before {
-    opacity: 0;
-  }
-
-  &.next:after {
-    opacity: 0;
   }
 
   .btn {
@@ -122,17 +122,17 @@ const Container = styled.div`
       font-size: 0;
     }
   }
-
 `
 const Button = styled.button`
 `
 const List = styled.ul`
   white-space: nowrap;
+  overflow-x: scroll;
+  overflow-y: hidden;
   height: 56px;
   font-size: 14px;
   margin-left: -32px;
-  transition: transform .4s;
-  transform: ${(props) => `translateX(-${props.scrollLeft}px)`};
+  scroll-behavior: smooth;
 
   &::-webkit-scrollbar {
     display: none;
