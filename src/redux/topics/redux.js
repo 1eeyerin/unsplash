@@ -2,11 +2,13 @@ import {createActions, createReducer} from "reduxsauce";
 
 const initialState = {
     list: [],
+    topicData:[],
 }
 
 export const Action = createActions({
     updateState: ['props'],
     getTopicList: ['data'],
+    getTopicPhoto: ['data'],
 }, {
     prefix: 'TOPICS/'
 });
