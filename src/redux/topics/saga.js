@@ -12,7 +12,16 @@ const saga = function* () {
                     list: result
                 })) 
             }
-        })
+        }),
+        takeLatest(Action.Types.GET_TOPIC_PHOTO,function* ({data}) {
+            const result = yield call(API.getTopicPhoto, data);
+
+            if(result) {
+                yield put(Action.Creators.updateState({
+                    topicData: result
+                }))
+            }
+        }),
     ])
 }
 
