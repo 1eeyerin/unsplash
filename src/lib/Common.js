@@ -93,14 +93,20 @@ export const recomposePhotos = (items) => {
     return photoGroup;
 }
 
-export const scrollMenu = ({maxScroll, scrollLeft, setClassName, setScrollLeft}) => {
+export const scrollMenu = ({slideRef, scrollLeft, setScrollLeft, setClassName, maxScroll, setMaxScroll}) => {
+
+    const onScroll = (e) => {
+        setScrollLeft(e.target.scrollLeft);
+        setMaxScroll(e.target.scrollWidth - e.target.clientWidth);
+    };
 
     const onClickLeft = () => {
-        setScrollLeft(Math.max(scrollLeft - 300, 0));
-    }
+        slideRef.current.scrollLeft = Math.max(scrollLeft - 300, 0);
+    };
+
     const onClickRight = () => {
-        setScrollLeft(Math.min(scrollLeft + 300, maxScroll));
-    }
+        slideRef.current.scrollLeft = Math.min(scrollLeft + 300, maxScroll);
+    };
 
     const handleClassName = () => {
         setClassName("");
@@ -108,5 +114,5 @@ export const scrollMenu = ({maxScroll, scrollLeft, setClassName, setScrollLeft})
         (scrollLeft >= (maxScroll - 10)) && setClassName("next");
     }
 
-    return {onClickLeft, onClickRight, handleClassName}
-}
+    return {onScroll, onClickLeft, onClickRight, handleClassName}
+};
