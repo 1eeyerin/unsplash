@@ -93,27 +93,26 @@ export const recomposePhotos = (items) => {
     return photoGroup;
 }
 
-export const moveSlideMenu = ({slideRef, setBreakPoint}) => {
+export const scrollMenu = ({slideRef, scrollLeft, setScrollLeft, setClassName, maxScroll, setMaxScroll}) => {
 
-    const lnbMenu = (arrow) => {
-        let pos = 0;
-        const ani = setInterval(frame, 10);
-        const scrollWidth = slideRef.current.scrollWidth - slideRef.current.clientWidth;
+    const onScroll = (e) => {
+        setScrollLeft(e.target.scrollLeft);
+        setMaxScroll(e.target.scrollWidth - e.target.clientWidth);
+    };
 
-        function handleClassName() {
-            setBreakPoint("active");
-            (slideRef.current.scrollLeft <= 30 || slideRef.current.scrollLeft >= (scrollWidth - 30)) && setBreakPoint(arrow);
-        }
+    const onClickLeft = () => {
+        slideRef.current.scrollLeft = Math.max(scrollLeft - 300, 0);
+    };
 
-        function frame() {
-            handleClassName();
-            if (pos === 25 || pos === -25) clearInterval(ani);
-            else {
-                arrow === "prev" ? pos-- : pos++;
-                slideRef.current.scrollLeft += pos;
-            }
-        }
+    const onClickRight = () => {
+        slideRef.current.scrollLeft = Math.min(scrollLeft + 300, maxScroll);
+    };
+
+    const handleClassName = () => {
+        setClassName("");
+        (scrollLeft <= 10) && setClassName("prev");
+        (scrollLeft >= (maxScroll - 10)) && setClassName("next");
     }
 
-    return {lnbMenu};
+    return {onScroll, onClickLeft, onClickRight, handleClassName}
 };

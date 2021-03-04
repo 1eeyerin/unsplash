@@ -1,36 +1,61 @@
-import React, {useRef, useState} from "react";
+import React, {useRef, useState, useEffect} from "react";
 import styled from "styled-components";
 import {Link} from "react-router-dom";
 import {SlideBtnNext, SlideBtnPrev} from "../../../icons";
 import cn from "classnames";
-import {moveSlideMenu} from "../../../lib/Common";
+import {scrollMenu} from "../../../lib/Common";
 
 function HorizontalSlideMenu({topicNav}) {
 
     const slideRef = useRef();
-    const [breakPoint, setBreakPoint] = useState("");
+    const [className, setClassName] = useState("");
+    const [scrollLeft, setScrollLeft] = useState(0);
+    const [maxScroll, setMaxScroll] = useState(0);
 
-    const {lnbMenu} = moveSlideMenu({slideRef, setBreakPoint});
+    useEffect(() => {
+        slideRef.current.dispatchEvent(new Event("scroll"));
+    }, [slideRef.current?.scrollWidth]);
+
+    useEffect(() => {
+        handleClassName();
+    }, [scrollLeft, maxScroll]);
+
+    const {onScroll, onClickLeft, onClickRight, handleClassName} = scrollMenu({
+        slideRef,
+        scrollLeft,
+        setScrollLeft,
+        setClassName,
+        maxScroll,
+        setMaxScroll
+    });
 
     return (
-        <Container className={cn(breakPoint)}>
-            <Button
-                type="button"
-                className="btn prev"
-                onClick={() => lnbMenu("prev")}>
-                <SlideBtnPrev/><span>prev button</span>
-            </Button>
-            <List ref={slideRef}>
+        <Container className={cn(className)}>
+            {
+                scrollLeft > 0 &&
+                <Button
+                    type="button"
+                    className="btn prev"
+                    onClick={onClickLeft}>
+                    <SlideBtnPrev/>
+                    <span>prev button</span>
+                </Button>
+            }
+            <List ref={slideRef} onScroll={onScroll}>
                 {
-                    topicNav.map((item, i) => <li><Link to={`/t/${item.slug}`}>{item.title}</Link></li>)
+                    topicNav.map((item, i) => <li key={i}><Link to={`/t/${item.slug}`}>{item.title}</Link></li>)
                 }
             </List>
-            <Button
-                type="button"
-                className="btn next"
-                onClick={() => lnbMenu("next")}>
-                <SlideBtnNext/><span>next button</span>
-            </Button>
+            {
+                scrollLeft < maxScroll &&
+                <Button
+                    type="button"
+                    className="btn next"
+                    onClick={onClickRight}>
+                    <SlideBtnNext/>
+                    <span>next button</span>
+                </Button>
+            }
         </Container>
     )
 }
@@ -42,8 +67,6 @@ const Container = styled.div`
   position: relative;
 
   &:after, &:before {
-    transition: opacity .2s ease-in-out;
-    opacity: 0;
     content: "";
     display: block;
     pointer-events: none;
@@ -54,18 +77,23 @@ const Container = styled.div`
     width: 100px;
   }
 
+  &.prev:before {
+    opacity: 0;
+  }
+
+  &.next:after {
+    opacity: 0;
+  }
+
   &:before {
     left: 0;
     background: linear-gradient(270deg, hsla(0, 0%, 100%, 0) 0, #fff 95%, #fff);
-    opacity: 0;
   }
 
   &:after {
     right: 0;
     background: linear-gradient(90deg, hsla(0, 0%, 100%, 0) 0, #fff 95%, #fff);
-    opacity: 1;
   }
-
 
   .btn {
     border: 0;
@@ -74,7 +102,6 @@ const Container = styled.div`
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    outline: 0;
     cursor: pointer;
     z-index: 2;
     width: 40px;
@@ -84,7 +111,6 @@ const Container = styled.div`
     &.prev {
       left: 0;
       margin-left: 8px;
-      opacity: 0;
     }
 
     &.next {
@@ -96,39 +122,6 @@ const Container = styled.div`
       font-size: 0;
     }
   }
-
-  &.prev .prev {
-    opacity: 0;
-  }
-
-  &.prev:before {
-    opacity: 0;
-  }
-
-  &.next .prev {
-    opacity: 1;
-  }
-
-  &.next:before {
-    opacity: 1;
-  }
-
-  &.next .next {
-    opacity: 0;
-  }
-
-  &.next:after {
-    opacity: 0;
-  }
-
-  &.active .btn {
-    opacity: 1;
-  }
-
-  &.active:before, &.active:after {
-    opacity: 1;
-  }
-
 `
 const Button = styled.button`
 `
@@ -139,6 +132,7 @@ const List = styled.ul`
   height: 56px;
   font-size: 14px;
   margin-left: -32px;
+  scroll-behavior: smooth;
 
   &::-webkit-scrollbar {
     display: none;
