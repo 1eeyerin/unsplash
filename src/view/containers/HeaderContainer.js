@@ -11,7 +11,6 @@ function HeaderContainer() {
 
     useEffect(() => {
         topicsActions.getTopicList({
-            client_id: URL.API_CLIENT_ID,
             per_page: 20
         })
     }, [])

@@ -26,7 +26,10 @@ const request = async (method, url, data = {}) => {
         }
 
         if (method === FetchConsts.GET) {
-            config.params = data;
+            config.params = {
+                client_id: URL.API_CLIENT_ID,
+                ...data,
+            }
         } else {
             config.data = data;
         }

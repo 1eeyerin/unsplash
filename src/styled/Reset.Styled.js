@@ -53,6 +53,11 @@ export const GlobalStyle = createGlobalStyle`
         vertical-align:top;
         max-width: 100%;
     }
+    
+    #popup {
+      position: relative;
+      z-index: 1000;
+    }
 `;
 
 

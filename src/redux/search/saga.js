@@ -6,6 +6,9 @@ const saga = function* () {
     yield all([
         takeLatest(Action.Types.SEARCH_PHOTOS, function* ({data}) {
             try {
+                yield put(Action.Creators.updateState({
+                    searchResults: {},
+                }))
                 const result = yield call(API.searchPhotos, data);
                 if(result) {
                     yield put(Action.Creators.updateState({
