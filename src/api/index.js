@@ -5,6 +5,8 @@ const API = {
     searchPhotos: (data) => FetchJson.get('/search/photos', data),
     getTopicList: (data) => FetchJson.get('/topics', data),
     getTopicPhoto: ([data, query]) => FetchJson.get(`/topics/${query}/photos`, data),
+    getPhotoById: (id) => FetchJson.get(`/photos/${id}`),
+    getPhotoRelated: (id) => FetchJson.get(`/photos/${id}/related`),
 }
 
 export default API;
