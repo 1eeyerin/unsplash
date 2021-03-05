@@ -17,7 +17,6 @@ function TopicPhotoListContainer({match}){
     const getTopic = () => {
         topicsActions.getTopicPhoto([
             {
-                client_id: URL.API_CLIENT_ID,
                 per_page: 20,
             },
             query,

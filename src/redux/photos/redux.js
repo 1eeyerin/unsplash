@@ -1,12 +1,16 @@
 import {createActions, createReducer} from "reduxsauce";
 
 const initialState = {
-    list: []
+    list: [],
+    popupPhoto: {
+        show: false,
+    }
 }
 
 export const Action = createActions({
     updateState: ['props'],
     getPhotos: ['data'],
+    getPhotoById: ['id'],
     setPhotos: ['photos'],
 }, {
     prefix: 'PHOTOS/'

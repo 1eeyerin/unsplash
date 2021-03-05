@@ -52,3 +52,10 @@ export const SlideBtnNext = () => (
         <path d="M11.3333 7.3333l2-2L24 16 13.3333 26.6666l-2-2L20 16l-8.6667-8.6667z"/>
     </svg>
 )
+
+export const IconPhotoFullSize = () => (
+    <svg width="32" height="32" className="_1NYtf" version="1.1" viewBox="0 0 32 32" aria-hidden="false">
+        <path
+            d="M14.5 19.3l-6 6h4.8V28H4v-9.3h2.7v4.8l6-6 1.8 1.8zM18.7 4v2.7h4.8l-6 6 1.9 1.9 6-6v4.8H28V4h-9.3z"/>
+    </svg>
+)

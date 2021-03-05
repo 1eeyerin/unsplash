@@ -16,7 +16,6 @@ function MainPhotoListContainer() {
 
     const getPhotos = () => {
         photosActions.getPhotos({
-            client_id: URL.API_CLIENT_ID,
             per_page: 20,
         });
     }

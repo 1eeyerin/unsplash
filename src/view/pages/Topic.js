@@ -21,7 +21,7 @@ const Container = styled.div`
 `
 const Title = styled.h1`
   padding-top: 60px;
-  padding-bottom: 72px;
+  padding-bottom: 48px;
   font-family: ${font.en};
   font-size: 46px;
   line-height: 1.2;

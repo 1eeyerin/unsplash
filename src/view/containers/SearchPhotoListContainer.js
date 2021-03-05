@@ -16,7 +16,6 @@ function SearchPhotoListContainer({match}){
 
     const searchPhotos = () => {
         searchActions.searchPhotos({
-            client_id: URL.API_CLIENT_ID,
             query
         });
     }

@@ -4,6 +4,8 @@ import {Link} from "react-router-dom";
 import {SlideBtnNext, SlideBtnPrev} from "../../../icons";
 import cn from "classnames";
 import {scrollMenu} from "../../../lib/Common";
+import _ from "lodash";
+import HorizontalMenuSkeleton from "../Loader/HorizontalMenuSkeleton";
 
 function HorizontalSlideMenu({topicNav}) {
 
@@ -13,7 +15,7 @@ function HorizontalSlideMenu({topicNav}) {
     const [maxScroll, setMaxScroll] = useState(0);
 
     useEffect(() => {
-        slideRef.current.dispatchEvent(new Event("scroll"));
+        (!_.isEmpty(topicNav)) && slideRef.current.dispatchEvent(new Event("scroll"));
     }, [slideRef.current?.scrollWidth]);
 
     useEffect(() => {
@@ -28,6 +30,9 @@ function HorizontalSlideMenu({topicNav}) {
         maxScroll,
         setMaxScroll
     });
+
+
+    if(_.isEmpty(topicNav)) return <HorizontalMenuSkeleton />;
 
     return (
         <Container className={cn(className)}>
