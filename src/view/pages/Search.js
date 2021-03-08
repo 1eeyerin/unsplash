@@ -3,7 +3,7 @@ import styled from "styled-components";
 import SearchPhotoListContainer from "../containers/SearchPhotoListContainer";
 
 function Search(props){
-    
+
     return(
         <Container>
             <SearchPhotoListContainer {...props} />
