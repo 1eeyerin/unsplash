@@ -49,5 +49,4 @@ const PhotoGroup = styled.div`
 const Col = styled.div`
 `
 
-//export default React.memo(PhotoList);
 export default PhotoList;
