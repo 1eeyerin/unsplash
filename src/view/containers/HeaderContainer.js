@@ -4,7 +4,6 @@ import Header from "../components/Header";
 import {topicsActions} from "../../redux/ActionCreators";
 import {useSelector} from "react-redux";
 import Lnb from "../components/Lnb";
-import {URL} from "../../constants/Consts";
 
 function HeaderContainer() {
     const {topics} = useSelector(state => state);

@@ -6,7 +6,6 @@ import SearchBox from "../SearchBox";
 import Nav from "./Nav";
 
 const Header = () => {
-
     return (
         <Container>
             <Logo to={"/"}>
