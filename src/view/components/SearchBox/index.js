@@ -1,16 +1,23 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import styled from "styled-components";
 import {IconSearch} from "../../../icons";
 import {navigate} from "../../../lib/History";
 import cn from "classnames";
 import {font} from "../../../styled/Font.Styled";
+import {useLocation} from "react-router-dom"
 
 function SearchBox({shape}) {
+    const location = useLocation();
+    const initialValue = location.pathname.startsWith('/search/') ? location.pathname.split('/').pop() : "";
     const [value, setValue] = useState('');
+
+    useEffect(() => {
+        setValue(initialValue);
+    }, [initialValue]);
 
     const onChange = (e) => {
         setValue(e.target.value);
-    }
+    };
 
     const onSubmit = (e) => {
         e.preventDefault();
