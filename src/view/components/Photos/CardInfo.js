@@ -2,16 +2,23 @@ import React from "react";
 import styled from "styled-components";
 import {IconPhotoCardAdd, IconPhotoCardDownload, IconPhotoCardLike} from "../../../icons";
 
-function CardInfo({name, profile_image, urls}) {
+function CardInfo({name, profile_image, urls, sponsorship}) {
 
     return (
         <Container>
-            <TopUtilBox>
-                <Button><IconPhotoCardLike/></Button>
-                <Button><IconPhotoCardAdd/></Button>
-            </TopUtilBox>
+            <Info>
+                <Sponsor>
+                    {
+                        sponsorship && "Sponsored"
+                    }
+                </Sponsor>
+                <Buttons>
+                    <Button><IconPhotoCardLike/></Button>
+                    <Button><IconPhotoCardAdd/></Button>
+                </Buttons>
+            </Info>
 
-            <BottomUtilBox>
+            <Info>
                 <UserAvatar>
                     <UserInfo>
                         <UserImage><img src={profile_image.small} alt=""/></UserImage>
@@ -19,7 +26,7 @@ function CardInfo({name, profile_image, urls}) {
                     </UserInfo>
                 </UserAvatar>
                 <Button as="a" href={urls.full} download><IconPhotoCardDownload/></Button>
-            </BottomUtilBox>
+            </Info>
         </Container>
     )
 }
@@ -41,7 +48,17 @@ const Container = styled.div`
     opacity: 1;
   }
 `
-
+const Sponsor = styled.div`
+  flex: 1;
+  opacity: .9;
+  font-weight: 500;
+  color: #fff;
+  font-size: 11px;
+  letter-spacing: .02em;
+  text-shadow: 0 1px 8px rgb(0 0 0 / 10%);
+`
+const Buttons = styled.div`
+`
 const Button = styled.button`
   height: 32px;
   padding: 0 11px;
@@ -70,13 +87,10 @@ const Button = styled.button`
     margin-left: 8px;
   }
 `
-const TopUtilBox = styled.div`
-  display: flex;
-  justify-content: flex-end;
-`
-const BottomUtilBox = styled.div`
+const Info = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
 `
 const UserAvatar = styled.div`
   display: flex;
