@@ -2,10 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import CardInfo from "./CardInfo";
 
-function PhotoCard({urls, onClick, user, sponsorship}) {
+function PhotoCard({urls, onClick, user, sponsorship, width, height, color}) {
+    const ratioHeight = height / width * 100;
+
     return (
         <Container onClick={onClick}>
-            <Contents>
+            <Contents style={{paddingBottom: `${ratioHeight}%`, backgroundColor: color}}>
                 <Image className="card-image">
                     <img src={urls.regular} alt=""/>
                 </Image>
@@ -25,10 +27,15 @@ const Container = styled.div`
 `
 const Contents = styled.div`
   position: relative;
+  padding-bottom: 50%; 
 `
 const Image = styled.div`
-  position: relative;
   z-index: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 
   &:before {
     content: "";
