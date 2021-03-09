@@ -1,6 +1,6 @@
 import {useEffect, useRef, useState} from "react";
 
-export const useOnViewport = ([options, isLoading]) => {
+export const useOnViewport = (options = {}, isLoading = false) => {
 
     const ref = useRef();
     const [inView, setInView] = useState(false);
