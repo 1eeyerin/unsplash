@@ -14,6 +14,7 @@ function SearchPhotoListContainer({match}){
     const searchPhotos = () => {
         searchActions.searchPhotos({
             query,
+            per_page: 5,
             page,
         });
     }

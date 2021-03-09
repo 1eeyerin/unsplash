@@ -1,7 +1,6 @@
 import React, {useEffect} from "react";
 import styled from "styled-components";
 import {topicsActions} from "../../redux/ActionCreators";
-import {URL} from "../../constants/Consts";
 import PhotoList from "../components/Photos/PhotoList";
 import {ContentContainer} from "../components/Layout/Layout.Styled";
 import {useSelector} from "react-redux";
@@ -17,7 +16,7 @@ function TopicPhotoListContainer({match}){
     const getTopic = () => {
         topicsActions.getTopicPhoto([
             {
-                per_page: 20,
+                per_page: 5,
             },
             query,
         ]);
