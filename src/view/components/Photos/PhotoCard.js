@@ -2,14 +2,14 @@ import React from "react";
 import styled from "styled-components";
 import CardInfo from "./CardInfo";
 
-function PhotoCard({urls, onClick, user}) {
+function PhotoCard({urls, onClick, user, sponsorship}) {
     return (
         <Container onClick={onClick}>
             <Contents>
                 <Image className="card-image">
                     <img src={urls.regular} alt=""/>
                 </Image>
-                <CardInfo {...user} urls={urls}/>
+                <CardInfo {...user} urls={urls} sponsorship={sponsorship}/>
             </Contents>
         </Container>
     )
