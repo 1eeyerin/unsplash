@@ -19,6 +19,7 @@ export default createReducer(initialState, {
         ...state,
         ...props
     }),
+
     [Action.Types.DELETE_HISTORY]: (state, {props}) => ({
         ...state,
         searchResults: {
