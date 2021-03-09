@@ -15,8 +15,8 @@ function  Lnb({topicNav}) {
 }
 
 const Container = styled.div`
-  position: sticky;
-  top: 62px;
+  position: relative;
+  top: 0;
   left: 0;
   width: 100%;
   z-index: 1;
