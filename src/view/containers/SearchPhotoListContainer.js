@@ -7,16 +7,28 @@ import {useSelector} from "react-redux";
 
 function SearchPhotoListContainer({match}){
     const query = match.params.query;
-    const {searchResults} = useSelector(state => state.search);
-
-    useEffect(() => {
-        searchPhotos();
-    }, [query]);
+    const {searchResults, isLoading} = useSelector(state => state.search);
+    const [page, setPage] = useState(1);
 
     const searchPhotos = () => {
         searchActions.searchPhotos({
-            query
+            query,
+            per_page: 5,
+            page,
         });
+    }
+
+    useEffect(() => {
+        searchActions.deleteHistory();
+    }, [query]);
+
+    useEffect(() => {
+        searchPhotos();
+    }, [query, page]);
+
+    const getMoreItems = () => {
+        if(8 <= page) return;
+        setPage(prevPage => prevPage + 1);
     }
 
     return(

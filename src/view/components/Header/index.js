@@ -22,10 +22,8 @@ const Container = styled.div`
   height: 62px;
   align-items: center;
   padding: 0 20px;
-  position: sticky;
-  top: 0;
-  left: 0;
   width: 100%;
+  position: relative;
   z-index: 2;
   background: #fff;
 `;

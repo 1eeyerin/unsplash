@@ -1,32 +1,47 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import styled from "styled-components";
 import {topicsActions} from "../../redux/ActionCreators";
-import {URL} from "../../constants/Consts";
 import PhotoList from "../components/Photos/PhotoList";
 import {ContentContainer} from "../components/Layout/Layout.Styled";
 import {useSelector} from "react-redux";
+import InfiniteScroll from "../components/InfiniteScroll";
 
-function TopicPhotoListContainer({match}){
+function TopicPhotoListContainer({match}) {
     const query = match.params.query;
-    const {topics} = useSelector(state => state);
-
-    useEffect(() => {
-        getTopic();
-    }, [query]);
+    const {topicData, isLoading} = useSelector(state => state.topics);
+    const [page, setPage] = useState(1);
 
     const getTopic = () => {
         topicsActions.getTopicPhoto([
             {
-                per_page: 20,
+                per_page: 5,
+                page,
             },
             query,
         ]);
     }
 
-    return(
+    useEffect(() => {
+        topicsActions.deleteHistory();
+    }, [query]);
+
+    useEffect(() => {
+        getTopic();
+    }, [query, page]);
+
+    const getMoreItems = () => {
+        if(8 <= page) return;
+        setPage(prevPage => prevPage + 1);
+    }
+
+    return (
         <Container>
             <ContentContainer>
-                <PhotoList data={topics.topicData}/>
+                <InfiniteScroll
+                    getMoreItems={getMoreItems}
+                    isLoading={isLoading}>
+                    <PhotoList data={topicData}/>
+                </InfiniteScroll>
             </ContentContainer>
         </Container>
     )
