@@ -4,9 +4,9 @@ import {useOnViewport} from "../../../hooks/useOnViewport";
 
 function InfiniteScroll({children, getMoreItems = () => {}, isLoading}) {
 
-    const [ref, inView] = useOnViewport([{
+    const [ref, inView] = useOnViewport({
         rootMargin: "300px",
-    }, isLoading]);
+    }, isLoading);
 
     useEffect(() => {
         inView && getMoreItems();

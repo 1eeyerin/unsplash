@@ -1,15 +1,26 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import styled from "styled-components";
 import CardInfo from "./CardInfo";
+import {useOnViewport} from "../../../hooks/useOnViewport";
 
-function PhotoCard({urls, onClick, user}) {
+function PhotoCard({urls, onClick, user, sponsorship, width, height, color}) {
+    const ratioHeight = height / width * 100;
+    const [loaded, setLoaded] = useState(false);
+    const [imageRef, inView] = useOnViewport();
+
+    useEffect(() => {
+        if(inView) setLoaded(true);
+    }, [inView]);
+
     return (
         <Container onClick={onClick}>
-            <Contents>
-                <Image className="card-image">
-                    <img src={urls.regular} alt=""/>
+            <Contents style={{paddingBottom: `${ratioHeight}%`, backgroundColor: color}}>
+                <Image className="card-image" ref={imageRef}>
+                    {
+                        loaded && <img src={urls.regular} alt=""/>
+                    }
                 </Image>
-                <CardInfo {...user} urls={urls}/>
+                <CardInfo {...user} sponsorship={sponsorship}/>
             </Contents>
         </Container>
     )
@@ -25,10 +36,15 @@ const Container = styled.div`
 `
 const Contents = styled.div`
   position: relative;
+  padding-bottom: 50%; 
 `
 const Image = styled.div`
-  position: relative;
   z-index: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 
   &:before {
     content: "";
