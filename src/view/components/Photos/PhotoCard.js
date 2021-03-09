@@ -11,7 +11,7 @@ function PhotoCard({urls, onClick, user, sponsorship, width, height, color}) {
                 <Image className="card-image">
                     <img src={urls.regular} alt=""/>
                 </Image>
-                <CardInfo {...user} urls={urls} sponsorship={sponsorship}/>
+                <CardInfo {...user} sponsorship={sponsorship}/>
             </Contents>
         </Container>
     )

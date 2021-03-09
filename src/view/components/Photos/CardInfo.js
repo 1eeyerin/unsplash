@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import {IconPhotoCardAdd, IconPhotoCardDownload, IconPhotoCardLike} from "../../../icons";
 
-function CardInfo({name, profile_image, urls, sponsorship}) {
+function CardInfo({name, profile_image, sponsorship}) {
 
     return (
         <Container>
@@ -25,7 +25,7 @@ function CardInfo({name, profile_image, urls, sponsorship}) {
                         <p><span className="e_">{name}</span></p>
                     </UserInfo>
                 </UserAvatar>
-                <Button as="a" href={urls.full} download><IconPhotoCardDownload/></Button>
+                <Button as="a"><IconPhotoCardDownload/></Button>
             </Info>
         </Container>
     )
