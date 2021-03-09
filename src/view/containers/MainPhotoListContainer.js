@@ -23,6 +23,7 @@ function MainPhotoListContainer() {
     }, [page]);
 
     const getMoreItems = () => {
+        if(8 <= page) return;
         setPage(prevPage => prevPage + 1);
     }
 
