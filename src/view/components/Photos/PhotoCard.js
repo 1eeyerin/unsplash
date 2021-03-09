@@ -1,17 +1,26 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import styled from "styled-components";
 import CardInfo from "./CardInfo";
+import {useOnViewport} from "../../../hooks/useOnViewport";
 
 function PhotoCard({urls, onClick, user, sponsorship, width, height, color}) {
     const ratioHeight = height / width * 100;
+    const [loaded, setLoaded] = useState(false);
+    const [imageRef, inView] = useOnViewport();
+
+    useEffect(() => {
+        if(inView) setLoaded(true);
+    }, [inView]);
 
     return (
         <Container onClick={onClick}>
             <Contents style={{paddingBottom: `${ratioHeight}%`, backgroundColor: color}}>
-                <Image className="card-image">
-                    <img src={urls.regular} alt=""/>
+                <Image className="card-image" ref={imageRef}>
+                    {
+                        loaded && <img src={urls.regular} alt=""/>
+                    }
                 </Image>
-                <CardInfo {...user} urls={urls} sponsorship={sponsorship}/>
+                <CardInfo {...user} sponsorship={sponsorship}/>
             </Contents>
         </Container>
     )
