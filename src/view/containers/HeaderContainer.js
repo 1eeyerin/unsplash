@@ -23,7 +23,11 @@ function HeaderContainer() {
 }
 
 const Container = styled.div`
-
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
 `
 
 export default HeaderContainer;
