@@ -26,7 +26,7 @@ function MainPhotoListContainer() {
         if(8 <= page) return;
         setPage(prevPage => prevPage + 1);
     }
-
+    
     return (
         <Container>
             <ContentContainer>

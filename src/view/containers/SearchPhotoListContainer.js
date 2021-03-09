@@ -1,10 +1,9 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import styled from "styled-components";
 import {searchActions} from "../../redux/ActionCreators";
 import PhotoList from "../components/Photos/PhotoList";
 import {ContentContainer} from "../components/Layout/Layout.Styled";
 import {useSelector} from "react-redux";
-import InfiniteScroll from "../components/InfiniteScroll";
 
 function SearchPhotoListContainer({match}){
     const query = match.params.query;
@@ -27,7 +26,6 @@ function SearchPhotoListContainer({match}){
         searchPhotos();
     }, [query, page]);
 
-
     const getMoreItems = () => {
         if(8 <= page) return;
         setPage(prevPage => prevPage + 1);
@@ -36,11 +34,7 @@ function SearchPhotoListContainer({match}){
     return(
         <Container>
             <ContentContainer>
-                <InfiniteScroll
-                    getMoreItems={getMoreItems}
-                    isLoading={isLoading}>
-                    <PhotoList data={searchResults.results}/>
-                </InfiniteScroll>
+                <PhotoList data={searchResults.results}/>
             </ContentContainer>
         </Container>
     )
