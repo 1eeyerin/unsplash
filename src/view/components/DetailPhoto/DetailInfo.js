@@ -1,14 +1,18 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import styled from "styled-components";
 import {IconInfo, IconPhotoCardAdd, IconPhotoCardLike, IconPhotoFullSize, IconShare} from "../../../icons";
 import {Btn, Buttons} from "../Button/Button.Styled";
 import {UserBio, UserImage, UserInfo} from "../../../styled/Common.Styled";
 
-function PopupInfo({urls, user}) {
+function DetailInfo({urls, user}) {
 
     const [imageUrl, setImageUrl] = useState(urls?.small);
     const [imageSizeFull, setImageSizeFull] = useState(false);
 
+    useEffect(() => {
+        setImageUrl(urls?.small);
+    }, [urls])
+    
     const onClick = () => {
         imageSizeFull ? setImageSizeFull(false) : setImageSizeFull(true);
         imageSizeFull ? setImageUrl(urls?.small) : setImageUrl(urls?.full);
@@ -19,10 +23,10 @@ function PopupInfo({urls, user}) {
             <ImageArea>
                 <Info>
                     <UserInfo>
-                        <UserImage><img src={user.profile_image.small} alt=""/></UserImage>
+                        <UserImage><img src={user?.profile_image.small} alt=""/></UserImage>
                         <UserBio>
-                            <p className="userName"><span className="e_">{user.name}</span></p>
-                            <p className="userBio">@{user.username}</p>
+                            <p className="userName"><span className="e_">{user?.name}</span></p>
+                            <p className="userBio">@{user?.username}</p>
                         </UserBio>
                     </UserInfo>
                     <Buttons>
@@ -34,8 +38,8 @@ function PopupInfo({urls, user}) {
                 <ImageButton
                     onClick={onClick}
                     sizeFull={imageSizeFull}>
-                    <IconPhotoFullSize/>
                     <Image>
+                        <IconPhotoFullSize/>
                         <img src={imageUrl} alt=""/>
                     </Image>
                 </ImageButton>
@@ -104,10 +108,12 @@ const ImageButton = styled.button`
 `
 const Image = styled.div`
   font-size: 0;
+  position: relative;
+  z-index: 0;
 
   img {
     max-width: 100%;
   }
 `
 
-export default PopupInfo;
+export default DetailInfo;

@@ -1,13 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import PopupPhoto from "../components/PopupPhoto";
+import DetailPhotoContainer from "../containers/DetailPhotoContainer";
 
-function Photos({match}){
-    const id = match.params.id;
-    
+function Photos(props){
     return(
         <Container>
-            {/*<PopupPhoto/>*/}
+            <DetailPhotoContainer {...props} />
         </Container>
     )
 }
