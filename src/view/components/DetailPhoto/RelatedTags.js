@@ -1,17 +1,17 @@
 import React from "react";
 import styled from "styled-components";
 
-function PhotosContainer(){
-    
-    return(
+function RelatedTags({Title}) {
+
+    return (
         <Container>
-            PhotosContainer
+            <Title>Related tags</Title>
         </Container>
     )
 }
 
 const Container = styled.div`
-
+  padding: 0 12px;
 `
 
-export default PhotosContainer;
+export default RelatedTags;
