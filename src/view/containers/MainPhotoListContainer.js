@@ -41,7 +41,7 @@ function MainPhotoListContainer() {
 }
 
 const Container = styled.div`
-
+  padding: 48px 0 85px;
 `
 
 export default MainPhotoListContainer;

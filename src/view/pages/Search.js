@@ -12,7 +12,8 @@ function Search(props){
 }
 
 const Container = styled.div`
-
+  margin-top: 48px;
+  padding-bottom: 85px;
 `
 
 export default Search;
