@@ -22,9 +22,8 @@ const saga = function* () {
 
             yield put(Action.Creators.updateState({isLoading : false}))
         }),
-        takeLatest(Action.Types.GET_PHOTO_BY_ID, function* ({id}) {
+        takeLatest(Action.Types.GET_POPUP_PHOTO, function* ({id}) {
             try {
-
                 const [resultPhotoById, resultPhotoRelated] = yield all([
                     call(API.getPhotoById, id),
                     call(API.getPhotoRelated, id)
@@ -36,6 +35,25 @@ const saga = function* () {
                             ...resultPhotoById,
                             related_photos: resultPhotoRelated.results,
                             show: true,
+                        }
+                    }))
+                }
+            } catch (e) {
+                console.log('@@ e',e);
+            }
+        }),
+        takeLatest(Action.Types.GET_DETAIL_PHOTO, function* ({id}) {
+            try {
+                const [resultPhotoById, resultPhotoRelated] = yield all([
+                    call(API.getPhotoById, id),
+                    call(API.getPhotoRelated, id)
+                ])
+
+                if(resultPhotoById) {
+                    yield put(Action.Creators.updateState({
+                        photo: {
+                            ...resultPhotoById,
+                            related_photos: resultPhotoRelated.results,
                         }
                     }))
                 }
