@@ -12,6 +12,7 @@ function LayerPopup(){
                 show: false,
             }
         })
+        window.history.pushState({}, null, '/');
     }
 
     return createPortal(
