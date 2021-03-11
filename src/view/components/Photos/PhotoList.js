@@ -10,6 +10,7 @@ function PhotoList({data}) {
 
     const onClick = (id) => {
         photosActions.getPhotoById(id);
+        window.history.pushState({id}, null, `/photos/${id}`);
     }
 
     return (

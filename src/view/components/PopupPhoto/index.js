@@ -7,6 +7,7 @@ import PopupInfo from "./PopupInfo";
 function PopupPhoto() {
 
     const {popupPhoto} = useSelector(state => state.photos);
+
     return (
         <Container>
             <Contents onClick={(e) => e.stopPropagation()}>
@@ -20,10 +21,12 @@ function PopupPhoto() {
 const Container = styled.div`
   width: 80vw;
   margin: 0 auto;
-  padding: 40px 0;
+  padding: 32px 0;
 `
 const Contents = styled.div`
   background: #ffffff;
+  border-radius: 4px;
+  box-shadow: 0 8px 16px rgb(0 0 0 / 15%);
 `
 
 export default PopupPhoto;
