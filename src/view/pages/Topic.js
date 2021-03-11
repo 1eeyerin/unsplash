@@ -17,11 +17,11 @@ function Topic(props) {
 }
 
 const Container = styled.div`
-
+  padding-bottom: 85px;
 `
 const Title = styled.h1`
   padding-top: 60px;
-  padding-bottom: 48px;
+  padding-bottom: 84px;
   font-family: ${font.en};
   font-size: 46px;
   line-height: 1.2;
