@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import {IconPhotoCardAdd, IconPhotoCardDownload, IconPhotoCardLike} from "../../../icons";
+import {Btn, Buttons} from "../Button/Button.Styled";
+import {UserBio, UserImage, UserInfo} from "../../../styled/Common.Styled";
 
 function CardInfo({name, profile_image, sponsorship}) {
 
@@ -13,19 +15,21 @@ function CardInfo({name, profile_image, sponsorship}) {
                     }
                 </Sponsor>
                 <Buttons>
-                    <Button><IconPhotoCardLike/></Button>
-                    <Button><IconPhotoCardAdd/></Button>
+                    <Btn><IconPhotoCardLike/></Btn>
+                    <Btn><IconPhotoCardAdd/></Btn>
                 </Buttons>
             </Info>
 
             <Info>
                 <UserAvatar>
-                    <UserInfo>
+                    <StyledUserInfo>
                         <UserImage><img src={profile_image.small} alt=""/></UserImage>
-                        <p><span className="e_">{name}</span></p>
-                    </UserInfo>
+                        <UserBio>
+                            <p className="userName"><span className="e_">{name}</span></p>
+                        </UserBio>
+                    </StyledUserInfo>
                 </UserAvatar>
-                <Button as="a"><IconPhotoCardDownload/></Button>
+                <Btn as="a"><IconPhotoCardDownload/></Btn>
             </Info>
         </Container>
     )
@@ -48,6 +52,12 @@ const Container = styled.div`
     opacity: 1;
   }
 `
+const StyledUserInfo = styled(UserInfo)`
+  .userName {
+    color: #fff;
+    font-weight: 400;
+  }
+`
 const Sponsor = styled.div`
   flex: 1;
   opacity: .9;
@@ -57,36 +67,6 @@ const Sponsor = styled.div`
   letter-spacing: .02em;
   text-shadow: 0 1px 8px rgb(0 0 0 / 10%);
 `
-const Buttons = styled.div`
-`
-const Button = styled.button`
-  height: 32px;
-  padding: 0 11px;
-  font-size: 14px;
-  line-height: 30px;
-  color: #767676;
-  background-color: hsla(0, 0%, 100%, .9);
-  border: 1px solid transparent;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  border-radius: 4px;
-  text-align: center;
-  user-select: none;
-  cursor: pointer;
-  outline: 0;
-
-  svg {
-    position: relative;
-    top: -1px;
-    width: 15px;
-    fill: #767676;
-  }
-
-  & + button {
-    margin-left: 8px;
-  }
-`
 const Info = styled.div`
   display: flex;
   justify-content: space-between;
@@ -95,22 +75,5 @@ const Info = styled.div`
 const UserAvatar = styled.div`
   display: flex;
   flex: 1;
-`
-const UserInfo = styled.div`
-  display: flex;
-  flex: 1;
-  align-items: center;
-
-  p {
-    color: #fff;
-    display: flex;
-    flex: 1;
-  }
-`
-const UserImage = styled.div`
-  border-radius: 50%;
-  overflow: hidden;
-  background-color: rgba(0, 0, 0, .1);
-  margin-right: 8px;
 `
 export default CardInfo;

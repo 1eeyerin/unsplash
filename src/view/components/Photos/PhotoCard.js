@@ -10,6 +10,7 @@ function PhotoCard({urls, onClick, user, sponsorship, width, height, color}) {
 
     useEffect(() => {
         if(inView) setLoaded(true);
+        return () => setLoaded(false);
     }, [inView]);
 
     return (

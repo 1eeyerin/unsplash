@@ -9,32 +9,36 @@ function PhotoList({data}) {
     const photosGroup = recomposePhotos(data);
 
     const onClick = (id) => {
-        photosActions.getPhotoById(id);
+        photosActions.getPopupPhoto(id);
+        window.history.pushState({id}, null, `/photos/${id}`);
     }
 
     return (
         <Container>
-            {
-                photosGroup.map((group, idx) => (
-                    <PhotoGroup key={idx}>
-                        {
-                            group.map((item, i) => (
-                                <Col key={i}>
-                                    <PhotoCard {...item} onClick={() => onClick(item.id)}/>
-                                </Col>
-                            ))
-                        }
-                    </PhotoGroup>
-                ))
-            }
+            <Layout>
+                {
+                    photosGroup.map((group, idx) => (
+                        <PhotoGroup key={idx}>
+                            {
+                                group.map((item, i) => (
+                                    <Col key={i}>
+                                        <PhotoCard {...item} onClick={() => onClick(item.id)}/>
+                                    </Col>
+                                ))
+                            }
+                        </PhotoGroup>
+                    ))
+                }
+            </Layout>
         </Container>
     )
 }
-
 const Container = styled.div`
+    overflow: hidden;
+`
+const Layout = styled.div`
   display: flex;
-  margin: 0 -12px;
-  margin-top: 24px;
+  margin: -24px -12px;
 `
 const PhotoGroup = styled.div`
   width: 33.3333%;
