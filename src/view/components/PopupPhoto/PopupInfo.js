@@ -1,26 +1,57 @@
 import React, {useState} from "react";
 import styled from "styled-components";
-import {IconPhotoFullSize} from "../../../icons";
+import {IconInfo, IconPhotoCardAdd, IconPhotoCardLike, IconPhotoFullSize, IconShare} from "../../../icons";
+import {Btn, Buttons} from "../Button/Button.Styled";
+import {UserBio, UserImage, UserInfo} from "../../../styled/Common.Styled";
 
-function PopupInfo(popupPhoto) {
+function PopupInfo({urls, user}) {
 
-    const [imageUrl, setImageUrl] = useState(popupPhoto?.urls.small);
+    const [imageUrl, setImageUrl] = useState(urls?.small);
     const [imageSizeFull, setImageSizeFull] = useState(false);
 
     const onClick = () => {
         imageSizeFull ? setImageSizeFull(false) : setImageSizeFull(true);
-        imageSizeFull ? setImageUrl(popupPhoto?.urls.small) : setImageUrl(popupPhoto?.urls.full);
+        imageSizeFull ? setImageUrl(urls?.small) : setImageUrl(urls?.full);
     }
 
     return (
         <Container>
             <ImageArea>
-                <ImageButton onClick={onClick}>
+                <Info>
+                    <UserInfo>
+                        <UserImage><img src={user.profile_image.small} alt=""/></UserImage>
+                        <UserBio>
+                            <p className="userName"><span className="e_">{user.name}</span></p>
+                            <p className="userBio">@{user.username}</p>
+                        </UserBio>
+                    </UserInfo>
+                    <Buttons>
+                        <StyledBtn><IconPhotoCardLike/></StyledBtn>
+                        <StyledBtn><IconPhotoCardAdd/></StyledBtn>
+                    </Buttons>
+                </Info>
+
+                <ImageButton
+                    onClick={onClick}
+                    sizeFull={imageSizeFull}>
                     <IconPhotoFullSize/>
                     <Image>
                         <img src={imageUrl} alt=""/>
                     </Image>
                 </ImageButton>
+
+                <Info className="right">
+                    <Buttons>
+                        <StyledBtn>
+                            <IconShare/>
+                            <span>Share</span>
+                        </StyledBtn>
+                        <StyledBtn>
+                            <IconInfo/>
+                            <span>Info</span>
+                        </StyledBtn>
+                    </Buttons>
+                </Info>
             </ImageArea>
         </Container>
     )
@@ -28,6 +59,17 @@ function PopupInfo(popupPhoto) {
 
 const Container = styled.div`
 
+`
+const Info = styled.div`
+  display: flex;
+  flex: 1;
+  align-items: center;
+  padding: 9px 12px;
+  justify-content: flex-end;
+  background: #fff;
+`
+const StyledBtn = styled(Btn)`
+  border-color: #d1d1d1;
 `
 const ImageArea = styled.div`
   text-align: center;
@@ -39,9 +81,9 @@ const ImageButton = styled.button`
   border: 0;
   font-size: 0;
   vertical-align: top;
-  padding: 0;
   cursor: zoom-in;
-
+  padding: ${props => props.sizeFull? "0" : "10px 16px"};
+  
   &:hover svg {
     opacity: 1;
   }
