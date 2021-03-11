@@ -45,24 +45,24 @@ const Default = {
 }
 
 export const ButtonGroup = styled.div`
-    position: relative;
-    z-index: 100;
-    display: flex;
-    justify-content:center;
-    
-    ${props => props.reverse && `
+  position: relative;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+
+  ${props => props.reverse && `
         flex-flow: row-reverse;
     `};
-    
-    ${props => props.left && `
+
+  ${props => props.left && `
         justify-content: flex-start;
     `};
-    
-    ${props => props.right && `
+
+  ${props => props.right && `
         justify-content: flex-end;
     `};
-    
-    ${props => props.gutter && `
+
+  ${props => props.gutter && `
         > * {
             margin-left: ${props.gutter}px;
         }
@@ -73,62 +73,101 @@ export const ButtonGroup = styled.div`
 `;
 
 export const Button = styled.button`
-    position:relative;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    height: ${Default.HEIGHT}px;
-    padding: ${Default.PADDING};
-    font-size: ${Default.FONT_SIZE}px;
-    color: ${Default.COLOR};
-    background-color: ${Default.BACKGROUND_COLOR};
-    background-image: none;
-    line-height: normal;
-    white-space: nowrap;
-    text-align: center;
-    cursor: pointer;
-    user-select: none;
-    font-weight: bold;
-    border: 1px solid transparent;
-    border-radius: ${Default.BORDER_RADIUS};
-    transition: ${Default.TRANSITION};
-    &:focus {
-        outline: 0;       
-    }
-    
-    ${props => props.sort === 'primary' && `
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: ${Default.HEIGHT}px;
+  padding: ${Default.PADDING};
+  font-size: ${Default.FONT_SIZE}px;
+  color: ${Default.COLOR};
+  background-color: ${Default.BACKGROUND_COLOR};
+  background-image: none;
+  line-height: normal;
+  white-space: nowrap;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+  font-weight: bold;
+  border: 1px solid transparent;
+  border-radius: ${Default.BORDER_RADIUS};
+  transition: ${Default.TRANSITION};
+
+  &:focus {
+    outline: 0;
+  }
+
+  ${props => props.sort === 'primary' && `
         background-color: ${Types.Primary.BACKGROUND_COLOR};
         color: ${props.disabled ? Types.Disabled.COLOR : Types.Primary.COLOR};
     `};
-    
-    ${props => props.sort === 'secondary' && `
+
+  ${props => props.sort === 'secondary' && `
         background-color: ${Types.Secondary.BACKGROUND_COLOR};
         color: ${props.disabled ? Types.Disabled.COLOR : Types.Secondary.COLOR};
     `};
-   
-    ${props => props.full && `
+
+  ${props => props.full && `
         width: 100%;
     `};
-    
-    ${props => props.size === 'large' && `
+
+  ${props => props.size === 'large' && `
         height: ${Size.Large.HEIGHT}px;
         padding: ${Size.Large.PADDING};
         font-size: ${Size.Large.FONT_SIZE}px;
     `};
-    
-    ${props => props.size === 'small' && `
+
+  ${props => props.size === 'small' && `
         height: ${Size.Small.HEIGHT}px;
         padding: ${Size.Small.PADDING};
         font-size: ${Size.Small.FONT_SIZE}px;
     `};
-    
-    ${props => props.disabled && `
+
+  ${props => props.disabled && `
         cursor: not-allowed; 
     `};
-    
-    ${props => props.icon && `
+
+  ${props => props.icon && `
         img {
             margin-right: 8px;        
         }
     `};
 `;
+
+export const Buttons = styled.div`
+  display: flex;
+`
+
+export const Btn = styled.button`
+  display: flex;
+  height: 32px;
+  padding: 0 11px;
+  font-size: 14px;
+  line-height: 30px;
+  color: #767676;
+  background-color: hsla(0, 0%, 100%, .9);
+  border: 1px solid transparent;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  text-align: center;
+  user-select: none;
+  cursor: pointer;
+  outline: 0;
+
+  svg {
+    position: relative;
+    top: -1px;
+    width: 15px;
+    fill: #767676;
+  }
+  
+  span {
+    margin-left: 6px;
+  }
+
+  & + button {
+    margin-left: 8px;
+  }
+`
