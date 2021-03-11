@@ -10,7 +10,8 @@ const initialState = {
 export const Action = createActions({
     updateState: ['props'],
     getPhotos: ['data'],
-    getPhotoById: ['id'],
+    getPopupPhoto: ['id'],
+    getDetailPhoto: ['id'],
     setPhotos: ['photos'],
 }, {
     prefix: 'PHOTOS/'
