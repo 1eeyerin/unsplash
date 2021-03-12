@@ -1,15 +1,14 @@
 import React, {useRef, useState, useEffect} from "react";
 import styled from "styled-components";
-import {Link, useLocation} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {SlideBtnNext, SlideBtnPrev} from "../../../icons";
 import cn from "classnames";
 import {scrollMenu} from "../../../lib/Common";
 import _ from "lodash";
 import HorizontalMenuSkeleton from "../Loader/HorizontalMenuSkeleton";
 
-function HorizontalSlideMenu({topicNav}) {
+function HorizontalSlideMenu({topicNav, location}) {
 
-    const location = useLocation();
     const topicLocation = location.pathname.startsWith('/t/') ? location.pathname.split('/').pop() : "";
 
     const slideRef = useRef();
