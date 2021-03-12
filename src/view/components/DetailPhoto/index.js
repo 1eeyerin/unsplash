@@ -4,25 +4,31 @@ import DetailInfo from "./DetailInfo";
 import RelatedPhotos from "./RelatedPhotos";
 import {font} from "../../../styled/Font.Styled";
 import RelatedCollections from "./RelatedCollections";
-import RelatedTags from "./RelatedTags";
+import {pxToRem} from "../../../styled/Util.Styled";
 
 function DetailPhoto({data}) {
     return (
         <Container>
             <DetailInfo {...data}/>
-            <RelatedPhotos data={data?.related_photos} Title={Title}/>
-            <RelatedCollections Title={Title}/>
-            <RelatedTags Title={Title}/>
+            <Contents>
+                <RelatedPhotos data={data?.related_photos} Title={Title}/>
+                <RelatedCollections data={data?.related_collections} Title={Title}/>
+            </Contents>
         </Container>
     )
 }
+
 const Container = styled.div`
 `
-const Title = styled.div`
-  padding-top: 60px;
-  padding-bottom: 16px;
-  font-size: 18px;
+const Contents = styled.div`
+  max-width: ${pxToRem(1320)};
+  margin: 0 auto;
   font-family: ${font.en};
+`
+const Title = styled.h2`
+  padding-top: 60px;
+  padding-bottom: 28px;
+  font-size: 18px;
 `
 
 export default DetailPhoto;
