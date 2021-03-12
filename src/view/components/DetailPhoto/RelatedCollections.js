@@ -11,7 +11,6 @@ function RelatedCollections({data, Title}) {
                     data?.results.map((item, idx) => {
                         return (
                             <Li key={idx}>
-                                {console.log('@@ item', item)}
                                 <PreviewPhoto>
                                     <Layout>
                                         <Image>
