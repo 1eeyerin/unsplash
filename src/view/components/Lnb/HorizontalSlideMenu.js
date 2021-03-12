@@ -1,6 +1,6 @@
 import React, {useRef, useState, useEffect} from "react";
 import styled from "styled-components";
-import {Link} from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
 import {SlideBtnNext, SlideBtnPrev} from "../../../icons";
 import cn from "classnames";
 import {scrollMenu} from "../../../lib/Common";
@@ -9,10 +9,14 @@ import HorizontalMenuSkeleton from "../Loader/HorizontalMenuSkeleton";
 
 function HorizontalSlideMenu({topicNav}) {
 
+    const location = useLocation();
+    const topicLocation = location.pathname.startsWith('/t/') ? location.pathname.split('/').pop() : "";
+
     const slideRef = useRef();
     const [className, setClassName] = useState("");
     const [scrollLeft, setScrollLeft] = useState(0);
     const [maxScroll, setMaxScroll] = useState(0);
+
 
     useEffect(() => {
         (!_.isEmpty(topicNav)) && slideRef.current.dispatchEvent(new Event("scroll"));
@@ -48,7 +52,15 @@ function HorizontalSlideMenu({topicNav}) {
             }
             <List ref={slideRef} onScroll={onScroll}>
                 {
-                    topicNav.map((item, i) => <li key={i}><Link to={`/t/${item.slug}`}>{item.title}</Link></li>)
+                    topicNav.map((item, i) => {
+                        return (
+                                <li
+                                    key={i}
+                                    className={topicLocation === item.slug ? "active" : ""}>
+                                    <Link to={`/t/${item.slug}`}>{item.title}</Link>
+                                </li>
+                            )
+                    })
                 }
             </List>
             {
@@ -149,6 +161,10 @@ const List = styled.ul`
     vertical-align: top;
     height: 100%;
     padding-left: 32px;
+    
+    &.active a {
+      box-shadow: inset 0 -2px #111;
+    }
 
     a {
       display: flex;
