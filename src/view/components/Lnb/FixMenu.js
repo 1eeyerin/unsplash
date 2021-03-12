@@ -2,12 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import {Link} from "react-router-dom";
 
-function FixMenu() {
+function FixMenu({location}) {
 
     return (
         <Container>
             <List>
-                <li><Link to="/"><span>Editorial</span></Link></li>
+                <li className={location.pathname === "/"? "active" : ""}><Link to="/"><span>Editorial</span></Link></li>
                 <li><Link to="/"><span>Following</span></Link></li>
             </List>
         </Container>
@@ -40,10 +40,17 @@ const List = styled.ul`
     display: flex;
     align-items: center;
     padding-left: 32px;
+    
+    &.active a {
+      box-shadow: inset 0 -2px #111;
+    }
 
     a {
       text-decoration: none;
       color: #727272;
+      display: flex;
+      align-items: center;
+      height: 100%;
     }
   }
 `

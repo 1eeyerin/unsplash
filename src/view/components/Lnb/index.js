@@ -3,13 +3,16 @@ import styled from "styled-components";
 import FixMenu from "./FixMenu";
 import HorizontalSlideMenu from "./HorizontalSlideMenu";
 import {font} from "../../../styled/Font.Styled";
+import {useLocation} from "react-router-dom";
 
 function  Lnb({topicNav}) {
 
+    const location = useLocation();
+
     return (
         <Container>
-            <FixMenu/>
-            <HorizontalSlideMenu topicNav={topicNav}/>
+            <FixMenu location={location}/>
+            <HorizontalSlideMenu topicNav={topicNav} location={location}/>
         </Container>
     )
 }
