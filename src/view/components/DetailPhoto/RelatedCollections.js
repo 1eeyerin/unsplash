@@ -11,24 +11,23 @@ function RelatedCollections({data, Title}) {
                     data?.results.map((item, idx) => {
                         return (
                             <Li key={idx}>
-                                {console.log('@@ item', item)}
                                 <PreviewPhoto>
                                     <Layout>
                                         <Image>
-                                            <img src={item.preview_photos[0].urls.regular} alt=""/>
+                                            <img src={item.preview_photos[0]?.urls?.regular} alt=""/>
                                         </Image>
                                         <Image>
-                                            <Img><img src={item.preview_photos[1].urls.small} alt=""/></Img>
-                                            <Img><img src={item.preview_photos[2].urls.small} alt=""/></Img>
+                                            <Img><img src={item.preview_photos[1]?.urls?.small} alt=""/></Img>
+                                            <Img><img src={item.preview_photos[2]?.urls?.small} alt=""/></Img>
                                         </Image>
                                     </Layout>
                                 </PreviewPhoto>
                                 <ItemTitle className="e_">{item.title}</ItemTitle>
-                                <ItemInfo>{item.total_photos} photos &middot; Curated by {item.user.name}</ItemInfo>
+                                <ItemInfo>{item.total_photos} photos &middot; Curated by {item.user?.name}</ItemInfo>
                                 <Tags>
                                     {[...Array(3)].map((n, i) => {
                                         return (
-                                            <li><a href="#">{item.tags[i].title}</a></li>
+                                            <li key={i}><a href="#">{item.tags[i]?.title}</a></li>
                                         )
                                     })}
                                 </Tags>
