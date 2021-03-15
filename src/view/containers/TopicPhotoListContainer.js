@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import styled from "styled-components";
 import {topicsActions} from "../../redux/ActionCreators";
 import PhotoList from "../components/Photos/PhotoList";
-import {ContentContainer} from "../components/Layout/Layout.Styled";
+import {ContentContainer} from "../../styled/Layout.Styled";
 import {useSelector} from "react-redux";
 import InfiniteScroll from "../components/InfiniteScroll";
 

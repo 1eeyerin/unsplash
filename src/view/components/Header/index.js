@@ -5,8 +5,9 @@ import {IconLogo} from "../../../icons";
 import SearchBox from "../SearchBox";
 import Nav from "./Nav";
 
-const Header = () => {
-    return (
+function Header(){
+
+    return(
         <Container>
             <h1>
                 <Logo to={"/"}>
@@ -28,7 +29,8 @@ const Container = styled.div`
   position: relative;
   z-index: 2;
   background: #fff;
-`;
+`
+
 const Logo = styled(Link)`
   margin-right: 18px;
 

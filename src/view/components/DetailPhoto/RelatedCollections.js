@@ -1,12 +1,12 @@
 import React from "react";
-import styled from "styled-components";
+import styled from 'styled-components';
 
 function RelatedCollections({data, Title}) {
 
     return (
         <Container>
             <Title>Related collections</Title>
-            <Ul>
+            <Ul>s
                 {
                     data?.results.map((item, idx) => {
                         return (
@@ -117,11 +117,11 @@ const Tags = styled.ul`
   display: flex;
   flex-wrap: wrap;
   margin: 0 -8px;
-  
+
   li {
     padding: 0 0 8px 8px;
   }
-  
+
   a {
     background-color: #eee;
     padding-right: 8px;

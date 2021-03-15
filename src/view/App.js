@@ -1,11 +1,11 @@
 import React from 'react';
+import {useSelector} from "react-redux";
 import {GlobalStyle} from "../styled/Reset.Styled";
 import Routes from "./routes/Routes";
 import HeaderContainer from "./containers/HeaderContainer";
-import {useSelector} from "react-redux";
 import PopupPhotoContainer from "./containers/PopupPhotoContainer";
 
-const App = () => {
+function App() {
 
     const {popupPhoto} = useSelector(state => state.photos);
 

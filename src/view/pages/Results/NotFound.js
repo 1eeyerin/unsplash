@@ -1,18 +1,17 @@
-import React from 'react'
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
-const NotFound = () => {
+function NotFound(){
     
-    return (
+    return(
         <Container>
             NotFound
         </Container>
     )
 }
 
-
 const Container = styled.div`
-    
-`;
+
+`
 
 export default NotFound;

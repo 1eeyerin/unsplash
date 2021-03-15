@@ -4,12 +4,6 @@ import {URL} from "../constants/Consts";
 const FetchConsts = {
     GET: 'get',
     POST: 'post',
-    PUT: 'put',
-    DELETE: 'delete',
-    APPLICATION_JSON: 'application/json',
-    APPLICATION_X_WWW_FORM_URL_ENCODED: 'application/x-www-form-urlencoded',
-    MULTIPART_FORM_DATA: 'multipart/form-data',
-    TEXT_PLAIN: 'text/plain',
 }
 
 const axiosInstance = axios.create({
@@ -46,9 +40,7 @@ const request = async (method, url, data = {}) => {
 
 const FetchJson = {
     get: (url, data) => request(FetchConsts.GET, url, data),
-    post: (url, data) => request(FetchConsts.POST, url, data),
-    put: (url, data) => request(FetchConsts.PUT, url, data),
-    delete: (url, data) => request(FetchConsts.DELETE, url, data),
+    post: (url, data) => request(FetchConsts.POST, url, data)
 }
 
 export {FetchJson};

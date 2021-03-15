@@ -1,12 +1,6 @@
 import styled from 'styled-components';
-import {pxToRem} from "../../../styled/Util.Styled";
-import {breakPoint, media} from "../../../styled/Responsive.Styled";
-
-export const PageContainer = styled.div`
-    flex: 1;
-    background-color: ${props => props.dark && '#151a1d'};
-    min-height: ${pxToRem(690)};
-`
+import {pxToRem} from "./Util.Styled";
+import {breakPoint, media} from "./Responsive.Styled";
 
 export const ContentContainer = styled.div`
     position:relative;
@@ -35,11 +29,6 @@ export const ContentContainer = styled.div`
     `};
    
 `;
-
-export const Full = styled.div`
-    flex: 1;
-`;
-
 
 export const Overlay = styled.div`
     position:absolute;

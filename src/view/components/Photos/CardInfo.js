@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import {IconPhotoCardAdd, IconPhotoCardDownload, IconPhotoCardLike} from "../../../icons";
-import {Btn, Buttons} from "../Button/Button.Styled";
+import {Btn, Buttons} from "../../../styled/Button.Styled";
 import {UserBio, UserImage, UserInfo} from "../../../styled/Common.Styled";
 
 function CardInfo({name, profile_image, sponsorship}) {
