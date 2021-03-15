@@ -1,33 +1,42 @@
 import React from "react";
 import styled from "styled-components";
-import {Link} from "react-router-dom";
-import {IconMenu} from "../../../icons"
+import { Link } from "react-router-dom";
+import { IconMenu } from "../../../icons";
 
 function Nav() {
-
-    return (
-        <Container>
-            <List>
-                <li><Link to="/"><span>Home</span></Link></li>
-                <li><Link to="/"><span>Brands</span></Link></li>
-            </List>
-            <Button type="button"><IconMenu/></Button>
-        </Container>
-    )
+  return (
+    <Container>
+      <List>
+        <li>
+          <Link to="/">
+            <span>Home</span>
+          </Link>
+        </li>
+        <li>
+          <Link to="/">
+            <span>Brands</span>
+          </Link>
+        </li>
+      </List>
+      <Button type="button">
+        <IconMenu />
+      </Button>
+    </Container>
+  );
 }
 
 const Container = styled.div`
   margin-left: 50px;
   display: flex;
   align-items: center;
-`
+`;
 const Button = styled.button`
   padding-left: 32px;
   background: 0;
   border: 0;
   outline: 0;
   cursor: pointer;
-`
+`;
 const List = styled.ul`
   display: flex;
   font-size: 14px;
@@ -44,6 +53,6 @@ const List = styled.ul`
       color: #727272;
     }
   }
-`
+`;
 
 export default Nav;
