@@ -1,79 +1,66 @@
-import React, {useRef, useState, useEffect} from "react";
+import React, { useRef, useState, useEffect } from "react";
 import styled from "styled-components";
-import {Link} from "react-router-dom";
-import {SlideBtnNext, SlideBtnPrev} from "../../../icons";
+import { Link } from "react-router-dom";
+import { SlideBtnNext, SlideBtnPrev } from "../../../icons";
 import cn from "classnames";
-import {scrollMenu} from "../../../lib/Common";
+import { scrollMenu } from "../../../lib/Common";
 import _ from "lodash";
 import HorizontalMenuSkeleton from "../Loader/HorizontalMenuSkeleton";
 
-function HorizontalSlideMenu({topicNav, location}) {
+function HorizontalSlideMenu({ topicNav, location }) {
+  const topicLocation = location.pathname.startsWith("/t/")
+    ? location.pathname.split("/").pop()
+    : "";
 
-    const topicLocation = location.pathname.startsWith('/t/') ? location.pathname.split('/').pop() : "";
+  const slideRef = useRef();
+  const [className, setClassName] = useState("");
+  const [scrollLeft, setScrollLeft] = useState(0);
+  const [maxScroll, setMaxScroll] = useState(0);
 
-    const slideRef = useRef();
-    const [className, setClassName] = useState("");
-    const [scrollLeft, setScrollLeft] = useState(0);
-    const [maxScroll, setMaxScroll] = useState(0);
+  useEffect(() => {
+    !_.isEmpty(topicNav) && slideRef.current.dispatchEvent(new Event("scroll"));
+  }, [slideRef.current?.scrollWidth]);
 
+  useEffect(() => {
+    handleClassName();
+  }, [scrollLeft, maxScroll]);
 
-    useEffect(() => {
-        (!_.isEmpty(topicNav)) && slideRef.current.dispatchEvent(new Event("scroll"));
-    }, [slideRef.current?.scrollWidth]);
+  const { onScroll, onClickLeft, onClickRight, handleClassName } = scrollMenu({
+    slideRef,
+    scrollLeft,
+    setScrollLeft,
+    setClassName,
+    maxScroll,
+    setMaxScroll
+  });
 
-    useEffect(() => {
-        handleClassName();
-    }, [scrollLeft, maxScroll]);
+  if (_.isEmpty(topicNav)) return <HorizontalMenuSkeleton />;
 
-    const {onScroll, onClickLeft, onClickRight, handleClassName} = scrollMenu({
-        slideRef,
-        scrollLeft,
-        setScrollLeft,
-        setClassName,
-        maxScroll,
-        setMaxScroll
-    });
-
-
-    if(_.isEmpty(topicNav)) return <HorizontalMenuSkeleton />;
-
-    return (
-        <Container className={cn(className)}>
-            {
-                scrollLeft > 0 &&
-                <Button
-                    type="button"
-                    className="btn prev"
-                    onClick={onClickLeft}>
-                    <SlideBtnPrev/>
-                    <span>prev button</span>
-                </Button>
-            }
-            <List ref={slideRef} onScroll={onScroll}>
-                {
-                    topicNav.map((item, i) => {
-                        return (
-                                <li
-                                    key={i}
-                                    className={topicLocation === item.slug ? "active" : ""}>
-                                    <Link to={`/t/${item.slug}`}>{item.title}</Link>
-                                </li>
-                            )
-                    })
-                }
-            </List>
-            {
-                scrollLeft < maxScroll &&
-                <Button
-                    type="button"
-                    className="btn next"
-                    onClick={onClickRight}>
-                    <SlideBtnNext/>
-                    <span>next button</span>
-                </Button>
-            }
-        </Container>
-    )
+  return (
+    <Container className={cn(className)}>
+      {scrollLeft > 0 && (
+        <Button type="button" className="btn prev" onClick={onClickLeft}>
+          <SlideBtnPrev />
+          <span>prev button</span>
+        </Button>
+      )}
+      <List ref={slideRef} onScroll={onScroll}>
+        {topicNav.map((item, i) => {
+          return (
+            <li key={i} className={topicLocation === item.slug ? "active" : ""}>
+              <Link to={`/t/${item.slug}`}>{item.title}</Link>
+            </li>
+          );
+        })}
+      </List>
+      {scrollLeft < maxScroll && (
+        <Button type="button" className="btn next" onClick={onClickRight}>
+          <SlideBtnNext />
+          <span>next button</span>
+        </Button>
+      )}
+    </Container>
+  );
 }
 
 const Container = styled.div`
@@ -82,7 +69,8 @@ const Container = styled.div`
   padding: 0 20px;
   position: relative;
 
-  &:after, &:before {
+  &:after,
+  &:before {
     content: "";
     display: block;
     pointer-events: none;
@@ -122,7 +110,7 @@ const Container = styled.div`
     z-index: 2;
     width: 40px;
     height: 40px;
-    transition: .2s;
+    transition: 0.2s;
 
     &.prev {
       left: 0;
@@ -138,9 +126,8 @@ const Container = styled.div`
       font-size: 0;
     }
   }
-`
-const Button = styled.button`
-`
+`;
+const Button = styled.button``;
 const List = styled.ul`
   white-space: nowrap;
   overflow-x: scroll;
@@ -160,7 +147,7 @@ const List = styled.ul`
     vertical-align: top;
     height: 100%;
     padding-left: 32px;
-    
+
     &.active a {
       box-shadow: inset 0 -2px #111;
     }
@@ -177,6 +164,6 @@ const List = styled.ul`
       }
     }
   }
-`
+`;
 
 export default HorizontalSlideMenu;

@@ -1,51 +1,53 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import {IconSearch} from "../../../icons";
-import {navigate} from "../../../lib/History";
+import { IconSearch } from "../../../icons";
+import { navigate } from "../../../lib/History";
 import cn from "classnames";
-import {font} from "../../../styled/Font.Styled";
-import {useLocation} from "react-router-dom"
+import { font } from "../../../styled/Font";
+import { useLocation } from "react-router-dom";
 
-function SearchBox({shape}) {
-    const location = useLocation();
-    const initialValue = location.pathname.startsWith('/search/') ? location.pathname.split('/').pop() : "";
-    const [value, setValue] = useState('');
+function SearchBox({ shape }) {
+  const location = useLocation();
+  const initialValue = location.pathname.startsWith("/search/")
+    ? location.pathname.split("/").pop()
+    : "";
+  const [value, setValue] = useState("");
 
-    useEffect(() => {
-        setValue(initialValue);
-    }, [initialValue]);
+  useEffect(() => {
+    setValue(initialValue);
+  }, [initialValue]);
 
-    const onChange = (e) => {
-        setValue(e.target.value);
-    };
+  const onChange = e => {
+    setValue(e.target.value);
+  };
 
-    const onSubmit = (e) => {
-        e.preventDefault();
-        navigate(`/search/photos/${value}`);
-    }
+  const onSubmit = e => {
+    e.preventDefault();
+    navigate(`/search/photos/${value}`);
+  };
 
-    return (
-        <Container className={cn('SearchBox', shape)}>
-            <Form onSubmit={onSubmit}>
-                <Button>
-                    <IconSearch/>
-                </Button>
-                <Label htmlFor="">
-                    <Input
-                        type="text"
-                        value={value}
-                        onChange={onChange}
-                        placeholder={"Search free high-resolution photos"}
-                    />
-                </Label>
-            </Form>
-        </Container>
-    )
+  return (
+    <Container className={cn("SearchBox", shape)}>
+      <Form onSubmit={onSubmit}>
+        <Button>
+          <IconSearch />
+        </Button>
+        <Label htmlFor="">
+          <Input
+            type="text"
+            value={value}
+            onChange={onChange}
+            placeholder={"Search free high-resolution photos"}
+          />
+        </Label>
+      </Form>
+    </Container>
+  );
 }
 
 const Container = styled.div`
   flex: 1;
-`
+`;
 const Form = styled.form`
   display: flex;
   background: #eeeeee;
@@ -53,46 +55,54 @@ const Form = styled.form`
   padding-left: 6px;
   height: 40px;
   align-items: center;
+
   .round & {
     background: #eee;
     border-radius: 19px;
   }
+
   .square & {
     background: #fff;
     border-radius: 4px;
-    height:54px;
+    height: 54px;
   }
-`
+`;
 const Label = styled.label`
   display: block;
   width: 100%;
+
   .round & {
     height: 38px;
   }
+
   .square & {
     height: 54px;
   }
-`
+`;
 const Button = styled.button`
   background: transparent;
   border: 0;
   display: flex;
   align-items: center;
   padding-left: 8px;
+
   &:focus {
     outline: 0;
   }
+
   svg {
     height: auto;
     fill: #767676;
+
     .round & {
       width: 20px;
     }
+
     .square & {
       width: 24px;
     }
   }
-`
+`;
 const Input = styled.input`
   display: block;
   width: 100%;
@@ -102,9 +112,10 @@ const Input = styled.input`
   padding: 8px;
   font-family: ${font.en};
   font-size: 15px;
+
   &:focus {
     outline: 0;
   }
-`
+`;
 
 export default SearchBox;

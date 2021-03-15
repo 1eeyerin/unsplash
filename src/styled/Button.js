@@ -1,8 +1,8 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const Buttons = styled.div`
   display: flex;
-`
+`;
 
 export const Btn = styled.button`
   display: flex;
@@ -11,7 +11,7 @@ export const Btn = styled.button`
   font-size: 14px;
   line-height: 30px;
   color: #767676;
-  background-color: hsla(0, 0%, 100%, .9);
+  background-color: hsla(0, 0%, 100%, 0.9);
   border: 1px solid transparent;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
   -webkit-border-radius: 4px;
@@ -28,7 +28,7 @@ export const Btn = styled.button`
     width: 15px;
     fill: #767676;
   }
-  
+
   span {
     margin-left: 6px;
   }
@@ -36,4 +36,4 @@ export const Btn = styled.button`
   & + button {
     margin-left: 8px;
   }
-`
+`;

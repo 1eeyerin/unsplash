@@ -1,44 +1,50 @@
-export const recomposePhotos = (items) => {
-    let photoGroup = [[], [], []];
-    let groupHeight = [0, 0, 0];
+export const recomposePhotos = items => {
+  let photoGroup = [[], [], []];
+  let groupHeight = [0, 0, 0];
 
-    if (items) {
-        for (let i = 0; i < items.length; i++) {
-            const width = items[i].width;
-            const height = items[i].height;
-            const ratioHeight = height / width;
+  if (items) {
+    for (let i = 0; i < items.length; i++) {
+      const width = items[i].width;
+      const height = items[i].height;
+      const ratioHeight = height / width;
 
-            // 가장 작은 <height>를 가지고 있는 그룹 <idx>에 <item>도 넣고
-            // <item>의 <ratioHeight>도 <groupHeight>와 더해주어야 한다.
-            const minHeightIndex = groupHeight.indexOf(Math.min(...groupHeight));
-            photoGroup[minHeightIndex].push(items[i]);
-            groupHeight[minHeightIndex] = groupHeight[minHeightIndex] + ratioHeight;
-        }
+      // 가장 작은 <height>를 가지고 있는 그룹 <idx>에 <item>도 넣고
+      // <item>의 <ratioHeight>도 <groupHeight>와 더해주어야 한다.
+      const minHeightIndex = groupHeight.indexOf(Math.min(...groupHeight));
+      photoGroup[minHeightIndex].push(items[i]);
+      groupHeight[minHeightIndex] = groupHeight[minHeightIndex] + ratioHeight;
     }
+  }
 
-    return photoGroup;
-}
+  return photoGroup;
+};
 
-export const scrollMenu = ({slideRef, scrollLeft, setScrollLeft, setClassName, maxScroll, setMaxScroll}) => {
+export const scrollMenu = ({
+  slideRef,
+  scrollLeft,
+  setScrollLeft,
+  setClassName,
+  maxScroll,
+  setMaxScroll
+}) => {
+  const onScroll = e => {
+    setScrollLeft(e.target.scrollLeft);
+    setMaxScroll(e.target.scrollWidth - e.target.clientWidth);
+  };
 
-    const onScroll = (e) => {
-        setScrollLeft(e.target.scrollLeft);
-        setMaxScroll(e.target.scrollWidth - e.target.clientWidth);
-    };
+  const onClickLeft = () => {
+    slideRef.current.scrollLeft = Math.max(scrollLeft - 300, 0);
+  };
 
-    const onClickLeft = () => {
-        slideRef.current.scrollLeft = Math.max(scrollLeft - 300, 0);
-    };
+  const onClickRight = () => {
+    slideRef.current.scrollLeft = Math.min(scrollLeft + 300, maxScroll);
+  };
 
-    const onClickRight = () => {
-        slideRef.current.scrollLeft = Math.min(scrollLeft + 300, maxScroll);
-    };
+  const handleClassName = () => {
+    setClassName("");
+    scrollLeft <= 10 && setClassName("prev");
+    scrollLeft >= maxScroll - 10 && setClassName("next");
+  };
 
-    const handleClassName = () => {
-        setClassName("");
-        (scrollLeft <= 10) && setClassName("prev");
-        (scrollLeft >= (maxScroll - 10)) && setClassName("next");
-    }
-
-    return {onScroll, onClickLeft, onClickRight, handleClassName}
+  return { onScroll, onClickLeft, onClickRight, handleClassName };
 };

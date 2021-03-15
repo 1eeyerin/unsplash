@@ -7,10 +7,10 @@ import store from "./redux/store";
 import HISTORY from "./lib/History";
 
 ReactDOM.render(
-    <Provider store={store}>
-        <Router history={HISTORY}>
-            <App />
-        </Router>
-    </Provider>,
-    document.getElementById("root"),
+  <Provider store={store}>
+    <Router history={HISTORY}>
+      <App />
+    </Router>
+  </Provider>,
+  document.getElementById("root")
 );
