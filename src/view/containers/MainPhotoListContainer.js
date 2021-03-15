@@ -3,7 +3,7 @@ import styled from "styled-components";
 import {photosActions} from "../../redux/ActionCreators";
 import PhotoList from "../components/Photos/PhotoList";
 import {useSelector} from "react-redux";
-import {ContentContainer} from "../components/Layout/Layout.Styled";
+import {ContentContainer} from "../../styled/Layout.Styled";
 import InfiniteScroll from "../components/InfiniteScroll";
 
 function MainPhotoListContainer() {

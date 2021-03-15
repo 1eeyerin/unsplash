@@ -6,8 +6,7 @@ import Search from "../pages/Search";
 import Topic from "../pages/Topic";
 import Photos from "../pages/Photos";
 
-const Routes = () => {
-
+function Routes() {
     return (
         <Switch>
             <Route exact path="/" component={Home}/>
