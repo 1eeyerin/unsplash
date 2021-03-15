@@ -1,9 +1,7 @@
-import {all} from "redux-saga/effects";
+import { all } from "redux-saga/effects";
 
 const saga = function* () {
-    yield all([
-
-    ])
-}
+  yield all([]);
+};
 
 export default saga;

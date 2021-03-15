@@ -1,17 +1,24 @@
 import React from "react";
 import styled from "styled-components";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
-function FixMenu({location}) {
-
-    return (
-        <Container>
-            <List>
-                <li className={location.pathname === "/"? "active" : ""}><Link to="/"><span>Editorial</span></Link></li>
-                <li><Link to="/"><span>Following</span></Link></li>
-            </List>
-        </Container>
-    )
+function FixMenu({ location }) {
+  return (
+    <Container>
+      <List>
+        <li className={location.pathname === "/" ? "active" : ""}>
+          <Link to="/">
+            <span>Editorial</span>
+          </Link>
+        </li>
+        <li>
+          <Link to="/">
+            <span>Following</span>
+          </Link>
+        </li>
+      </List>
+    </Container>
+  );
 }
 
 const Container = styled.div`
@@ -19,7 +26,7 @@ const Container = styled.div`
   position: relative;
 
   &:after {
-    content: '';
+    content: "";
     position: absolute;
     top: 50%;
     right: 0px;
@@ -28,7 +35,7 @@ const Container = styled.div`
     margin-top: -16px;
     background: #d1d1d1;
   }
-`
+`;
 const List = styled.ul`
   height: 56px;
   display: flex;
@@ -40,7 +47,7 @@ const List = styled.ul`
     display: flex;
     align-items: center;
     padding-left: 32px;
-    
+
     &.active a {
       box-shadow: inset 0 -2px #111;
     }
@@ -53,6 +60,6 @@ const List = styled.ul`
       height: 100%;
     }
   }
-`
+`;
 
 export default FixMenu;

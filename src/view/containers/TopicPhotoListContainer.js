@@ -1,54 +1,50 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import {topicsActions} from "../../redux/ActionCreators";
+import { topicsActions } from "../../redux/ActionCreators";
 import PhotoList from "../components/Photos/PhotoList";
-import {ContentContainer} from "../components/Layout/Layout.Styled";
-import {useSelector} from "react-redux";
+import { ContentContainer } from "../../styled/Layout";
+import { useSelector } from "react-redux";
 import InfiniteScroll from "../components/InfiniteScroll";
 
-function TopicPhotoListContainer({match}) {
-    const query = match.params.query;
-    const {topicData, isLoading} = useSelector(state => state.topics);
-    const [page, setPage] = useState(1);
+function TopicPhotoListContainer({ match }) {
+  const query = match.params.query;
+  const { topicData, isLoading } = useSelector(state => state.topics);
+  const [page, setPage] = useState(1);
 
-    const getTopic = () => {
-        topicsActions.getTopicPhoto([
-            {
-                per_page: 5,
-                page,
-            },
-            query,
-        ]);
-    }
+  const getTopic = () => {
+    topicsActions.getTopicPhoto([
+      {
+        per_page: 5,
+        page
+      },
+      query
+    ]);
+  };
 
-    useEffect(() => {
-        topicsActions.deleteHistory();
-    }, [query]);
+  useEffect(() => {
+    topicsActions.deleteHistory();
+  }, [query]);
 
-    useEffect(() => {
-        getTopic();
-    }, [query, page]);
+  useEffect(() => {
+    getTopic();
+  }, [query, page]);
 
-    const getMoreItems = () => {
-        if(8 <= page) return;
-        setPage(prevPage => prevPage + 1);
-    }
+  const getMoreItems = () => {
+    if (8 <= page) return;
+    setPage(prevPage => prevPage + 1);
+  };
 
-    return (
-        <Container>
-            <ContentContainer>
-                <InfiniteScroll
-                    getMoreItems={getMoreItems}
-                    isLoading={isLoading}>
-                    <PhotoList data={topicData}/>
-                </InfiniteScroll>
-            </ContentContainer>
-        </Container>
-    )
+  return (
+    <Container>
+      <ContentContainer>
+        <InfiniteScroll getMoreItems={getMoreItems} isLoading={isLoading}>
+          <PhotoList data={topicData} />
+        </InfiniteScroll>
+      </ContentContainer>
+    </Container>
+  );
 }
 
-const Container = styled.div`
-
-`
+const Container = styled.div``;
 
 export default TopicPhotoListContainer;
