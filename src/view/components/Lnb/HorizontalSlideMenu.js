@@ -20,11 +20,7 @@ function HorizontalSlideMenu({ topicNav, location }) {
 
   useEffect(() => {
     !_.isEmpty(topicNav) && slideRef.current.dispatchEvent(new Event("scroll"));
-  }, [slideRef.current?.scrollWidth]);
-
-  useEffect(() => {
-    handleClassName();
-  }, [scrollLeft, maxScroll]);
+  }, [topicNav, slideRef.current?.scrollWidth]);
 
   const { onScroll, onClickLeft, onClickRight, handleClassName } = scrollMenu({
     slideRef,
@@ -34,6 +30,10 @@ function HorizontalSlideMenu({ topicNav, location }) {
     maxScroll,
     setMaxScroll
   });
+
+  useEffect(() => {
+    handleClassName();
+  }, [handleClassName, scrollLeft, maxScroll]);
 
   if (_.isEmpty(topicNav)) return <HorizontalMenuSkeleton />;
 

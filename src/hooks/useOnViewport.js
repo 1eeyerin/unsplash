@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from "react";
+import PropTypes from "prop-types";
 
 export const useOnViewport = (options = {}, isLoading = false) => {
-  const ref = useRef();
+  const ref = useRef(null);
   const [inView, setInView] = useState(false);
 
   useEffect(() => {
@@ -19,4 +20,9 @@ export const useOnViewport = (options = {}, isLoading = false) => {
   }, [ref, options, isLoading]);
 
   return [ref, inView];
+};
+
+useOnViewport.propTypes = {
+  options: PropTypes.object,
+  isLoading: PropTypes.bool
 };

@@ -12,7 +12,11 @@ function TopicPhotoListContainer({ match }) {
   const { topicData, isLoading } = useSelector(state => state.topics);
   const [page, setPage] = useState(1);
 
-  const getTopic = () => {
+  useEffect(() => {
+    topicsActions.deleteHistory();
+  }, [query]);
+
+  useEffect(() => {
     topicsActions.getTopicPhoto([
       {
         per_page: 5,
@@ -20,14 +24,6 @@ function TopicPhotoListContainer({ match }) {
       },
       query
     ]);
-  };
-
-  useEffect(() => {
-    topicsActions.deleteHistory();
-  }, [query]);
-
-  useEffect(() => {
-    getTopic();
   }, [query, page]);
 
   const getMoreItems = () => {

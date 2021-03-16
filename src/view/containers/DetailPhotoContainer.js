@@ -8,12 +8,9 @@ import PropTypes from "prop-types";
 function DetailPhotoContainer({ match }) {
   const id = match.params.id;
   const { photo } = useSelector(state => state.photos);
-  const getPhoto = () => {
-    photosActions.getDetailPhoto(id);
-  };
 
   useEffect(() => {
-    getPhoto();
+    photosActions.getDetailPhoto(id);
   }, [id]);
 
   return (

@@ -5,9 +5,13 @@ import { topicsActions } from "../../redux/ActionCreators";
 import { useSelector } from "react-redux";
 import Lnb from "../components/Lnb";
 import PropTypes from "prop-types";
+import { useLocation } from "react-router-dom";
 
 function HeaderContainer() {
   const { topics } = useSelector(state => state);
+  const { pathname } = useLocation();
+
+  const withLnb = pathname === "/" || pathname.startsWith("/t/");
 
   useEffect(() => {
     topicsActions.getTopicList({
@@ -18,7 +22,7 @@ function HeaderContainer() {
   return (
     <Container>
       <Header />
-      <Lnb topicNav={topics.list} />
+      {withLnb && <Lnb topicNav={topics.list} />}
     </Container>
   );
 }
