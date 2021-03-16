@@ -13,9 +13,9 @@ export const useOnViewport = (options = {}, isLoading = false) => {
       });
     }, options);
 
-    ref?.current && observer.observe(ref?.current);
+    ref?.current && observer.observe(ref.current);
 
-    return () => ref?.current && observer.unobserve(ref?.current);
+    return () => ref?.current && observer.unobserve(ref.current);
   }, [ref, options, isLoading]);
 
   return [ref, inView];

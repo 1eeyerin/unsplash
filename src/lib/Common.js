@@ -48,10 +48,3 @@ export const scrollMenu = ({
 
   return { onScroll, onClickLeft, onClickRight, handleClassName };
 };
-
-export const imagePreload = (images = []) => {
-  for (let i = 0; i < images.length; i++) {
-    let img = new Image();
-    img.src = images[i];
-  }
-};

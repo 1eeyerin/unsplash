@@ -7,7 +7,6 @@ import {
 } from "../../../icons";
 import { Btn, Buttons } from "../../../styled/Button";
 import { UserBio, UserImage, UserInfo } from "../../../styled/Common";
-import PropTypes from "prop-types";
 
 function CardInfo({ name, profile_image, sponsorship }) {
   return (
@@ -44,14 +43,6 @@ function CardInfo({ name, profile_image, sponsorship }) {
     </Container>
   );
 }
-
-CardInfo.propTypes = {
-  name: PropTypes.string,
-  profile_image: PropTypes.shape({
-    small: PropTypes.string
-  }),
-  sponsorship: PropTypes.object
-};
 
 const Container = styled.div`
   position: absolute;

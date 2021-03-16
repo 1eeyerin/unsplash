@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { createPortal } from "react-dom";
-import PropTypes from "prop-types";
 
 function Popup({ children, onClose }) {
   return createPortal(
@@ -13,11 +12,6 @@ function Popup({ children, onClose }) {
     document.getElementById("popup")
   );
 }
-
-Popup.propTypes = {
-  children: PropTypes.element.isRequired,
-  onClose: PropTypes.func
-};
 
 const Container = styled.div`
   overflow-y: scroll;

@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import Skeleton from "react-loading-skeleton";
 import _ from "lodash";
-import PropTypes from "prop-types";
 
 function HorizontalMenuSkeleton() {
   const arr = _.range(15);
@@ -18,10 +17,6 @@ function HorizontalMenuSkeleton() {
     </Container>
   );
 }
-
-HorizontalMenuSkeleton.propTypes = {
-  arr: PropTypes.array
-};
 
 const Container = styled.div`
   display: flex;

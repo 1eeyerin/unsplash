@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import _ from "lodash";
 import PhotoItemSkeleton from "./PhotoItemSkeleton";
-import PropTypes from "prop-types";
 
 function PhotoListSkeleton() {
   const arr = _.range(30);
@@ -19,10 +18,6 @@ function PhotoListSkeleton() {
     </Container>
   );
 }
-
-PhotoListSkeleton.propTypes = {
-  arr: PropTypes.array
-};
 
 const Container = styled.div``;
 const Row = styled.div`

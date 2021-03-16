@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
 
 function FixMenu({ location }) {
   return (
@@ -21,10 +20,6 @@ function FixMenu({ location }) {
     </Container>
   );
 }
-
-FixMenu.propTypes = {
-  location: PropTypes.object
-};
 
 const Container = styled.div`
   padding: 0 20px;

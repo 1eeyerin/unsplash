@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import PropTypes from "prop-types";
 
 function RelatedCollections({ data, Title }) {
   return (
@@ -45,27 +44,6 @@ function RelatedCollections({ data, Title }) {
     </Container>
   );
 }
-
-RelatedCollections.propTypes = {
-  data: PropTypes.shape({
-    results: PropTypes.array,
-    title: PropTypes.string,
-    total_photos: PropTypes.number,
-    preview_photos: PropTypes.shape({
-      urls: PropTypes.shape({
-        regular: PropTypes.string,
-        small: PropTypes.string
-      })
-    }),
-    user: PropTypes.shape({
-      name: PropTypes.string
-    }),
-    tags: PropTypes.shape({
-      title: PropTypes.string
-    })
-  }),
-  Title: PropTypes.object
-};
 
 const Container = styled.div`
   padding: 0 12px 85px;

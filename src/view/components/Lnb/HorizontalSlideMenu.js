@@ -6,7 +6,6 @@ import cn from "classnames";
 import { scrollMenu } from "../../../lib/Common";
 import _ from "lodash";
 import HorizontalMenuSkeleton from "../Loader/HorizontalMenuSkeleton";
-import PropTypes from "prop-types";
 
 function HorizontalSlideMenu({ topicNav, location }) {
   const topicLocation = location.pathname.startsWith("/t/")
@@ -63,13 +62,6 @@ function HorizontalSlideMenu({ topicNav, location }) {
     </Container>
   );
 }
-
-HorizontalSlideMenu.propTypes = {
-  topicNav: PropTypes.array,
-  slug: PropTypes.string,
-  title: PropTypes.string,
-  location: PropTypes.object
-};
 
 const Container = styled.div`
   flex-grow: 1;

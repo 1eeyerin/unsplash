@@ -5,7 +5,6 @@ import PhotoList from "../components/Photos/PhotoList";
 import { useSelector } from "react-redux";
 import { ContentContainer } from "../../styled/Layout";
 import InfiniteScroll from "../components/InfiniteScroll";
-import PropTypes from "prop-types";
 
 function MainPhotoListContainer() {
   const [page, setPage] = useState(1);
@@ -36,13 +35,6 @@ function MainPhotoListContainer() {
     </Container>
   );
 }
-
-MainPhotoListContainer.propTypes = {
-  list: PropTypes.array,
-  page: PropTypes.number,
-  isLoading: PropTypes.bool,
-  getMoreItems: PropTypes.func
-};
 
 const Container = styled.div`
   padding: 48px 0 85px;

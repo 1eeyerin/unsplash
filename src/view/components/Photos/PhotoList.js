@@ -3,7 +3,6 @@ import styled from "styled-components";
 import PhotoCard from "./PhotoCard";
 import { recomposePhotos } from "../../../lib/Common";
 import { photosActions } from "../../../redux/ActionCreators";
-import PropTypes from "prop-types";
 
 function PhotoList({ data }) {
   const photosGroup = recomposePhotos(data);
@@ -29,16 +28,6 @@ function PhotoList({ data }) {
     </Container>
   );
 }
-
-PhotoList.propTypes = {
-  data: PropTypes.array,
-  photosGroup: PropTypes.object,
-  group: PropTypes.shape({
-    item: PropTypes.shape({
-      id: PropTypes.string
-    })
-  })
-};
 
 const Container = styled.div`
   overflow: hidden;
