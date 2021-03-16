@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { photosActions } from "../../redux/ActionCreators";
 import DetailPhoto from "../components/DetailPhoto";
 import Popup from "../components/Popup";
+import PropTypes from "prop-types";
 
 function PopupPhotoContainer() {
   const { popupPhoto } = useSelector(state => state.photos);
@@ -22,5 +23,9 @@ function PopupPhotoContainer() {
     </Popup>
   );
 }
+
+PopupPhotoContainer.propTypes = {
+  popupPhoto: PropTypes.object
+};
 
 export default PopupPhotoContainer;

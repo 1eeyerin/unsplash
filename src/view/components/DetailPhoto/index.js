@@ -5,6 +5,7 @@ import RelatedPhotos from "./RelatedPhotos";
 import { font } from "../../../styled/Font";
 import RelatedCollections from "./RelatedCollections";
 import { pxToRem } from "../../../styled/Util";
+import PropTypes from "prop-types";
 
 function DetailPhoto({ data }) {
   return (
@@ -17,6 +18,13 @@ function DetailPhoto({ data }) {
     </Container>
   );
 }
+
+DetailInfo.propTypes = {
+  data: PropTypes.shape({
+    related_photos: PropTypes.object,
+    related_collections: PropTypes.object
+  })
+};
 
 const Container = styled.div``;
 const Contents = styled.div`

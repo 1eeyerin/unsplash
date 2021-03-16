@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useLayoutEffect } from "react";
 import styled from "styled-components";
+import PropTypes from "prop-types";
 import {
   IconInfo,
   IconPhotoCardAdd,
@@ -9,18 +10,17 @@ import {
 } from "../../../icons";
 import { Btn, Buttons } from "../../../styled/Button";
 import { UserBio, UserImage, UserInfo } from "../../../styled/Common";
+import { imagePreload } from "../../../lib/Common";
 
 function DetailInfo({ urls, user }) {
-  const [imageUrl, setImageUrl] = useState(urls?.small);
-  const [imageSizeFull, setImageSizeFull] = useState(false);
-
-  useEffect(() => {
-    setImageUrl(urls?.small);
+  useLayoutEffect(() => {
+    urls && imagePreload([urls?.small, urls?.regular]);
   }, [urls]);
 
+  const [imageSizeFull, setImageSizeFull] = useState(false);
+
   const onClick = () => {
-    imageSizeFull ? setImageSizeFull(false) : setImageSizeFull(true);
-    imageSizeFull ? setImageUrl(urls?.small) : setImageUrl(urls?.full);
+    setImageSizeFull(prevSize => !prevSize);
   };
 
   return (
@@ -51,7 +51,7 @@ function DetailInfo({ urls, user }) {
         <ImageButton onClick={onClick} sizeFull={imageSizeFull}>
           <Image>
             <IconPhotoFullSize />
-            <img src={imageUrl} alt="" />
+            <img src={imageSizeFull ? urls?.regular : urls?.small} alt="" />
           </Image>
         </ImageButton>
 
@@ -71,6 +71,20 @@ function DetailInfo({ urls, user }) {
     </Container>
   );
 }
+
+DetailInfo.propTypes = {
+  urls: PropTypes.shape({
+    regular: PropTypes.string,
+    small: PropTypes.string
+  }),
+  user: PropTypes.shape({
+    profile_image: PropTypes.shape({
+      small: PropTypes.string
+    }),
+    name: PropTypes.string,
+    username: PropTypes.string
+  })
+};
 
 const Container = styled.div``;
 const Info = styled.div`

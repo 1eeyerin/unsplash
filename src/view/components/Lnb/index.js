@@ -4,6 +4,7 @@ import FixMenu from "./FixMenu";
 import HorizontalSlideMenu from "./HorizontalSlideMenu";
 import { font } from "../../../styled/Font";
 import { useLocation } from "react-router-dom";
+import PropTypes from "prop-types";
 
 function Lnb({ topicNav }) {
   const location = useLocation();
@@ -15,6 +16,11 @@ function Lnb({ topicNav }) {
     </Container>
   );
 }
+
+Lnb.propTypes = {
+  topicNav: PropTypes.array,
+  location: PropTypes.object
+};
 
 const Container = styled.div`
   position: relative;
