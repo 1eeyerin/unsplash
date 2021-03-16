@@ -4,6 +4,7 @@ import Header from "../components/Header";
 import { topicsActions } from "../../redux/ActionCreators";
 import { useSelector } from "react-redux";
 import Lnb from "../components/Lnb";
+import PropTypes from "prop-types";
 
 function HeaderContainer() {
   const { topics } = useSelector(state => state);
@@ -21,6 +22,12 @@ function HeaderContainer() {
     </Container>
   );
 }
+
+HeaderContainer.propTypes = {
+  topics: PropTypes.shape({
+    list: PropTypes.object
+  })
+};
 
 const Container = styled.div`
   position: sticky;
