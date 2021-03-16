@@ -9,7 +9,7 @@ function Visual() {
       <Contents>
         <Title>Unsplash</Title>
         <Description>
-          The internet’s source of <a>freely-usable images.</a>
+          The internet’s source of <a href="/">freely-usable images.</a>
           <br />
           Powered by creators everywhere.
         </Description>
