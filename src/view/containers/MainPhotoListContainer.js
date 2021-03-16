@@ -10,15 +10,12 @@ import PropTypes from "prop-types";
 function MainPhotoListContainer() {
   const [page, setPage] = useState(1);
   const { list, isLoading } = useSelector(state => state.photos);
-  const getPhotos = () => {
+
+  useEffect(() => {
     photosActions.getPhotos({
       per_page: 5,
       page
     });
-  };
-
-  useEffect(() => {
-    getPhotos();
   }, [page]);
 
   const getMoreItems = () => {

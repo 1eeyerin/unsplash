@@ -33,7 +33,7 @@ function RelatedCollections({ data, Title }) {
                 {[...Array(3)].map((n, i) => {
                   return (
                     <li key={i}>
-                      <a href="#">{item.tags[i]?.title}</a>
+                      <a>{item.tags[i]?.title}</a>
                     </li>
                   );
                 })}
