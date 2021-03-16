@@ -8,10 +8,8 @@ import _ from "lodash";
 import HorizontalMenuSkeleton from "../Loader/HorizontalMenuSkeleton";
 import PropTypes from "prop-types";
 
-function HorizontalSlideMenu({ topicNav, location }) {
-  const topicLocation = location.pathname.startsWith("/t/")
-    ? location.pathname.split("/").pop()
-    : "";
+function HorizontalSlideMenu({ topicNav, pathname }) {
+  const location = pathname.startsWith("/t/") ? pathname.split("/").pop() : "";
 
   const slideRef = useRef();
   const [className, setClassName] = useState("");
@@ -48,7 +46,7 @@ function HorizontalSlideMenu({ topicNav, location }) {
       <List ref={slideRef} onScroll={onScroll}>
         {topicNav.map((item, i) => {
           return (
-            <li key={i} className={topicLocation === item.slug ? "active" : ""}>
+            <li key={i} className={location === item.slug ? "active" : ""}>
               <Link to={`/t/${item.slug}`}>{item.title}</Link>
             </li>
           );
@@ -68,7 +66,7 @@ HorizontalSlideMenu.propTypes = {
   topicNav: PropTypes.array,
   slug: PropTypes.string,
   title: PropTypes.string,
-  location: PropTypes.object
+  pathname: PropTypes.string
 };
 
 const Container = styled.div`

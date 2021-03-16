@@ -8,9 +8,9 @@ import { useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
 
 function SearchBox({ shape }) {
-  const location = useLocation();
-  const initialValue = location.pathname.startsWith("/search/")
-    ? location.pathname.split("/").pop()
+  const { pathname } = useLocation();
+  const initialValue = pathname.startsWith("/search/")
+    ? pathname.split("/").pop()
     : "";
   const [value, setValue] = useState("");
 
@@ -47,7 +47,8 @@ function SearchBox({ shape }) {
 }
 
 SearchBox.propTypes = {
-  shape: PropTypes.string
+  shape: PropTypes.string,
+  pathname: PropTypes.string
 };
 
 const Container = styled.div`
