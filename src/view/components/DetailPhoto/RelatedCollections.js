@@ -33,7 +33,7 @@ function RelatedCollections({ data, Title }) {
                 {[...Array(3)].map((n, i) => {
                   return (
                     <li key={i}>
-                      <a>{item.tags[i]?.title}</a>
+                      <span>{item.tags[i]?.title}</span>
                     </li>
                   );
                 })}
@@ -148,7 +148,7 @@ const Tags = styled.ul`
     padding: 0 0 8px 8px;
   }
 
-  a {
+  span {
     background-color: #eee;
     padding-right: 8px;
     padding-left: 8px;
