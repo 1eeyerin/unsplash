@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import CardInfo from "./CardInfo";
 import { useOnViewport } from "../../../hooks/useOnViewport";
+import PropTypes from "prop-types";
 
 function PhotoCard({ urls, onClick, user, sponsorship, width, height, color }) {
   const ratioHeight = (height / width) * 100;
@@ -29,6 +30,19 @@ function PhotoCard({ urls, onClick, user, sponsorship, width, height, color }) {
     </Container>
   );
 }
+
+PhotoCard.propTypes = {
+  urls: PropTypes.shape({
+    regular: PropTypes.string
+  }),
+  inView: PropTypes.bool,
+  onClick: PropTypes.func,
+  user: PropTypes.object,
+  sponsorship: PropTypes.object,
+  width: PropTypes.number,
+  height: PropTypes.number,
+  color: PropTypes.string
+};
 
 const Container = styled.div`
   padding: 12px 0;

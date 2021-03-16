@@ -5,6 +5,7 @@ import { navigate } from "../../../lib/History";
 import cn from "classnames";
 import { font } from "../../../styled/Font";
 import { useLocation } from "react-router-dom";
+import PropTypes from "prop-types";
 
 function SearchBox({ shape }) {
   const location = useLocation();
@@ -44,6 +45,10 @@ function SearchBox({ shape }) {
     </Container>
   );
 }
+
+SearchBox.propTypes = {
+  shape: PropTypes.string
+};
 
 const Container = styled.div`
   flex: 1;

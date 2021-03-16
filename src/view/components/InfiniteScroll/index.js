@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useOnViewport } from "../../../hooks/useOnViewport";
+import PropTypes from "prop-types";
 
-function InfiniteScroll({ children, getMoreItems = () => {}, isLoading }) {
+function InfiniteScroll({ children, getMoreItems, isLoading }) {
   const [ref, inView] = useOnViewport(
     {
       rootMargin: "300px"
@@ -21,6 +22,13 @@ function InfiniteScroll({ children, getMoreItems = () => {}, isLoading }) {
     </>
   );
 }
+
+InfiniteScroll.propTypes = {
+  children: PropTypes.element.isRequired,
+  getMoreItems: PropTypes.func,
+  isLoading: PropTypes.bool,
+  inView: PropTypes.bool
+};
 
 const Sentinel = styled.div`
   position: absolute;

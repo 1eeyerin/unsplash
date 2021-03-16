@@ -5,6 +5,7 @@ import PhotoList from "../components/Photos/PhotoList";
 import { ContentContainer } from "../../styled/Layout";
 import { useSelector } from "react-redux";
 import InfiniteScroll from "../components/InfiniteScroll";
+import PropTypes from "prop-types";
 
 function TopicPhotoListContainer({ match }) {
   const query = match.params.query;
@@ -44,6 +45,15 @@ function TopicPhotoListContainer({ match }) {
     </Container>
   );
 }
+
+TopicPhotoListContainer.propTypes = {
+  match: PropTypes.object,
+  query: PropTypes.string,
+  page: PropTypes.number,
+  getMoreItems: PropTypes.func,
+  isLoading: PropTypes.bool,
+  topicData: PropTypes.array
+};
 
 const Container = styled.div``;
 

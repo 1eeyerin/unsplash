@@ -3,6 +3,7 @@ import styled from "styled-components";
 import TopicPhotoListContainer from "../containers/TopicPhotoListContainer";
 import { ContentContainer } from "../../styled/Layout";
 import { font } from "../../styled/Font";
+import PropTypes from "prop-types";
 
 function Topic(props) {
   const query = props.match.params.query;
@@ -15,6 +16,10 @@ function Topic(props) {
     </Container>
   );
 }
+
+Topic.propTypes = {
+  query: PropTypes.string
+};
 
 const Container = styled.div`
   padding-bottom: 85px;
