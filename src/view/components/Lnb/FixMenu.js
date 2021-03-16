@@ -3,11 +3,11 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
-function FixMenu({ location }) {
+function FixMenu({ pathname }) {
   return (
     <Container>
       <List>
-        <li className={location.pathname === "/" ? "active" : ""}>
+        <li className={pathname === "/" ? "active" : ""}>
           <Link to="/">
             <span>Editorial</span>
           </Link>
@@ -23,7 +23,7 @@ function FixMenu({ location }) {
 }
 
 FixMenu.propTypes = {
-  location: PropTypes.object
+  pathname: PropTypes.string
 };
 
 const Container = styled.div`

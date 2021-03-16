@@ -22,7 +22,7 @@ function HeaderContainer() {
   return (
     <Container>
       <Header />
-      {withLnb && <Lnb topicNav={topics.list} />}
+      {withLnb && <Lnb topicNav={topics.list} pathname={pathname} />}
     </Container>
   );
 }
