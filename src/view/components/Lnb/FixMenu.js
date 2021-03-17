@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import { media } from "../../../styled/Responsive";
 
 function FixMenu({ pathname }) {
   return (
@@ -47,11 +48,19 @@ const List = styled.ul`
   font-size: 14px;
   margin-left: -32px;
 
+  ${media.lessThan("sm")`
+    margin-left: - 24px;
+  `};
+
   li {
     height: 100%;
     display: flex;
     align-items: center;
     padding-left: 32px;
+
+    ${media.lessThan("sm")`
+      padding-left: 24px;
+    `};
 
     &.active a {
       box-shadow: inset 0 -2px #111;
