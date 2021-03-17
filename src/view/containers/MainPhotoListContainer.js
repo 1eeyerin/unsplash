@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
 import { photosActions } from "../../redux/ActionCreators";
 import PhotoList from "../components/Photos/PhotoList";
@@ -18,10 +18,11 @@ function MainPhotoListContainer() {
     });
   }, [page]);
 
-  const getMoreItems = () => {
+  const getMoreItems = useCallback(() => {
     if (8 <= page) return;
     setPage(prevPage => prevPage + 1);
-  };
+    console.log("@@ page", page);
+  }, [page]);
 
   return (
     <Container>
