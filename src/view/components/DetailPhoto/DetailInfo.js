@@ -14,7 +14,7 @@ import { imagePreload } from "../../../lib/Common";
 
 function DetailInfo({ urls, user }) {
   useLayoutEffect(() => {
-    urls && imagePreload([urls?.small, urls?.regular]);
+    urls && imagePreload([urls?.small, urls?.full]);
   }, [urls]);
 
   const [imageSizeFull, setImageSizeFull] = useState(false);
@@ -51,7 +51,7 @@ function DetailInfo({ urls, user }) {
         <ImageButton onClick={onClick} sizeFull={imageSizeFull}>
           <Image>
             <IconPhotoFullSize />
-            <img src={imageSizeFull ? urls?.regular : urls?.small} alt="" />
+            <img src={imageSizeFull ? urls?.full : urls?.small} alt="" />
           </Image>
         </ImageButton>
 
