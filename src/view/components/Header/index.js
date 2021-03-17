@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { IconLogo } from "../../../icons";
 import SearchBox from "../SearchBox";
 import Nav from "./Nav";
+import { media } from "../../../styled/Responsive";
 
 function Header() {
   return (
@@ -28,6 +29,11 @@ const Container = styled.div`
   position: relative;
   z-index: 2;
   background: #fff;
+
+  ${media.lessThan("sm")`
+    height: 56px;
+    padding: 0 12px;
+  `};
 `;
 
 const Logo = styled(Link)`
@@ -36,6 +42,10 @@ const Logo = styled(Link)`
   svg {
     width: 32px;
     height: auto;
+
+    ${media.lessThan("sm")`
+      width: 26px;
+    `};
   }
 `;
 

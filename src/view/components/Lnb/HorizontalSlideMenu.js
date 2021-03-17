@@ -7,6 +7,7 @@ import { scrollMenu } from "../../../lib/Common";
 import _ from "lodash";
 import HorizontalMenuSkeleton from "../Loader/HorizontalMenuSkeleton";
 import PropTypes from "prop-types";
+import { media } from "../../../styled/Responsive";
 
 function HorizontalSlideMenu({ topicNav, pathname }) {
   const location = pathname.startsWith("/t/") ? pathname.split("/").pop() : "";
@@ -143,6 +144,10 @@ const List = styled.ul`
   margin-left: -32px;
   scroll-behavior: smooth;
 
+  ${media.lessThan("sm")`
+    margin-left: -24px;
+  `};
+
   &::-webkit-scrollbar {
     display: none;
     background-color: #fff;
@@ -153,6 +158,10 @@ const List = styled.ul`
     vertical-align: top;
     height: 100%;
     padding-left: 32px;
+
+    ${media.lessThan("sm")`
+      padding-left: 24px;
+    `};
 
     &.active a {
       box-shadow: inset 0 -2px #111;

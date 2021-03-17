@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { IconMenu } from "../../../icons";
+import { media } from "../../../styled/Responsive";
 
 function Nav() {
   return (
@@ -29,6 +30,10 @@ const Container = styled.div`
   margin-left: 50px;
   display: flex;
   align-items: center;
+
+  ${media.lessThan("sm")`
+    margin-left: 0;
+  `};
 `;
 const Button = styled.button`
   padding-left: 32px;
@@ -41,6 +46,10 @@ const List = styled.ul`
   display: flex;
   font-size: 14px;
   margin-left: -32px;
+
+  ${media.lessThan("sm")`
+    display: none;
+  `};
 
   li {
     height: 100%;
