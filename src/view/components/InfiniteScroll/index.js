@@ -13,7 +13,7 @@ function InfiniteScroll({ children, getMoreItems, isLoading }) {
 
   useEffect(() => {
     inView && getMoreItems();
-  }, [getMoreItems, inView]);
+  }, [inView]);
 
   return (
     <>
