@@ -58,3 +58,15 @@ export const imagePreload = (images = []) => {
     img.src = images[i];
   }
 };
+
+export const isActivePath = ({ exact, startsWidth, pathname }) => {
+  const length = [];
+  if (exact) {
+    length[0] = exact.some(i => pathname === i);
+  }
+  if (startsWidth) {
+    length[1] = startsWidth.some(i => pathname.startsWith(i));
+  }
+
+  return length[0] || length[1];
+};

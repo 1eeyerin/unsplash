@@ -6,12 +6,22 @@ import { useSelector } from "react-redux";
 import Lnb from "../components/Lnb";
 import PropTypes from "prop-types";
 import { useLocation } from "react-router-dom";
+import SearchBar from "../components/SearchBar";
+import { isActivePath } from "../../lib/Common";
 
 function HeaderContainer() {
   const { topics } = useSelector(state => state);
   const { pathname } = useLocation();
 
-  const withLnb = pathname === "/" || pathname.startsWith("/t/");
+  const activeLnb = isActivePath({
+    exact: ["/"],
+    startsWidth: ["/t/"],
+    pathname
+  });
+  const activeSearchBar = isActivePath({
+    startsWidth: ["/search/photos/"],
+    pathname
+  });
 
   useEffect(() => {
     topicsActions.getTopicList({
@@ -22,7 +32,8 @@ function HeaderContainer() {
   return (
     <Container>
       <Header />
-      {withLnb && <Lnb topicNav={topics.list} pathname={pathname} />}
+      {activeLnb && <Lnb topicNav={topics.list} pathname={pathname} />}
+      {activeSearchBar && <SearchBar />}
     </Container>
   );
 }
