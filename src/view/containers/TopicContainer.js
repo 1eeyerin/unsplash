@@ -6,10 +6,11 @@ import { ContentContainer } from "../../styled/Layout";
 import { useSelector } from "react-redux";
 import InfiniteScroll from "../components/InfiniteScroll";
 import PropTypes from "prop-types";
+import TopicInfoBox from "../components/Topic/InfoBox";
 
-function TopicPhotoListContainer({ match }) {
+function TopicContainer({ match }) {
   const query = match.params.query;
-  const { topicData, isLoading } = useSelector(state => state.topics);
+  const { topicData, isLoading, list } = useSelector(state => state.topics);
   const [page, setPage] = useState(1);
 
   useEffect(() => {
@@ -34,6 +35,7 @@ function TopicPhotoListContainer({ match }) {
   return (
     <Container>
       <ContentContainer>
+        <TopicInfoBox data={list} query={query} />
         <InfiniteScroll getMoreItems={getMoreItems} isLoading={isLoading}>
           <PhotoList data={topicData} />
         </InfiniteScroll>
@@ -42,7 +44,7 @@ function TopicPhotoListContainer({ match }) {
   );
 }
 
-TopicPhotoListContainer.propTypes = {
+TopicContainer.propTypes = {
   match: PropTypes.object,
   query: PropTypes.string,
   page: PropTypes.number,
@@ -53,4 +55,4 @@ TopicPhotoListContainer.propTypes = {
 
 const Container = styled.div``;
 
-export default TopicPhotoListContainer;
+export default TopicContainer;
