@@ -3,6 +3,7 @@ import styled from "styled-components";
 import SearchBox from "../../SearchBox";
 import { font } from "../../../../styled/Font";
 import { media } from "../../../../styled/Responsive";
+import { Link } from "react-router-dom";
 
 function Visual() {
   return (
@@ -10,7 +11,7 @@ function Visual() {
       <Contents>
         <Title>Unsplash</Title>
         <Description>
-          The internet’s source of <a href="/">freely-usable images.</a>
+          The internet’s source of <Link to={"/"}>freely-usable images.</Link>
           <br />
           Powered by creators everywhere.
         </Description>
