@@ -59,14 +59,18 @@ export const imagePreload = (images = []) => {
   }
 };
 
-export const isActivePath = ({ exact, startsWidth, pathname }) => {
+export const isActivePath = ({ exact, startsWith, pathname }) => {
   const length = [];
   if (exact) {
     length[0] = exact.some(i => pathname === i);
   }
-  if (startsWidth) {
-    length[1] = startsWidth.some(i => pathname.startsWith(i));
+  if (startsWith) {
+    length[1] = startsWith.some(i => pathname.startsWith(i));
   }
 
   return length[0] || length[1];
+};
+
+export const splitLastPath = (startsWith, pathname) => {
+  return pathname.startsWith(startsWith) ? pathname.split("/").pop() : "";
 };
