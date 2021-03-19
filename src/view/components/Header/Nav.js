@@ -60,6 +60,7 @@ const List = styled.ul`
     a {
       text-decoration: none;
       color: #727272;
+      font-weight: 500;
     }
   }
 `;
