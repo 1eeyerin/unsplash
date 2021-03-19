@@ -5,13 +5,22 @@ import { topicsActions } from "../../redux/ActionCreators";
 import { useSelector } from "react-redux";
 import Lnb from "../components/Lnb";
 import PropTypes from "prop-types";
-import { useLocation } from "react-router-dom";
+import { withRouter } from "react-router-dom";
+import SearchBar from "../components/SearchBar";
+import { isActivePath } from "../../lib/Common";
 
-function HeaderContainer() {
+function HeaderContainer({ location }) {
   const { topics } = useSelector(state => state);
-  const { pathname } = useLocation();
 
-  const withLnb = pathname === "/" || pathname.startsWith("/t/");
+  const activeLnb = isActivePath({
+    exact: ["/"],
+    startsWith: ["/t/"],
+    pathname: location.pathname
+  });
+  const activeSearchBar = isActivePath({
+    startsWith: ["/s/photos/"],
+    pathname: location.pathname
+  });
 
   useEffect(() => {
     topicsActions.getTopicList({
@@ -22,14 +31,18 @@ function HeaderContainer() {
   return (
     <Container>
       <Header />
-      {withLnb && <Lnb topicNav={topics.list} pathname={pathname} />}
+      {activeLnb && <Lnb topicNav={topics.list} pathname={location?.pathname} />}
+      {activeSearchBar && <SearchBar location={location} search={location?.search} />}
     </Container>
   );
 }
 
 HeaderContainer.propTypes = {
   topics: PropTypes.shape({
-    list: PropTypes.object
+    list: PropTypes.object,
+    location: PropTypes.shape({
+      pathname: PropTypes.string
+    })
   })
 };
 
@@ -41,4 +54,4 @@ const Container = styled.div`
   z-index: 10;
 `;
 
-export default HeaderContainer;
+export default withRouter(HeaderContainer);

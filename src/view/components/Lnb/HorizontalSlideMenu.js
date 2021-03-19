@@ -3,19 +3,18 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { SlideBtnNext, SlideBtnPrev } from "../../../icons";
 import cn from "classnames";
-import { scrollMenu } from "../../../lib/Common";
+import { scrollMenu, splitLastPath } from "../../../lib/Common";
 import _ from "lodash";
 import HorizontalMenuSkeleton from "../Loader/HorizontalMenuSkeleton";
 import PropTypes from "prop-types";
 import { media } from "../../../styled/Responsive";
 
 function HorizontalSlideMenu({ topicNav, pathname }) {
-  const location = pathname.startsWith("/t/") ? pathname.split("/").pop() : "";
-
   const slideRef = useRef();
   const [className, setClassName] = useState("");
   const [scrollLeft, setScrollLeft] = useState(0);
   const [maxScroll, setMaxScroll] = useState(0);
+  const location = splitLastPath("/t/", pathname);
 
   useEffect(() => {
     !_.isEmpty(topicNav) && slideRef.current.dispatchEvent(new Event("scroll"));
