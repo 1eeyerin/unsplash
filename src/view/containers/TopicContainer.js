@@ -20,7 +20,7 @@ function TopicContainer({ match }) {
   useEffect(() => {
     topicsActions.getTopicPhoto([
       {
-        per_page: 5,
+        per_page: 10,
         page
       },
       query
@@ -28,7 +28,7 @@ function TopicContainer({ match }) {
   }, [query, page]);
 
   const getMoreItems = () => {
-    if (8 <= page) return;
+    if (4 <= page) return;
     setPage(prevPage => prevPage + 1);
   };
 

@@ -22,16 +22,15 @@ function SearchPhotoListContainer({ match, location }) {
   useEffect(() => {
     searchActions.searchPhotos({
       query,
-      per_page: 5,
+      per_page: 10,
       page,
       ...parsed
     });
   }, [query, page, location.search]);
 
   const getMoreItems = () => {
-    if (8 <= page) return;
+    if (4 <= page) return;
     setPage(prevPage => prevPage + 1);
-    console.log("@@ page", page);
   };
 
   return (
