@@ -14,13 +14,7 @@ export const IconLogo = () => (
 );
 
 export const IconMenu = () => (
-  <svg
-    width="18"
-    height="18"
-    version="1.1"
-    viewBox="0 0 32 32"
-    aria-hidden="false"
-  >
+  <svg width="18" height="18" version="1.1" viewBox="0 0 32 32" aria-hidden="false">
     <path
       d="M7 15.5c0 1.9-1.6 3.5-3.5 3.5s-3.5-1.6-3.5-3.5 1.6-3.5 3.5-3.5 3.5 1.6 3.5 3.5zm21.5-3.5c-1.9 0-3.5 1.6-3.5 3.5s1.6 3.5
             3.5 3.5 3.5-1.6 3.5-3.5-1.6-3.5-3.5-3.5zm-12.5 0c-1.9 0-3.5 1.6-3.5 3.5s1.6 3.5 3.5 3.5 3.5-1.6 3.5-3.5-1.6-3.5-3.5-3.5z"
@@ -151,5 +145,21 @@ export const IconPhotoFullSize = () => (
     aria-hidden="false"
   >
     <path d="M14.5 19.3l-6 6h4.8V28H4v-9.3h2.7v4.8l6-6 1.8 1.8zM18.7 4v2.7h4.8l-6 6 1.9 1.9 6-6v4.8H28V4h-9.3z" />
+  </svg>
+);
+
+export const IconPhotos = () => (
+  <svg
+    width="32"
+    height="32"
+    className="DhJsa"
+    version="1.1"
+    viewBox="0 0 32 32"
+    aria-hidden="false"
+  >
+    <path
+      d="M26.7 4H5.3C4.5 4 4 4.5 4 5.3v21.3c0 .9.5 1.4 1.3 1.4h21.3c.8 0 1.3-.5
+    1.3-1.3V5.3c.1-.8-.4-1.3-1.2-1.3zm-20 20l4.7-6 3.3 4 4.7-6 6 8H6.7z"
+    />
   </svg>
 );
