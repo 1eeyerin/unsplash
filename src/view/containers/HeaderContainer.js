@@ -10,7 +10,12 @@ import SearchBar from "../components/SearchBar";
 import { isActivePath } from "../../lib/Common";
 
 function HeaderContainer({ location }) {
-  const { topics } = useSelector(state => state);
+  const {
+    topics,
+    search: {
+      searchResults: { total }
+    }
+  } = useSelector(state => state);
 
   const activeLnb = isActivePath({
     exact: ["/"],
@@ -32,18 +37,20 @@ function HeaderContainer({ location }) {
     <Container>
       <Header />
       {activeLnb && <Lnb topicNav={topics.list} pathname={location?.pathname} />}
-      {activeSearchBar && <SearchBar location={location} search={location?.search} />}
+      {activeSearchBar && <SearchBar location={location} search={location?.search} total={total} />}
     </Container>
   );
 }
 
 HeaderContainer.propTypes = {
   topics: PropTypes.shape({
-    list: PropTypes.object,
-    location: PropTypes.shape({
-      pathname: PropTypes.string
-    })
-  })
+    list: PropTypes.object
+  }),
+  location: PropTypes.shape({
+    pathname: PropTypes.string,
+    search: PropTypes.string
+  }),
+  total: PropTypes.number
 };
 
 const Container = styled.div`
