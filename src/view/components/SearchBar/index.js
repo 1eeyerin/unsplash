@@ -4,14 +4,11 @@ import PropTypes from "prop-types";
 import { font } from "../../../styled/Font";
 import SearchMenu from "./SearchMenu";
 import SearchControl from "./Util";
-import { splitLastPath } from "../../../lib/Common";
 
-function SearchBar({ location, search }) {
-  const splitPath = splitLastPath("/s/", location?.pathname);
-
+function SearchBar({ location, search, total }) {
   return (
     <Container>
-      <SearchMenu pathname={splitPath} location={location} />
+      <SearchMenu location={location} total={total} />
       <SearchControl location={location} search={search} />
     </Container>
   );
@@ -35,7 +32,9 @@ const Container = styled.div`
 `;
 
 SearchBar.propTypes = {
-  pathname: PropTypes.string
+  location: PropTypes.object,
+  search: PropTypes.string,
+  total: PropTypes.number
 };
 
 export default SearchBar;
