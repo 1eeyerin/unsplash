@@ -2,16 +2,17 @@ import React from "react";
 import styled from "styled-components";
 import { IconPhotos } from "../../../icons";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
-function SearchMenu({ pathname, location }) {
+function SearchMenu({ location, total }) {
   return (
     <Container>
       <Ul>
-        <Li className={pathname.startsWith("/s/photos/") ? "active" : ""}>
-          <Link to={`/s/photos/${location}`}>
+        <Li className={location?.pathname.startsWith("/s/photos/") ? "active" : ""}>
+          <Link to={location?.pathname}>
             <IconPhotos />
             <span>
-              Photos <em>5</em>
+              Photos <em>{total ? total : ""}</em>
             </span>
           </Link>
         </Li>
@@ -19,6 +20,12 @@ function SearchMenu({ pathname, location }) {
     </Container>
   );
 }
+
+SearchMenu.propTypes = {
+  pathname: PropTypes.string,
+  location: PropTypes.object,
+  total: PropTypes.number
+};
 
 const Container = styled.div``;
 
