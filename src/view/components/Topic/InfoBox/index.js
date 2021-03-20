@@ -3,6 +3,7 @@ import styled from "styled-components";
 import TopicAbout from "./TopicAbout";
 import TopicInfo from "./TopicInfo";
 import { font } from "../../../../styled/Font";
+import { media } from "../../../../styled/Responsive";
 
 function TopicInfoBox({ data, query }) {
   const [result] = data?.filter(i => i.slug === query);
@@ -21,6 +22,13 @@ const Container = styled.div`
   grid-template-columns: repeat(3, [col-start] 1fr);
   padding: 60px 0 72px;
   font-family: ${font.en};
+
+  ${media.lessThan("sm")`
+    display:block; 
+    grid-gap: unset;
+    grid-template-columns: unset;
+    padding: 48px 12px;  
+  `};
 `;
 
 export default TopicInfoBox;

@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import { IconTopicList } from "../../../../icons";
+import { media } from "../../../../styled/Responsive";
 
 function TopicInfo({ data }) {
   const monthNames = [
@@ -95,12 +96,17 @@ TopicInfo.propTypes = {
 const Container = styled.div`
   display: grid;
   row-gap: 16px;
+
+  ${media.lessThan("sm")`
+    margin-top: 40px;
+  `};
 `;
 
 const InfoBox = styled.div`
   border: 1px solid #d1d1d1;
   border-radius: 4px;
   padding: 24px;
+  min-width: 310px;
 
   dl {
     display: grid;
@@ -136,6 +142,11 @@ const InfoBox = styled.div`
       justify-content: flex-end;
     }
   }
+
+  ${media.lessThan("sm")`
+    border-color: transparent;
+    padding: 8px 0;
+  `};
 `;
 
 const Profile_Image = styled.div`
@@ -151,6 +162,7 @@ const Button = styled.button`
   padding: 0 16px;
   font-size: 15px;
   line-height: 42px;
+  height: 42px;
   border: 0;
   display: block;
   border-radius: 4px;
