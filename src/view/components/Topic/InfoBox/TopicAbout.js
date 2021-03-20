@@ -1,16 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-import { font } from "../../../../styled/Font";
 import PropTypes from "prop-types";
 
 function TopicAbout({ data }) {
   return (
     <Container>
       <Title>{data?.title}</Title>
-      <p>{data?.description}</p>
-      <a href="/" target="_blank">
-        Check out the color palette here
-      </a>
+      <Description dangerouslySetInnerHTML={{ __html: data?.description }} />
     </Container>
   );
 }
@@ -22,15 +18,22 @@ TopicAbout.propTypes = {
   })
 };
 
-const Container = styled.div``;
+const Container = styled.div`
+  grid-column: col-start 1 / span 2;
+`;
 
 const Title = styled.h1`
-  padding-top: 60px;
-  padding-bottom: 84px;
-  font-family: ${font.en};
+  margin-bottom: 16px;
   font-size: 46px;
   line-height: 1.2;
   font-weight: 700;
+`;
+
+const Description = styled.p`
+  margin-bottom: 24px;
+  max-width: 620px;
+  font-size: 18px;
+  line-height: 1.6;
 `;
 
 export default TopicAbout;
