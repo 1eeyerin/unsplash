@@ -81,7 +81,7 @@ const Ul = styled.ul`
   flex-wrap: wrap;
   margin: 0 -12px;
 
-  ${media.lessThan("sm")`
+  ${media.lessThan("xs")`
     margin: 0;
   `};
 `;
@@ -96,7 +96,7 @@ const Li = styled.li`
     padding-bottom: 24px;
   `};
 
-  ${media.lessThan("sm")`
+  ${media.lessThan("xs")`
     width: 100%;
     padding: 0 0 18px;
   `};

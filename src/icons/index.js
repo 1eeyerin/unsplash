@@ -163,3 +163,61 @@ export const IconPhotos = () => (
     />
   </svg>
 );
+
+export const IconTopicList = ({ item }) => {
+  if (item === "Status") {
+    return (
+      <svg
+        width="32"
+        height="32"
+        className="_1wVHI"
+        version="1.1"
+        viewBox="0 0 32 32"
+        aria-hidden="false"
+      >
+        <path d="M16 2.7C8.7 2.7 2.7 8.7 2.7 16s6 13.3 13.3 13.3 13.3-6 13.3-13.3S23.3 2.7 16 2.7zm-.7 24v-8.3h-4.6l6.7-13v8.3h4.5l-6.6 13z" />
+      </svg>
+    );
+  } else if (item === "Curator") {
+    return (
+      <svg
+        width="32"
+        height="32"
+        className="_1wVHI"
+        version="1.1"
+        viewBox="0 0 32 32"
+        aria-hidden="false"
+      >
+        <path d="M16 2.7C8.6 2.7 2.7 8.6 2.7 16s6 13.3 13.3 13.3 13.3-6 13.3-13.3S23.4 2.7 16 2.7zm0 4c2.2 0 4 1.8 4 4s-1.8 4-4 4-4-1.8-4-4 1.8-4 4-4zm0 18.9c-3.3 0-6.3-1.7-8-4.3 0-2.7 5.3-4.1 8-4.1s8 1.5 8 4.1c-1.7 2.6-4.7 4.3-8 4.3z" />
+      </svg>
+    );
+  } else if (item === "Contributions") {
+    return (
+      <svg
+        width="32"
+        height="32"
+        className="_1wVHI"
+        version="1.1"
+        viewBox="0 0 32 32"
+        aria-hidden="false"
+      >
+        <path d="M26.7 4H5.3C4.5 4 4 4.5 4 5.3v21.3c0 .9.5 1.4 1.3 1.4h21.3c.8 0 1.3-.5 1.3-1.3V5.3c.1-.8-.4-1.3-1.2-1.3zm-20 20l4.7-6 3.3 4 4.7-6 6 8H6.7z" />
+      </svg>
+    );
+  } else if (item === "Time") {
+    return (
+      <svg
+        width="32"
+        height="32"
+        className="_1EFXx"
+        version="1.1"
+        viewBox="0 0 32 32"
+        aria-hidden="false"
+      >
+        <path d="M16 2.7C8.6 2.7 2.7 8.6 2.7 16s6 13.3 13.3 13.3c7.4 0 13.3-6 13.3-13.3S23.4 2.7 16 2.7zm0 24c-5.9 0-10.7-4.8-10.7-10.7S10.1 5.3 16 5.3 26.7 10.1 26.7 16 21.9 26.7 16 26.7zm.7-10.4l6 3.6-1 1.6-7-4.2v-8h2v7z" />
+      </svg>
+    );
+  }
+
+  return null;
+};
