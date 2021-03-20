@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { createPortal } from "react-dom";
 import PropTypes from "prop-types";
+import { media } from "../../../styled/Responsive";
 
 function Popup({ children, onClose }) {
   return createPortal(
@@ -32,6 +33,10 @@ const Layout = styled.div`
   width: 80vw;
   margin: 0 auto;
   padding: 32px 0;
+
+  ${media.lessThan("xs")`
+    width: 100%;
+  `};
 `;
 const Contents = styled.div`
   background: #ffffff;

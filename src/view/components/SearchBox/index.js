@@ -6,12 +6,11 @@ import cn from "classnames";
 import { font } from "../../../styled/Font";
 import { useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
+import { splitLastPath } from "../../../lib/Common";
 
 function SearchBox({ shape }) {
-  const location = useLocation();
-  const initialValue = location.pathname.startsWith("/search/")
-    ? location.pathname.split("/").pop()
-    : "";
+  const { pathname } = useLocation();
+  const initialValue = splitLastPath("/s/", pathname);
   const [value, setValue] = useState("");
 
   useEffect(() => {
@@ -24,7 +23,7 @@ function SearchBox({ shape }) {
 
   const onSubmit = e => {
     e.preventDefault();
-    navigate(`/search/photos/${value}`);
+    navigate(`/s/photos/${value}`);
   };
 
   return (
@@ -47,7 +46,8 @@ function SearchBox({ shape }) {
 }
 
 SearchBox.propTypes = {
-  shape: PropTypes.string
+  shape: PropTypes.string,
+  pathname: PropTypes.string
 };
 
 const Container = styled.div`

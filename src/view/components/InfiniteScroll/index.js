@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 function InfiniteScroll({ children, getMoreItems, isLoading }) {
   const [ref, inView] = useOnViewport(
     {
-      rootMargin: "300px"
+      rootMargin: "30%"
     },
     isLoading
   );

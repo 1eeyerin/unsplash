@@ -4,8 +4,9 @@ import { photosActions } from "../../redux/ActionCreators";
 import DetailPhoto from "../components/DetailPhoto";
 import Popup from "../components/Popup";
 import PropTypes from "prop-types";
+import { withRouter } from "react-router-dom";
 
-function PopupPhotoContainer() {
+function PopupPhotoContainer({ location }) {
   const { popupPhoto } = useSelector(state => state.photos);
 
   const onClose = () => {
@@ -14,7 +15,7 @@ function PopupPhotoContainer() {
         show: false
       }
     });
-    window.history.pushState({}, null, "/");
+    window.history.pushState({}, null, location?.pathname);
   };
 
   return (
@@ -25,7 +26,10 @@ function PopupPhotoContainer() {
 }
 
 PopupPhotoContainer.propTypes = {
-  popupPhoto: PropTypes.object
+  popupPhoto: PropTypes.object,
+  location: PropTypes.shape({
+    pathname: PropTypes.string
+  })
 };
 
-export default PopupPhotoContainer;
+export default withRouter(PopupPhotoContainer);

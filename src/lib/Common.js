@@ -1,6 +1,9 @@
-export const recomposePhotos = items => {
-  let photoGroup = [[], [], []];
-  let groupHeight = [0, 0, 0];
+import { breakPoint } from "../styled/Responsive";
+
+export const recomposePhotos = (items, windowWidth) => {
+  let count = windowWidth >= breakPoint.MD ? 3 : windowWidth >= breakPoint.XS ? 2 : 1;
+  let photoGroup = Array.from({ length: count }, () => []);
+  let groupHeight = new Array(count).fill(0);
 
   if (items) {
     for (let i = 0; i < items.length; i++) {
@@ -54,4 +57,20 @@ export const imagePreload = (images = []) => {
     let img = new Image();
     img.src = images[i];
   }
+};
+
+export const isActivePath = ({ exact, startsWith, pathname }) => {
+  const length = [];
+  if (exact) {
+    length[0] = exact.some(i => pathname === i);
+  }
+  if (startsWith) {
+    length[1] = startsWith.some(i => pathname.startsWith(i));
+  }
+
+  return length[0] || length[1];
+};
+
+export const splitLastPath = (startsWith, pathname) => {
+  return pathname.startsWith(startsWith) ? pathname.split("/").pop() : "";
 };

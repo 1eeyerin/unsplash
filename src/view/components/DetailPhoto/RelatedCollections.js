@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
+import { media } from "../../../styled/Responsive";
 
 function RelatedCollections({ data, Title }) {
   return (
@@ -29,15 +30,19 @@ function RelatedCollections({ data, Title }) {
               <ItemInfo>
                 {item.total_photos} photos &middot; Curated by {item.user?.name}
               </ItemInfo>
-              <Tags>
-                {[...Array(3)].map((n, i) => {
-                  return (
-                    <li key={i}>
-                      <span>{item.tags[i]?.title}</span>
-                    </li>
-                  );
-                })}
-              </Tags>
+              {item?.tags.length ? (
+                <Tags>
+                  {[...Array(3)].map((n, i) => {
+                    return (
+                      <li key={i}>
+                        <span>{item.tags[i]?.title}</span>
+                      </li>
+                    );
+                  })}
+                </Tags>
+              ) : (
+                ""
+              )}
             </Li>
           );
         })}
@@ -69,18 +74,32 @@ RelatedCollections.propTypes = {
 
 const Container = styled.div`
   padding: 0 12px 85px;
+  overflow: hidden;
 `;
 const Ul = styled.ul`
   display: flex;
   flex-wrap: wrap;
+  margin: 0 -12px;
+
+  ${media.lessThan("xs")`
+    margin: 0;
+  `};
 `;
 const Li = styled.li`
-  width: calc(33.3333% - 16px);
+  width: 33.3333%;
+  padding: 0 12px;
+  box-sizing: border-box;
   overflow: hidden;
 
-  + li {
-    margin-left: 24px;
-  }
+  ${media.lessThan("md")`
+    width: 50%;
+    padding-bottom: 24px;
+  `};
+
+  ${media.lessThan("xs")`
+    width: 100%;
+    padding: 0 0 18px;
+  `};
 `;
 const PreviewPhoto = styled.div`
   height: 0;

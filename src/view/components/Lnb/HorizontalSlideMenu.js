@@ -3,20 +3,18 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { SlideBtnNext, SlideBtnPrev } from "../../../icons";
 import cn from "classnames";
-import { scrollMenu } from "../../../lib/Common";
+import { scrollMenu, splitLastPath } from "../../../lib/Common";
 import _ from "lodash";
 import HorizontalMenuSkeleton from "../Loader/HorizontalMenuSkeleton";
 import PropTypes from "prop-types";
+import { media } from "../../../styled/Responsive";
 
-function HorizontalSlideMenu({ topicNav, location }) {
-  const topicLocation = location.pathname.startsWith("/t/")
-    ? location.pathname.split("/").pop()
-    : "";
-
+function HorizontalSlideMenu({ topicNav, pathname }) {
   const slideRef = useRef();
   const [className, setClassName] = useState("");
   const [scrollLeft, setScrollLeft] = useState(0);
   const [maxScroll, setMaxScroll] = useState(0);
+  const location = splitLastPath("/t/", pathname);
 
   useEffect(() => {
     !_.isEmpty(topicNav) && slideRef.current.dispatchEvent(new Event("scroll"));
@@ -48,7 +46,7 @@ function HorizontalSlideMenu({ topicNav, location }) {
       <List ref={slideRef} onScroll={onScroll}>
         {topicNav.map((item, i) => {
           return (
-            <li key={i} className={topicLocation === item.slug ? "active" : ""}>
+            <li key={i} className={location === item.slug ? "active" : ""}>
               <Link to={`/t/${item.slug}`}>{item.title}</Link>
             </li>
           );
@@ -68,7 +66,7 @@ HorizontalSlideMenu.propTypes = {
   topicNav: PropTypes.array,
   slug: PropTypes.string,
   title: PropTypes.string,
-  location: PropTypes.object
+  pathname: PropTypes.string
 };
 
 const Container = styled.div`
@@ -145,6 +143,10 @@ const List = styled.ul`
   margin-left: -32px;
   scroll-behavior: smooth;
 
+  ${media.lessThan("sm")`
+    margin-left: -24px;
+  `};
+
   &::-webkit-scrollbar {
     display: none;
     background-color: #fff;
@@ -155,6 +157,10 @@ const List = styled.ul`
     vertical-align: top;
     height: 100%;
     padding-left: 32px;
+
+    ${media.lessThan("sm")`
+      padding-left: 24px;
+    `};
 
     &.active a {
       box-shadow: inset 0 -2px #111;

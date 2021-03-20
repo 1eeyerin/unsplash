@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { media } from "./Responsive";
 
 export const Buttons = styled.div`
   display: flex;
@@ -31,6 +32,11 @@ export const Btn = styled.button`
 
   span {
     margin-left: 6px;
+
+    ${media.lessThan("sm")`
+      font-size: 0;
+      margin-left: 0;
+    `};
   }
 
   & + button {
