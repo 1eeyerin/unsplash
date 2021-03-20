@@ -65,11 +65,10 @@ const PhotoGroup = styled.div`
     width: 50%;
   `};
 
-  ${media.lessThan("sm")`
+  ${media.lessThan("xs")`
     width: 100%;
   `};
 `;
 const Col = styled.div``;
 
-//export default React.memo(PhotoList);
 export default PhotoList;

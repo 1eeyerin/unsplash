@@ -1,7 +1,7 @@
 import { breakPoint } from "../styled/Responsive";
 
 export const recomposePhotos = (items, windowWidth) => {
-  let count = windowWidth >= breakPoint.MD ? 3 : windowWidth >= breakPoint.SM ? 2 : 1;
+  let count = windowWidth >= breakPoint.MD ? 3 : windowWidth >= breakPoint.XS ? 2 : 1;
   let photoGroup = Array.from({ length: count }, () => []);
   let groupHeight = new Array(count).fill(0);
 
