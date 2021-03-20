@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
+import { media } from "../../../../styled/Responsive";
 
 function TopicAbout({ data }) {
   return (
@@ -27,6 +28,12 @@ const Title = styled.h1`
   font-size: 46px;
   line-height: 1.2;
   font-weight: 700;
+
+  ${media.lessThan("sm")`
+      margin-bottom: 16px;
+      font-size: 28px;
+      line-height: 1.25;
+  `};
 `;
 
 const Description = styled.p`
@@ -34,6 +41,12 @@ const Description = styled.p`
   max-width: 620px;
   font-size: 18px;
   line-height: 1.6;
+
+  ${media.lessThan("sm")`
+      margin-bottom: 24px;
+      max-width: 620px;
+      font-size: 15px;
+  `};
 `;
 
 export default TopicAbout;
