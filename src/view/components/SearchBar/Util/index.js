@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { withRouter } from "react-router-dom";
 import styled from "styled-components";
 import PropTypes from "prop-types";
@@ -7,36 +7,56 @@ import Color from "./Color";
 import Sort from "./Sort";
 import qs from "qs";
 import { navigate } from "../../../../lib/History";
+import { useOutsideClick } from "../../../../hooks/useOutsideClick";
 
 function SearchControl({ location, search }) {
-  const [useOrientation, setUseOrientation] = useState("");
-  const [useColor, setUseColor] = useState("");
-  const [useSort, setUseSort] = useState("");
+  const ref = useRef();
+  const initValue = [
+    { orientation: "", color: "", sort: "" },
+    { orientation: false, color: false, sort: false }
+  ];
+  const [control, setControl] = useState(initValue[0]);
+  const [activeMenu, setActiveMenu] = useState(initValue[1]);
 
   useEffect(() => {
     const parsed = qs.parse(search, { ignoreQueryPrefix: true });
-
-    useSort ? (parsed.order_by = useSort) : delete parsed.order_by;
-    useOrientation ? (parsed.orientation = useOrientation) : delete parsed.orientation;
-    useColor ? (parsed.color = useColor) : delete parsed.color;
-
+    control.orientation ? (parsed.orientation = control.orientation) : delete parsed.orientation;
+    control.color ? (parsed.color = control.color) : delete parsed.color;
+    control.sort ? (parsed.order_by = control.sort) : delete parsed.order_by;
     location.search = qs.stringify(parsed);
     navigate(`${location.pathname}?${location.search}`);
-  }, [useSort, useOrientation, useColor]);
+  }, [control.orientation, control.color, control.sort]);
 
   const handleClear = () => {
-    setUseOrientation("");
-    setUseColor("");
-    setUseSort("");
+    setControl(initValue[0]);
+    setActiveMenu(initValue[1]);
+  };
+
+  useOutsideClick(ref, () => {
+    setActiveMenu(initValue[1]);
+  });
+
+  const handleActiveMenu = e => {
+    let newObj = { ...activeMenu };
+    const name = e.currentTarget.name;
+
+    for (const key in newObj) {
+      if (key !== name) {
+        newObj[key] = false;
+      } else {
+        newObj[name] = !newObj[name];
+      }
+    }
+    setActiveMenu(newObj);
   };
 
   return (
     <Container>
-      <Ul>
-        {(useOrientation || useColor || useSort) && (
+      <Ul ref={ref}>
+        {(control.orientation || control.color || control.sort) && (
           <Li>
             <StyledMenu>
-              <button className="selectBtn" onClick={handleClear}>
+              <button className="selectBtn clear" onClick={handleClear}>
                 Clear
               </button>
             </StyledMenu>
@@ -47,8 +67,11 @@ function SearchControl({ location, search }) {
             ControlMenu={ControlMenu}
             StyledMenu={StyledMenu}
             Item={Item}
-            useOrientation={useOrientation}
-            setUseOrientation={setUseOrientation}
+            control={control}
+            setControl={setControl}
+            activeMenu={activeMenu}
+            setActiveMenu={() => setActiveMenu(initValue[1])}
+            handleActiveMenu={handleActiveMenu}
           />
         </Li>
         <Li>
@@ -56,8 +79,11 @@ function SearchControl({ location, search }) {
             ControlMenu={ControlMenu}
             StyledMenu={StyledMenu}
             Item={Item}
-            useColor={useColor}
-            setUseColor={setUseColor}
+            control={control}
+            setControl={setControl}
+            activeMenu={activeMenu}
+            setActiveMenu={() => setActiveMenu(initValue[1])}
+            handleActiveMenu={handleActiveMenu}
           />
         </Li>
         <Li>
@@ -65,8 +91,11 @@ function SearchControl({ location, search }) {
             ControlMenu={ControlMenu}
             StyledMenu={StyledMenu}
             Item={Item}
-            useSort={useSort}
-            setUseSort={setUseSort}
+            control={control}
+            setControl={setControl}
+            activeMenu={activeMenu}
+            setActiveMenu={() => setActiveMenu(initValue[1])}
+            handleActiveMenu={handleActiveMenu}
           />
         </Li>
       </Ul>
@@ -75,9 +104,7 @@ function SearchControl({ location, search }) {
 }
 
 SearchControl.propTypes = {
-  a: PropTypes.shape({
-    b: PropTypes.string
-  })
+  search: PropTypes.string
 };
 
 const Container = styled.div`
@@ -113,7 +140,7 @@ const StyledMenu = styled.div`
     white-space: nowrap;
     transition: color 0.1s ease-in-out;
 
-    &:hover {
+    ¬ &:hover {
       color: #111;
 
       &:after {
@@ -130,6 +157,10 @@ const StyledMenu = styled.div`
       border: 5px solid transparent;
       border-top-color: #d1d1d1;
       transition: border 0.1s ease-in-out;
+    }
+
+    &.clear:after {
+      display: none;
     }
   }
 `;

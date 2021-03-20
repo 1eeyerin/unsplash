@@ -1,11 +1,20 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
-function Orientation({ ControlMenu, StyledMenu, Item, useOrientation, setUseOrientation }) {
+function Orientation({
+  ControlMenu,
+  StyledMenu,
+  Item,
+  control,
+  setControl,
+  activeMenu,
+  setActiveMenu,
+  handleActiveMenu
+}) {
   const [title, setTitle] = useState("Any orientation");
 
   useEffect(() => {
-    switch (useOrientation) {
+    switch (control.orientation) {
       case "landscape":
         setTitle("Landscape");
         break;
@@ -18,36 +27,49 @@ function Orientation({ ControlMenu, StyledMenu, Item, useOrientation, setUseOrie
       default:
         setTitle("Any orientation");
     }
-  }, [useOrientation]);
+  }, [control.orientation]);
+
+  const handleClick = e => {
+    let newArr = { ...control };
+    newArr.orientation = e.currentTarget.name;
+    setControl(newArr);
+    setActiveMenu();
+  };
 
   return (
     <StyledMenu>
-      <button className="selectBtn">{title}</button>
-      <ControlMenu style={{ minWidth: "180px" }}>
-        <List>
-          <li>
-            <Item onClick={() => setUseOrientation("")}>Any orientation</Item>
-          </li>
-          <li>
-            <Item onClick={() => setUseOrientation("landscape")}>
-              <Icon className="landscape" />
-              <span>Landscape</span>
-            </Item>
-          </li>
-          <li>
-            <Item onClick={() => setUseOrientation("portrait")}>
-              <Icon className="icon portrait" />
-              <span>Portrait</span>
-            </Item>
-          </li>
-          <li>
-            <Item onClick={() => setUseOrientation("squarish")}>
-              <Icon className="icon square" />
-              <span>Square</span>
-            </Item>
-          </li>
-        </List>
-      </ControlMenu>
+      <button className="selectBtn" name="orientation" onClick={handleActiveMenu}>
+        {title}
+      </button>
+      {activeMenu.orientation && (
+        <ControlMenu style={{ minWidth: "180px" }}>
+          <List>
+            <li>
+              <Item onClick={handleClick} title="">
+                Any orientation
+              </Item>
+            </li>
+            <li>
+              <Item onClick={handleClick} name="landscape">
+                <Icon className="landscape" />
+                <span>Landscape</span>
+              </Item>
+            </li>
+            <li>
+              <Item onClick={handleClick} name="portrait">
+                <Icon className="icon portrait" />
+                <span>Portrait</span>
+              </Item>
+            </li>
+            <li>
+              <Item onClick={handleClick} name="squarish">
+                <Icon className="icon square" />
+                <span>Square</span>
+              </Item>
+            </li>
+          </List>
+        </ControlMenu>
+      )}
     </StyledMenu>
   );
 }

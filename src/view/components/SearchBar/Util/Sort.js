@@ -1,32 +1,55 @@
 import React, { useEffect, useState } from "react";
 
-function Sort({ ControlMenu, StyledMenu, Item, useSort, setUseSort }) {
+function Sort({
+  ControlMenu,
+  StyledMenu,
+  Item,
+  control,
+  setControl,
+  activeMenu,
+  setActiveMenu,
+  handleActiveMenu
+}) {
   const [title, setTitle] = useState("");
 
   useEffect(() => {
-    switch (useSort) {
+    switch (control.sort) {
       case "latest":
         setTitle("Newest");
         break;
       default:
         setTitle("Relevance");
     }
-  }, [useSort]);
+  }, [control.sort]);
+
+  const handleClick = e => {
+    let newObj = { ...control };
+    newObj.sort = e.currentTarget.name;
+    setControl(newObj);
+    setActiveMenu();
+  };
+
   return (
     <StyledMenu>
-      <button className="selectBtn">Sort by {title}</button>
-      <ControlMenu>
-        <ul>
-          <li>
-            <Item onClick={() => setUseSort("")}>Relevance</Item>
-          </li>
-          <li>
-            <Item>
-              <span onClick={() => setUseSort("latest")}>Newest</span>
-            </Item>
-          </li>
-        </ul>
-      </ControlMenu>
+      <button className="selectBtn" name="sort" onClick={handleActiveMenu}>
+        Sort by {title}
+      </button>
+      {activeMenu.sort && (
+        <ControlMenu>
+          <ul>
+            <li>
+              <Item onClick={handleClick} name="">
+                <span>Relevance</span>
+              </Item>
+            </li>
+            <li>
+              <Item onClick={handleClick} name="latest">
+                <span>Newest</span>
+              </Item>
+            </li>
+          </ul>
+        </ControlMenu>
+      )}
     </StyledMenu>
   );
 }

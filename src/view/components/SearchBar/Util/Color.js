@@ -1,7 +1,16 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
-function Color({ ControlMenu, StyledMenu, Item, useColor, setUseColor }) {
+function Color({
+  ControlMenu,
+  StyledMenu,
+  Item,
+  control,
+  setControl,
+  activeMenu,
+  setActiveMenu,
+  handleActiveMenu
+}) {
   const [title, setTitle] = useState("");
 
   const colors = [
@@ -18,7 +27,7 @@ function Color({ ControlMenu, StyledMenu, Item, useColor, setUseColor }) {
   ];
 
   useEffect(() => {
-    switch (useColor) {
+    switch (control.color) {
       case "black_and_white":
         setTitle("Black and white");
         break;
@@ -55,29 +64,44 @@ function Color({ ControlMenu, StyledMenu, Item, useColor, setUseColor }) {
       default:
         setTitle("Any Color");
     }
-  }, [useColor]);
+  }, [control.color]);
+
+  const handleClick = e => {
+    let newArr = { ...control };
+    newArr.color = e.currentTarget.name;
+    setControl(newArr);
+    setActiveMenu();
+  };
 
   return (
     <StyledMenu>
-      <button className="selectBtn">{title}</button>
-      <ControlMenu style={{ minWidth: "168px" }}>
-        <ul>
-          <li>
-            <Item onClick={() => setUseColor("")}>Any Color</Item>
-          </li>
-          <li>
-            <Item onClick={() => setUseColor("black_and_white")}>Black and white</Item>
-          </li>
-          <li>
-            <Item as="div">Tones</Item>
-            <ColorBox>
-              {colors.map((i, idx) => {
-                return <ColorItem className={i} key={idx} onClick={() => setUseColor(i)} />;
-              })}
-            </ColorBox>
-          </li>
-        </ul>
-      </ControlMenu>
+      <button className="selectBtn" name="color" onClick={handleActiveMenu}>
+        {title}
+      </button>
+      {activeMenu.color && (
+        <ControlMenu style={{ minWidth: "168px" }}>
+          <ul>
+            <li>
+              <Item onClick={handleClick} name="">
+                Any Color
+              </Item>
+            </li>
+            <li>
+              <Item onClick={handleClick} name="black_and_white">
+                Black and white
+              </Item>
+            </li>
+            <li>
+              <Item as="div">Tones</Item>
+              <ColorBox>
+                {colors.map((i, idx) => {
+                  return <ColorItem onClick={handleClick} className={i} name={i} key={idx} />;
+                })}
+              </ColorBox>
+            </li>
+          </ul>
+        </ControlMenu>
+      )}
     </StyledMenu>
   );
 }
