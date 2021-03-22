@@ -23,7 +23,7 @@ const Container = styled.div`
   grid-column: col-start 1 / span 2;
 `;
 
-const Title = styled.h1`
+const Title = styled.h2`
   margin-bottom: 16px;
   font-size: 46px;
   line-height: 1.2;
