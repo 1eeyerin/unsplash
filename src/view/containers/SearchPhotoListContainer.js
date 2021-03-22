@@ -7,6 +7,9 @@ import { useSelector } from "react-redux";
 import InfiniteScroll from "../components/InfiniteScroll";
 import PropTypes from "prop-types";
 import qs from "qs";
+import EmptyPhotos from "../components/EmptyResults/EmptyPhotos";
+import SearchKeyword from "../components/Search/SearchKeyword";
+import _ from "lodash";
 
 function SearchPhotoListContainer({ match, location }) {
   const parsed = qs.parse(location.search, { ignoreQueryPrefix: true });
@@ -36,8 +39,13 @@ function SearchPhotoListContainer({ match, location }) {
   return (
     <Container>
       <ContentContainer>
+        <SearchKeyword query={query} />
         <InfiniteScroll getMoreItems={getMoreItems} isLoading={isLoading}>
-          <PhotoList data={searchResults.results} />
+          {searchResults?.total ? (
+            <PhotoList data={searchResults.results} />
+          ) : (
+            !isLoading && <EmptyPhotos />
+          )}
         </InfiniteScroll>
       </ContentContainer>
     </Container>
@@ -50,7 +58,8 @@ SearchPhotoListContainer.propTypes = {
   getMoreItems: PropTypes.func,
   isLoading: PropTypes.bool,
   searchResults: PropTypes.shape({
-    results: PropTypes.array
+    results: PropTypes.array,
+    total: PropTypes.number
   })
 };
 
