@@ -38,6 +38,9 @@ const Container = styled.div`
 
 const Logo = styled(Link)`
   margin-right: 18px;
+  display: flex;
+  align-items: center;
+  margin-top: -2px;
 
   svg {
     width: 32px;
