@@ -3,7 +3,8 @@ import { createActions, createReducer } from "reduxsauce";
 const initialState = {
   searchResults: {
     results: []
-  }
+  },
+  popupControl: false
 };
 
 export const Action = createActions(
