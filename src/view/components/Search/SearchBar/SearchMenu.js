@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { IconPhotos } from "../../../icons";
+import { IconPhotos } from "../../../../icons";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 

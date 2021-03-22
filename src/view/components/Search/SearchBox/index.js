@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { IconSearch } from "../../../icons";
-import { navigate } from "../../../lib/History";
+import { IconSearch } from "../../../../icons";
+import { navigate } from "../../../../lib/History";
 import cn from "classnames";
-import { font } from "../../../styled/Font";
+import { font } from "../../../../styled/Font";
 import { useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
-import { splitLastPath } from "../../../lib/Common";
+import { splitLastPath } from "../../../../lib/Common";
 
 function SearchBox({ shape }) {
   const { pathname } = useLocation();

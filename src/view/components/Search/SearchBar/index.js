@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
-import { font } from "../../../styled/Font";
+import { font } from "../../../../styled/Font";
 import SearchMenu from "./SearchMenu";
 import SearchControl from "./Util";
 

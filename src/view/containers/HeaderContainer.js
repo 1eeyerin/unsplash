@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import Lnb from "../components/Lnb";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
-import SearchBar from "../components/SearchBar";
+import SearchBar from "../components/Search/SearchBar";
 import { isActivePath } from "../../lib/Common";
 
 function HeaderContainer({ location }) {

@@ -6,8 +6,8 @@ import Orientation from "./Orientation";
 import Color from "./Color";
 import Sort from "./Sort";
 import qs from "qs";
-import { navigate } from "../../../../lib/History";
-import { useOutsideClick } from "../../../../hooks/useOutsideClick";
+import { navigate } from "../../../../../lib/History";
+import { useOutsideClick } from "../../../../../hooks/useOutsideClick";
 
 function SearchControl({ location, search }) {
   const ref = useRef();
