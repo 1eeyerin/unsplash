@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { IconLogo } from "../../../icons";
-import SearchBox from "../SearchBox";
+import SearchBox from "../Search/SearchBox";
 import Nav from "./Nav";
 import { media } from "../../../styled/Responsive";
 
@@ -38,6 +38,9 @@ const Container = styled.div`
 
 const Logo = styled(Link)`
   margin-right: 18px;
+  display: flex;
+  align-items: center;
+  margin-top: -2px;
 
   svg {
     width: 32px;

@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { IconPhotos } from "../../../icons";
+import { IconPhotos } from "../../../../icons";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
@@ -45,6 +45,7 @@ const Li = styled.li`
     height: 100%;
     white-space: nowrap;
     text-decoration: none;
+    font-size: 14px;
   }
 
   svg {

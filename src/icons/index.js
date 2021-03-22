@@ -221,3 +221,29 @@ export const IconTopicList = ({ item }) => {
 
   return null;
 };
+
+export const IconSearchFilterMenu = () => (
+  <svg
+    width="32"
+    height="32"
+    className="_3fj4s"
+    version="1.1"
+    viewBox="0 0 32 32"
+    aria-hidden="false"
+  >
+    <path d="M0,24.89v3.55H10.67V24.89ZM0,3.56V7.11H17.78V3.56ZM17.78,32V28.44H32V24.89H17.78V21.33H14.22V32ZM7.11,10.67v3.55H0v3.56H7.11v3.55h3.56V10.67ZM32,17.78V14.22H14.22v3.56ZM21.33,10.67h3.56V7.11H32V3.56H24.89V0H21.33Z" />
+  </svg>
+);
+
+export const IconSearchFilterActive = () => (
+  <svg
+    width="32"
+    height="32"
+    className="q_36N"
+    version="1.1"
+    viewBox="0 0 32 32"
+    aria-hidden="false"
+  >
+    <path d="M13.3334 23.2l-6.66671-6.6667 1.86666-1.8667 4.80005 4.8L23.4667 9.33331 25.3334 11.2l-12 12z" />
+  </svg>
+);

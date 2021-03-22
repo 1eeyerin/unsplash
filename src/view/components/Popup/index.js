@@ -21,7 +21,7 @@ Popup.propTypes = {
 };
 
 const Container = styled.div`
-  overflow-y: scroll;
+  overflow-y: auto;
   position: fixed;
   top: 0;
   left: 0;

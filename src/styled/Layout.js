@@ -4,7 +4,7 @@ import { media } from "./Responsive";
 
 export const ContentContainer = styled.div`
   position: relative;
-  max-width: ${pxToRem(1170)};
+  max-width: ${pxToRem(1320)};
   margin: 0 auto;
   padding: 0 ${pxToRem(15)};
 
