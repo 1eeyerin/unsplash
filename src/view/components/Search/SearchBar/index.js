@@ -3,16 +3,33 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 import { font } from "../../../../styled/Font";
 import SearchMenu from "./SearchMenu";
-import SearchControl from "./Util";
+import { useWindowDimensions } from "../../../../hooks/useWindowDimensions";
+import { breakPoint } from "../../../../styled/Responsive";
+import { IconSearchFilterMenu } from "../../../../icons";
+import SearchControl from "../SearchControl";
 
-function SearchBar({ location, search, total }) {
+function SearchBar({ location, search, total, handleFilterPopup }) {
+  const { width: windowWidth } = useWindowDimensions();
+
   return (
     <Container>
       <SearchMenu location={location} total={total} />
-      <SearchControl location={location} search={search} />
+      {windowWidth >= breakPoint.MD ? (
+        <SearchControl location={location} search={search} />
+      ) : (
+        <FilterButton onClick={handleFilterPopup}>
+          <IconSearchFilterMenu />
+        </FilterButton>
+      )}
     </Container>
   );
 }
+
+SearchBar.propTypes = {
+  location: PropTypes.object,
+  search: PropTypes.string,
+  total: PropTypes.number
+};
 
 const Container = styled.div`
   position: relative;
@@ -31,10 +48,16 @@ const Container = styled.div`
   font-family: ${font.en};
 `;
 
-SearchBar.propTypes = {
-  location: PropTypes.object,
-  search: PropTypes.string,
-  total: PropTypes.number
-};
+const FilterButton = styled.button`
+  border: 0;
+  background: 0;
+  outline: 0;
+
+  svg {
+    width: 18px;
+    height: 18px;
+    fill: #767676;
+  }
+`;
 
 export default SearchBar;
