@@ -9,7 +9,7 @@ import {
   IconShare
 } from "../../../icons";
 import { Btn, Buttons } from "../../../styled/Button";
-import { UserBio, UserImage, UserInfo } from "../../../styled/Common";
+import { UserBio, UserImage, UserInfo } from "../../../styled/User";
 import { imagePreload } from "../../../lib/Common";
 
 function DetailInfo({ urls, user }) {

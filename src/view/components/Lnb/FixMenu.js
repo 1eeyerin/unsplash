@@ -31,6 +31,10 @@ const Container = styled.div`
   padding: 0 20px;
   position: relative;
 
+  ${media.lessThan("sm")`
+    display: none;
+  `};
+
   &:after {
     content: "";
     position: absolute;

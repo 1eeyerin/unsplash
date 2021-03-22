@@ -45,6 +45,7 @@ const Li = styled.li`
     height: 100%;
     white-space: nowrap;
     text-decoration: none;
+    font-size: 14px;
   }
 
   svg {

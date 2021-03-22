@@ -6,9 +6,13 @@ import Routes from "./routes/Routes";
 import HeaderContainer from "./containers/HeaderContainer";
 import PopupPhotoContainer from "./containers/PopupPhotoContainer";
 import PropTypes from "prop-types";
+import PopupSearchControlContainer from "./containers/PopupSearchControlContainer";
 
 function App() {
-  const { popupPhoto } = useSelector(state => state.photos);
+  const {
+    photos: { popupPhoto },
+    search: { popupControl }
+  } = useSelector(state => state);
 
   return (
     <Container>
@@ -16,6 +20,7 @@ function App() {
       <HeaderContainer />
       <Routes />
       {popupPhoto.show && <PopupPhotoContainer />}
+      {popupControl && <PopupSearchControlContainer />}
     </Container>
   );
 }
