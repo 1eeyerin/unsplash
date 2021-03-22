@@ -1,12 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import {
-  IconPhotoCardAdd,
-  IconPhotoCardDownload,
-  IconPhotoCardLike
-} from "../../../icons";
+import { IconPhotoCardAdd, IconPhotoCardDownload, IconPhotoCardLike } from "../../../icons";
 import { Btn, Buttons } from "../../../styled/Button";
-import { UserBio, UserImage, UserInfo } from "../../../styled/Common";
+import { UserBio, UserImage, UserInfo } from "../../../styled/User";
 import PropTypes from "prop-types";
 
 function CardInfo({ name, profile_image, sponsorship }) {
