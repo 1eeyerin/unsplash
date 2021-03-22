@@ -6,7 +6,7 @@ import { media } from "../../../styled/Responsive";
 function SearchKeyword({ query }) {
   return (
     <Container>
-      <h1>{query}</h1>
+      <h2>{query}</h2>
     </Container>
   );
 }
@@ -18,7 +18,7 @@ const Container = styled.div`
     padding: 48px 12px;
   `};
 
-  h1 {
+  h2 {
     font-size: 46px;
     line-height: 1.2;
     font-family: ${font.en};
