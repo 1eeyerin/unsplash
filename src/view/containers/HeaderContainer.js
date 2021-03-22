@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import Header from "../components/Header";
-import { topicsActions } from "../../redux/ActionCreators";
+import { searchActions, topicsActions } from "../../redux/ActionCreators";
 import { useSelector } from "react-redux";
 import Lnb from "../components/Lnb";
 import PropTypes from "prop-types";
@@ -17,6 +17,12 @@ function HeaderContainer({ location }) {
     }
   } = useSelector(state => state);
 
+  useEffect(() => {
+    topicsActions.getTopicList({
+      per_page: 20
+    });
+  }, []);
+
   const activeLnb = isActivePath({
     exact: ["/"],
     startsWith: ["/t/"],
@@ -27,17 +33,24 @@ function HeaderContainer({ location }) {
     pathname: location.pathname
   });
 
-  useEffect(() => {
-    topicsActions.getTopicList({
-      per_page: 20
+  const handleFilterPopup = () => {
+    searchActions.updateState({
+      popupControl: true
     });
-  }, []);
+  };
 
   return (
     <Container>
       <Header />
       {activeLnb && <Lnb topicNav={topics.list} pathname={location?.pathname} />}
-      {activeSearchBar && <SearchBar location={location} search={location?.search} total={total} />}
+      {activeSearchBar && (
+        <SearchBar
+          location={location}
+          search={location?.search}
+          total={total}
+          handleFilterPopup={handleFilterPopup}
+        />
+      )}
     </Container>
   );
 }
