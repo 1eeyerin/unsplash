@@ -46,6 +46,7 @@ const Li = styled.li`
     white-space: nowrap;
     text-decoration: none;
     font-size: 14px;
+    position: relative;
   }
 
   svg {
@@ -56,12 +57,19 @@ const Li = styled.li`
     transition: fill 0.1s ease-in-out;
   }
 
-  &:hover svg {
+  &:hover svg,
+  &.active svg {
     fill: #111;
   }
 
-  &.active a {
-    box-shadow: inset 0 -2px #111;
+  &.active a:before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: #111;
 
     svg {
       fill: #111;
