@@ -13,7 +13,9 @@ function HeaderContainer({ location }) {
   const {
     topics,
     search: {
-      searchResults: { total }
+      searchResults: {
+        photos: { total }
+      }
     }
   } = useSelector(state => state);
 
