@@ -12,12 +12,6 @@ function SearchKeyword({ query }) {
 }
 
 const Container = styled.div`
-  padding: 60px 0 72px;
-
-  ${media.lessThan("sm")`
-    padding: 48px 12px;
-  `};
-
   h2 {
     font-size: 46px;
     line-height: 1.2;

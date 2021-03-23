@@ -1,8 +1,12 @@
 import { createActions, createReducer } from "reduxsauce";
+import produce from "immer";
 
 const initialState = {
   searchResults: {
-    results: []
+    photos: {
+      results: []
+    },
+    related_searches: []
   },
   popupControl: false
 };
@@ -24,10 +28,8 @@ export default createReducer(initialState, {
     ...props
   }),
 
-  [Action.Types.DELETE_HISTORY]: (state, { props }) => ({
-    ...state,
-    searchResults: {
-      results: []
-    }
-  })
+  [Action.Types.DELETE_HISTORY]: (state, { props }) =>
+    produce(state, draft => {
+      draft.searchResults.photos.results = [];
+    })
 });

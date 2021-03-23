@@ -10,12 +10,16 @@ const saga = function* () {
 
       try {
         const result = yield call(API.searchPhotos, data);
+
         if (result) {
           yield put(
             Action.Creators.updateState({
               searchResults: {
                 ...result,
-                results: [...searchResults.results, ...result.results]
+                photos: {
+                  ...result.photos,
+                  results: [...searchResults.photos.results, ...result.photos.results]
+                }
               }
             })
           );

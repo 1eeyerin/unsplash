@@ -1,7 +1,7 @@
 import { breakPoint } from "../styled/Responsive";
 
 export const recomposePhotos = (items, windowWidth) => {
-  let count = windowWidth >= breakPoint.MD ? 3 : windowWidth >= breakPoint.XS ? 2 : 1;
+  let count = windowWidth >= breakPoint.MD ? 3 : 2;
   let photoGroup = Array.from({ length: count }, () => []);
   let groupHeight = new Array(count).fill(0);
 
@@ -20,36 +20,6 @@ export const recomposePhotos = (items, windowWidth) => {
   }
 
   return photoGroup;
-};
-
-export const scrollMenu = ({
-  slideRef,
-  scrollLeft,
-  setScrollLeft,
-  setClassName,
-  maxScroll,
-  setMaxScroll
-}) => {
-  const onScroll = e => {
-    setScrollLeft(e.target.scrollLeft);
-    setMaxScroll(e.target.scrollWidth - e.target.clientWidth);
-  };
-
-  const onClickLeft = () => {
-    slideRef.current.scrollLeft = Math.max(scrollLeft - 300, 0);
-  };
-
-  const onClickRight = () => {
-    slideRef.current.scrollLeft = Math.min(scrollLeft + 300, maxScroll);
-  };
-
-  const handleClassName = () => {
-    setClassName("");
-    scrollLeft <= 10 && setClassName("prev");
-    scrollLeft >= maxScroll - 10 && setClassName("next");
-  };
-
-  return { onScroll, onClickLeft, onClickRight, handleClassName };
 };
 
 export const imagePreload = (images = []) => {
