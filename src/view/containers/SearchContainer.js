@@ -9,12 +9,16 @@ import PropTypes from "prop-types";
 import qs from "qs";
 import EmptyPhotos from "../components/EmptyResults/EmptyPhotos";
 import SearchKeyword from "../components/Search/SearchKeyword";
-import _ from "lodash";
+import SearchScrollMenu from "../components/Search/SearchScrollMenu";
+import { media } from "../../styled/Responsive";
 
-function SearchPhotoListContainer({ match, location }) {
+function SearchContainer({ match, location }) {
   const parsed = qs.parse(location.search, { ignoreQueryPrefix: true });
   const query = match.params.query;
-  const { searchResults, isLoading } = useSelector(state => state.search);
+  const {
+    searchResults: { photos, related_searches },
+    isLoading
+  } = useSelector(state => state.search);
   const [page, setPage] = useState(1);
 
   useEffect(() => {
@@ -39,30 +43,39 @@ function SearchPhotoListContainer({ match, location }) {
   return (
     <Container>
       <ContentContainer>
-        <SearchKeyword query={query} />
+        <SearchInfo>
+          <SearchKeyword query={query} />
+          {related_searches && <SearchScrollMenu data={related_searches} />}
+        </SearchInfo>
         <InfiniteScroll getMoreItems={getMoreItems} isLoading={isLoading}>
-          {searchResults?.total ? (
-            <PhotoList data={searchResults.results} />
-          ) : (
-            !isLoading && <EmptyPhotos />
-          )}
+          {photos?.total ? <PhotoList data={photos.results} /> : !isLoading && <EmptyPhotos />}
         </InfiniteScroll>
       </ContentContainer>
     </Container>
   );
 }
 
-SearchPhotoListContainer.propTypes = {
+SearchContainer.propTypes = {
   query: PropTypes.string,
   page: PropTypes.number,
   getMoreItems: PropTypes.func,
   isLoading: PropTypes.bool,
   searchResults: PropTypes.shape({
-    results: PropTypes.array,
-    total: PropTypes.number
+    photos: PropTypes.shape({
+      results: PropTypes.array,
+      total: PropTypes.number
+    }),
+    related_searches: PropTypes.array
   })
 };
 
 const Container = styled.div``;
+const SearchInfo = styled.div`
+  padding: 60px 0 72px;
 
-export default SearchPhotoListContainer;
+  ${media.lessThan("sm")`
+    padding: 48px 12px;
+  `};
+`;
+
+export default SearchContainer;
