@@ -66,16 +66,23 @@ const List = styled.ul`
       padding-left: 24px;
     `};
 
-    &.active a {
-      box-shadow: inset 0 -2px #111;
-    }
-
     a {
       text-decoration: none;
       color: #727272;
       display: flex;
       align-items: center;
       height: 100%;
+      position: relative;
+    }
+
+    &.active a:before {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: #111;
     }
   }
 `;

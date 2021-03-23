@@ -96,8 +96,14 @@ export const SlideList = styled.ul`
       padding-left: 24px;
     `};
 
-    &.active a {
-      box-shadow: inset 0 -2px #111;
+    &.active a:before {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: #111;
     }
 
     a {
@@ -106,6 +112,7 @@ export const SlideList = styled.ul`
       height: 100%;
       text-decoration: none;
       color: #727272;
+      position: relative;
 
       &:hover {
         color: #111;
