@@ -7,6 +7,7 @@ import HeaderContainer from "./containers/HeaderContainer";
 import PopupPhotoContainer from "./containers/PopupPhotoContainer";
 import PropTypes from "prop-types";
 import PopupSearchControlContainer from "./containers/PopupSearchControlContainer";
+import UseScrollToTop from "../hooks/useScrollToTop";
 
 function App() {
   const {
@@ -17,6 +18,7 @@ function App() {
   return (
     <Container>
       <GlobalStyle />
+      <UseScrollToTop />
       <HeaderContainer />
       <Routes />
       {popupPhoto.show && <PopupPhotoContainer />}
