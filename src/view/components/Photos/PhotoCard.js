@@ -3,6 +3,7 @@ import styled from "styled-components";
 import CardInfo from "./CardInfo";
 import { useOnViewport } from "../../../hooks/useOnViewport";
 import PropTypes from "prop-types";
+import { media } from "../../../styled/Responsive";
 
 function PhotoCard({ urls, onClick, user, sponsorship, width, height, color }) {
   const ratioHeight = (height / width) * 100;
@@ -47,6 +48,10 @@ PhotoCard.propTypes = {
 const Container = styled.div`
   padding: 12px 0;
   cursor: zoom-in;
+
+  ${media.lessThan("xs")`
+    padding: 6px 0;
+  `};
 
   &:hover .card-image:before {
     opacity: 1;

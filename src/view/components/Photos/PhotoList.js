@@ -55,6 +55,10 @@ const Layout = styled.div`
   display: flex;
   flex-wrap: wrap;
   margin: -24px -12px;
+
+  ${media.lessThan("xs")`
+    margin: -12px -5px;
+  `};
 `;
 const PhotoGroup = styled.div`
   width: 33.3333%;
@@ -66,7 +70,7 @@ const PhotoGroup = styled.div`
   `};
 
   ${media.lessThan("xs")`
-    width: 100%;
+    padding: 5px;
   `};
 `;
 const Col = styled.div``;
