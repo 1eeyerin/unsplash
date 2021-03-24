@@ -46,12 +46,7 @@ function HeaderContainer({ location }) {
       <Header />
       {activeLnb && <Lnb topicNav={topics.list} pathname={location?.pathname} />}
       {activeSearchBar && (
-        <SearchBar
-          location={location}
-          search={location?.search}
-          total={total}
-          handleFilterPopup={handleFilterPopup}
-        />
+        <SearchBar location={location} total={total} handleFilterPopup={handleFilterPopup} />
       )}
     </Container>
   );

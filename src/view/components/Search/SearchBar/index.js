@@ -8,14 +8,14 @@ import { breakPoint } from "../../../../styled/Responsive";
 import { IconSearchFilterMenu } from "../../../../icons";
 import SearchControl from "../SearchControl";
 
-function SearchBar({ location, search, total, handleFilterPopup }) {
+function SearchBar({ location, total, handleFilterPopup }) {
   const { width: windowWidth } = useWindowDimensions();
 
   return (
     <Container>
       <SearchMenu location={location} total={total} />
       {windowWidth >= breakPoint.MD ? (
-        <SearchControl location={location} search={search} />
+        <SearchControl location={location} />
       ) : (
         <FilterButton onClick={handleFilterPopup}>
           <IconSearchFilterMenu />
@@ -27,8 +27,8 @@ function SearchBar({ location, search, total, handleFilterPopup }) {
 
 SearchBar.propTypes = {
   location: PropTypes.object,
-  search: PropTypes.string,
-  total: PropTypes.number
+  total: PropTypes.number,
+  handleFilterPopup: PropTypes.func
 };
 
 const Container = styled.div`

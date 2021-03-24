@@ -1,4 +1,5 @@
 import styled from "styled-components";
+
 export const ControlContents = styled.div`
   .selectBtn {
     border: 0;
@@ -12,12 +13,15 @@ export const ControlContents = styled.div`
     color: #767676;
     white-space: nowrap;
     transition: color 0.1s ease-in-out;
+
     ¬ &:hover {
       color: #111;
+
       &:after {
         border-color: #767676 transparent transparent;
       }
     }
+
     &:after {
       content: "";
       display: inline-block;
@@ -28,6 +32,7 @@ export const ControlContents = styled.div`
       border-top-color: #d1d1d1;
       transition: border 0.1s ease-in-out;
     }
+
     &.clear:after {
       display: none;
     }
@@ -44,14 +49,20 @@ export const ControlMenu = styled.div`
   border-radius: 4px;
   min-width: 135px;
   box-shadow: 0 8px 16px rgb(0 0 0 / 16%);
+
   ul {
     padding: 8px 0;
+
     li {
       color: #767676;
       font-size: 14px;
       text-align: left;
       overflow: hidden;
       position: relative;
+
+      &.active {
+        pointer-events: none;
+      }
 
       button {
         outline: 0;
