@@ -11,7 +11,7 @@ function Routes() {
     <Switch>
       <Route exact path="/" component={Home} />
       <Route exact path="/photos/:id" component={Photos} />
-      <Route path="/s/photos/:query" component={Search} />
+      <Route path="/s/:category/:query" component={Search} />
       <Route path="/t/:query" component={Topic} />
       <Route component={NotFound} />
     </Switch>
