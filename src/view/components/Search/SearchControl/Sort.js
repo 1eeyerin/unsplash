@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { IconSearchFilterActive } from "../../../../icons";
 
-function Sort({ Control, ActiveMenu, handleActiveMenu, Styled, popup }) {
+function Sort({ Styled, activeMenu, handleClick, handleActiveMenu, parsed, popup }) {
   const [title, setTitle] = useState("Relevance");
-  const [control, setControl] = Control;
-  const [activeMenu, setActiveMenu] = ActiveMenu;
   const [ControlContents, ControlMenu, ControlItem] = Styled;
   const Item = [
     {
@@ -18,21 +16,14 @@ function Sort({ Control, ActiveMenu, handleActiveMenu, Styled, popup }) {
   ];
 
   useEffect(() => {
-    switch (control.sort) {
+    switch (parsed.sort) {
       case "latest":
         setTitle("Newest");
         break;
       default:
         setTitle("Relevance");
     }
-  }, [control.sort]);
-
-  const handleClick = e => {
-    let newObj = { ...control };
-    newObj.sort = e.currentTarget.name;
-    setControl(newObj);
-    setActiveMenu();
-  };
+  }, [parsed.sort]);
 
   return (
     <ControlContents>
@@ -42,11 +33,18 @@ function Sort({ Control, ActiveMenu, handleActiveMenu, Styled, popup }) {
       {(activeMenu.sort || popup) && (
         <ControlMenu>
           <ul>
-            {Item.map((i, idx) => (
-              <li key={idx}>
-                <ControlItem onClick={handleClick} name={i.name}>
-                  {control.sort === i.name ? <IconSearchFilterActive /> : ""}
-                  <span>{i.text}</span>
+            {Item.map((item, idx) => (
+              <li
+                key={idx}
+                className={
+                  parsed.sort === item.name || (!parsed.sort && item.name === "") ? "active" : ""
+                }
+              >
+                <ControlItem onClick={e => handleClick(e, "sort")} name={item.name}>
+                  {(parsed.sort === item.name || (!parsed.sort && item.name === "")) && (
+                    <IconSearchFilterActive />
+                  )}
+                  <span>{item.text}</span>
                 </ControlItem>
               </li>
             ))}
