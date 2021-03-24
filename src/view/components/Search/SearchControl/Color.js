@@ -2,10 +2,8 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { IconSearchFilterActive } from "../../../../icons";
 
-function Color({ Control, ActiveMenu, handleActiveMenu, Styled, popup }) {
+function Color({ Styled, activeMenu, handleClick, handleActiveMenu, parsed, popup }) {
   const [title, setTitle] = useState("Any Color");
-  const [control, setControl] = Control;
-  const [activeMenu, setActiveMenu] = ActiveMenu;
   const [ControlContents, ControlMenu, ControlItem] = Styled;
   const Item = [
     {
@@ -35,7 +33,7 @@ function Color({ Control, ActiveMenu, handleActiveMenu, Styled, popup }) {
     if (popup) {
       setTitle("Color");
     } else {
-      switch (control.color) {
+      switch (parsed.color) {
         case "black_and_white":
           setTitle("Black and white");
           break;
@@ -73,14 +71,7 @@ function Color({ Control, ActiveMenu, handleActiveMenu, Styled, popup }) {
           setTitle("Any Color");
       }
     }
-  }, [control.color]);
-
-  const handleClick = e => {
-    let newArr = { ...control };
-    newArr.color = e.currentTarget.name;
-    setControl(newArr);
-    setActiveMenu();
-  };
+  }, [parsed.color]);
 
   return (
     <ControlContents>
@@ -90,20 +81,32 @@ function Color({ Control, ActiveMenu, handleActiveMenu, Styled, popup }) {
       {(activeMenu.color || popup) && (
         <ControlMenu style={{ minWidth: "168px" }}>
           <ul>
-            {Item.map((i, idx) => (
-              <li>
-                <ControlItem onClick={handleClick} name={i.name}>
-                  {control.color === i.name ? <IconSearchFilterActive /> : ""}
-                  <span>{i.text}</span>
+            {Item.map((item, idx) => (
+              <li
+                key={idx}
+                className={
+                  parsed.color === item.name || (!parsed.color && item.name === "") ? "active" : ""
+                }
+              >
+                <ControlItem onClick={e => handleClick(e, "color")} name={item.name}>
+                  {(parsed.color === item.name || (!parsed.color && item.name === "")) && (
+                    <IconSearchFilterActive />
+                  )}
+                  <span>{item.text}</span>
                 </ControlItem>
               </li>
             ))}
             <li>
               <ControlItem as="div">Tones</ControlItem>
               <ColorBox>
-                {colors.map((i, idx) => (
-                  <ColorItem onClick={handleClick} className={i} name={i} key={idx}>
-                    {control.color === i ? <IconSearchFilterActive /> : ""}
+                {colors.map((item, idx) => (
+                  <ColorItem
+                    onClick={e => handleClick(e, "color")}
+                    className={item}
+                    name={item}
+                    key={idx}
+                  >
+                    {parsed.color === item ? <IconSearchFilterActive /> : ""}
                   </ColorItem>
                 ))}
               </ColorBox>

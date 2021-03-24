@@ -8,6 +8,7 @@ const initialState = {
     },
     related_searches: []
   },
+  isLoading: false,
   popupControl: false
 };
 
