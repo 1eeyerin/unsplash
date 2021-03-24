@@ -6,17 +6,15 @@ import Color from "../Search/SearchControl/Color";
 import { useSearchControl } from "../../../hooks/useSearchControl";
 import { withRouter } from "react-router-dom";
 import { ControlContents, ControlItem, ControlMenu } from "../../../styled/Search";
+import qs from "qs";
 
-function PopupSearchControl({ location, search, onClose }) {
-  const {
-    initValue,
-    control,
-    setControl,
-    activeMenu,
-    setActiveMenu,
-    handleActiveMenu,
-    handleClear
-  } = useSearchControl({ location, search });
+function PopupSearchControl({ location: { pathname, search }, onClose }) {
+  const parsed = qs.parse(search, { ignoreQueryPrefix: true });
+  const { activeMenu, handleClick, handleClear, handleActiveMenu } = useSearchControl({
+    pathname,
+    search,
+    parsed
+  });
 
   const handlePopupClear = async () => {
     await handleClear();
@@ -29,28 +27,31 @@ function PopupSearchControl({ location, search, onClose }) {
       <ul>
         <li>
           <Sort
-            Control={[control, setControl]}
-            ActiveMenu={[activeMenu, () => setActiveMenu(initValue[1])]}
-            handleActiveMenu={handleActiveMenu}
             Styled={[Contents, Menu, Item]}
+            activeMenu={activeMenu}
+            handleClick={handleClick}
+            handleActiveMenu={handleActiveMenu}
+            parsed={parsed}
             popup={true}
           />
         </li>
         <li>
           <Color
-            Control={[control, setControl]}
-            ActiveMenu={[activeMenu, () => setActiveMenu(initValue[1])]}
-            handleActiveMenu={handleActiveMenu}
             Styled={[Contents, Menu, Item]}
+            activeMenu={activeMenu}
+            handleClick={handleClick}
+            handleActiveMenu={handleActiveMenu}
+            parsed={parsed}
             popup={true}
           />
         </li>
         <li>
           <Orientation
-            Control={[control, setControl]}
-            ActiveMenu={[activeMenu, () => setActiveMenu(initValue[1])]}
-            handleActiveMenu={handleActiveMenu}
             Styled={[Contents, Menu, Item]}
+            activeMenu={activeMenu}
+            handleClick={handleClick}
+            handleActiveMenu={handleActiveMenu}
+            parsed={parsed}
             popup={true}
           />
         </li>

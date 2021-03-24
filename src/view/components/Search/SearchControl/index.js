@@ -5,30 +5,30 @@ import Orientation from "./Orientation";
 import Color from "./Color";
 import Sort from "./Sort";
 import { useOutsideClick } from "../../../../hooks/useOutsideClick";
-import { withRouter } from "react-router-dom";
 import { useSearchControl } from "../../../../hooks/useSearchControl";
 import { ControlContents, ControlItem, ControlMenu } from "../../../../styled/Search";
+import qs from "qs";
 
-function SearchControl({ location, search }) {
+function SearchControl({ location: { pathname, search } }) {
+  const parsed = qs.parse(search, { ignoreQueryPrefix: true });
   const ref = useRef();
   const {
     initValue,
-    control,
-    setControl,
     activeMenu,
     setActiveMenu,
-    handleActiveMenu,
-    handleClear
-  } = useSearchControl({ location, search });
+    handleClick,
+    handleClear,
+    handleActiveMenu
+  } = useSearchControl({ pathname, search, parsed });
 
   useOutsideClick(ref, () => {
-    setActiveMenu(initValue[1]);
+    setActiveMenu(initValue);
   });
 
   return (
     <Container>
       <ul ref={ref}>
-        {(control.orientation || control.color || control.sort) && (
+        {(parsed.order_by || parsed.color || parsed.sort) && (
           <li>
             <ControlContents>
               <button className="selectBtn clear" onClick={handleClear}>
@@ -39,26 +39,29 @@ function SearchControl({ location, search }) {
         )}
         <li>
           <Orientation
-            Control={[control, setControl]}
-            ActiveMenu={[activeMenu, () => setActiveMenu(initValue[1])]}
-            handleActiveMenu={handleActiveMenu}
             Styled={[ControlContents, ControlMenu, ControlItem]}
+            activeMenu={activeMenu}
+            handleClick={handleClick}
+            handleActiveMenu={handleActiveMenu}
+            parsed={parsed}
           />
         </li>
         <li>
           <Color
-            Control={[control, setControl]}
-            ActiveMenu={[activeMenu, () => setActiveMenu(initValue[1])]}
-            handleActiveMenu={handleActiveMenu}
             Styled={[ControlContents, ControlMenu, ControlItem]}
+            activeMenu={activeMenu}
+            handleClick={handleClick}
+            handleActiveMenu={handleActiveMenu}
+            parsed={parsed}
           />
         </li>
         <li>
           <Sort
-            Control={[control, setControl]}
-            ActiveMenu={[activeMenu, () => setActiveMenu(initValue[1])]}
-            handleActiveMenu={handleActiveMenu}
             Styled={[ControlContents, ControlMenu, ControlItem]}
+            activeMenu={activeMenu}
+            handleClick={handleClick}
+            handleActiveMenu={handleActiveMenu}
+            parsed={parsed}
           />
         </li>
       </ul>
@@ -67,6 +70,7 @@ function SearchControl({ location, search }) {
 }
 
 SearchControl.propTypes = {
+  pathname: PropTypes.string,
   search: PropTypes.string
 };
 
@@ -89,4 +93,4 @@ const Container = styled.div`
   }
 `;
 
-export default withRouter(SearchControl);
+export default SearchControl;
