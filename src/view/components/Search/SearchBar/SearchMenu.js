@@ -1,24 +1,45 @@
 import React from "react";
 import styled from "styled-components";
-import { IconPhotos } from "../../../../icons";
-import { Link } from "react-router-dom";
+import { IconCollections, IconPhotos } from "../../../../icons";
+import { Link, matchPath } from "react-router-dom";
 import PropTypes from "prop-types";
 import qs from "qs";
+import { media } from "../../../../styled/Responsive";
 
-function SearchMenu({ location: { pathname, search }, total }) {
+function SearchMenu({ location: { pathname, search }, total: [photosTotal, collectionsTotal] }) {
   const parsed = qs.parse(search, { ignoreQueryPrefix: true });
   const searchQueryString = qs.stringify(parsed);
+  const {
+    params: { query }
+  } = matchPath(pathname, { path: "/s/:category/:query" });
+  const Item = [
+    {
+      name: "photos",
+      text: "Photos",
+      icon: <IconPhotos />,
+      total: photosTotal
+    },
+    {
+      name: "collections",
+      text: "Collections",
+      icon: <IconCollections />,
+      total: collectionsTotal
+    }
+  ];
+
   return (
     <Container>
       <Ul>
-        <Li className={pathname.startsWith("/s/photos/") ? "active" : ""}>
-          <Link to={`${pathname}?${searchQueryString}`}>
-            <IconPhotos />
-            <span>
-              Photos <em>{total ? total : ""}</em>
-            </span>
-          </Link>
-        </Li>
+        {Item.map((item, idx) => (
+          <Li className={pathname.startsWith(`/s/${item.name}/`) ? "active" : ""}>
+            <Link to={`/s/${item.name}/${query}?${searchQueryString}`}>
+              {item.icon}
+              <span>
+                {item.text} <em>{item.total ? item.total : ""}</em>
+              </span>
+            </Link>
+          </Li>
+        ))}
       </Ul>
     </Container>
   );
@@ -27,7 +48,8 @@ function SearchMenu({ location: { pathname, search }, total }) {
 SearchMenu.propTypes = {
   pathname: PropTypes.string,
   location: PropTypes.object,
-  total: PropTypes.number
+  photosTotal: PropTypes.number,
+  collectionsTotal: PropTypes.number
 };
 
 const Container = styled.div``;
@@ -41,6 +63,10 @@ const Ul = styled.ul`
 const Li = styled.li`
   padding-left: 32px;
   height: 100%;
+
+  ${media.lessThan("sm")`
+    padding-left: 24px;
+  `};
 
   a {
     display: flex;
@@ -58,6 +84,10 @@ const Li = styled.li`
     margin-right: 8px;
     fill: #d1d1d1;
     transition: fill 0.1s ease-in-out;
+
+    ${media.lessThan("sm")`
+      display: none;
+    `};
   }
 
   &:hover svg,
@@ -85,6 +115,10 @@ const Li = styled.li`
 
     em {
       font-weight: 400;
+
+      ${media.lessThan("sm")`
+        display: none;
+      `};
     }
   }
 `;

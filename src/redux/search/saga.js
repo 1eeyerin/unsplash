@@ -19,6 +19,10 @@ const saga = function* () {
                 photos: {
                   ...result.photos,
                   results: [...searchResults.photos.results, ...result.photos.results]
+                },
+                collections: {
+                  ...result.collections,
+                  results: [...searchResults.collections.results, ...result.collections.results]
                 }
               }
             })

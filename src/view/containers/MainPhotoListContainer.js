@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { photosActions } from "../../redux/ActionCreators";
-import PhotoList from "../components/Photos/PhotoList";
 import { useSelector } from "react-redux";
 import { ContentContainer } from "../../styled/Layout";
 import InfiniteScroll from "../components/InfiniteScroll";
 import PropTypes from "prop-types";
+import MasonryPhotos from "../components/Photos/MasonryPhotos";
 
 function MainPhotoListContainer() {
   const [page, setPage] = useState(1);
@@ -27,7 +27,7 @@ function MainPhotoListContainer() {
     <Container>
       <ContentContainer>
         <InfiniteScroll getMoreItems={getMoreItems} isLoading={isLoading}>
-          <PhotoList data={list} />
+          <MasonryPhotos data={list} />
         </InfiniteScroll>
       </ContentContainer>
     </Container>

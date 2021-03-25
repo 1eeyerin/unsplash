@@ -7,20 +7,27 @@ import { useWindowDimensions } from "../../../../hooks/useWindowDimensions";
 import { breakPoint } from "../../../../styled/Responsive";
 import { IconSearchFilterMenu } from "../../../../icons";
 import SearchControl from "../SearchControl";
+import { isActivePath } from "../../../../lib/Common";
 
 function SearchBar({ location, total, handleFilterPopup }) {
   const { width: windowWidth } = useWindowDimensions();
 
+  const activeSearchPhotos = isActivePath({
+    startsWith: ["/s/photos/"],
+    pathname: location.pathname
+  });
+
   return (
     <Container>
       <SearchMenu location={location} total={total} />
-      {windowWidth >= breakPoint.MD ? (
-        <SearchControl location={location} />
-      ) : (
-        <FilterButton onClick={handleFilterPopup}>
-          <IconSearchFilterMenu />
-        </FilterButton>
-      )}
+      {activeSearchPhotos &&
+        (windowWidth >= breakPoint.MD ? (
+          <SearchControl location={location} />
+        ) : (
+          <FilterButton onClick={handleFilterPopup}>
+            <IconSearchFilterMenu />
+          </FilterButton>
+        ))}
     </Container>
   );
 }
