@@ -7,6 +7,8 @@ import PropTypes from "prop-types";
 import { breakPoint, media } from "../../../styled/Responsive";
 import { useWindowDimensions } from "../../../hooks/useWindowDimensions";
 import { navigate } from "../../../lib/History";
+import _ from "lodash";
+import PhotoListSkeleton from "../Loader/PhotoListSkeleton";
 
 function PhotoList({ data }) {
   const { width } = useWindowDimensions();
@@ -20,6 +22,8 @@ function PhotoList({ data }) {
       window.history.pushState({ id }, null, `/photos/${id}`);
     }
   };
+
+  if (_.isEmpty(data)) return <PhotoListSkeleton />;
 
   return (
     <Container>
