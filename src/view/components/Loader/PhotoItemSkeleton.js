@@ -10,9 +10,21 @@ function PhotoItemSkeleton() {
   );
 }
 
-const Container = styled.div``;
+const Container = styled.div`
+  height: 0;
+  padding-bottom: 65%;
+  position: relative;
+
+  > span {
+    position: absolute;
+    height: 100%;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+`;
 const Thumb = styled(Skeleton)`
-  height: 200px;
+  height: 100%;
 `;
 
 export default PhotoItemSkeleton;
