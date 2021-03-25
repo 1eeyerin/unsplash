@@ -31,7 +31,7 @@ function HeaderContainer({ location }) {
     pathname: location.pathname
   });
   const activeSearchBar = isActivePath({
-    startsWith: ["/s/photos/"],
+    startsWith: ["/s/"],
     pathname: location.pathname
   });
 
