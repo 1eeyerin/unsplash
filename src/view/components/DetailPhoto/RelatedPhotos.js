@@ -1,14 +1,14 @@
 import React from "react";
 import styled from "styled-components";
-import PhotoList from "../Photos/PhotoList";
 import PropTypes from "prop-types";
 import { media } from "../../../styled/Responsive";
+import MasonryPhotos from "../Photos/MasonryPhotos";
 
 function RelatedPhotos({ data, Title }) {
   return (
     <Container>
       <Title>Related photos</Title>
-      <PhotoList data={data} />
+      <MasonryPhotos data={data} />
     </Container>
   );
 }

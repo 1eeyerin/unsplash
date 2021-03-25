@@ -1,14 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import PhotoCard from "./PhotoCard";
-import { recomposePhotos } from "../../../lib/Common";
-import { photosActions } from "../../../redux/ActionCreators";
+import { recomposePhotos } from "../../../../lib/Common";
+import { photosActions } from "../../../../redux/ActionCreators";
 import PropTypes from "prop-types";
-import { breakPoint, media } from "../../../styled/Responsive";
-import { useWindowDimensions } from "../../../hooks/useWindowDimensions";
-import { navigate } from "../../../lib/History";
+import { breakPoint, media } from "../../../../styled/Responsive";
+import { useWindowDimensions } from "../../../../hooks/useWindowDimensions";
+import { navigate } from "../../../../lib/History";
 import _ from "lodash";
-import PhotoListSkeleton from "../Loader/PhotoListSkeleton";
+import PhotoListSkeleton from "../../Loader/PhotoListSkeleton";
 
 function PhotoList({ data }) {
   const { width } = useWindowDimensions();

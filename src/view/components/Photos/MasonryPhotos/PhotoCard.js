@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import CardInfo from "./CardInfo";
-import { useOnViewport } from "../../../hooks/useOnViewport";
+import PhotoCardInfo from "./PhotoCardInfo";
+import { useOnViewport } from "../../../../hooks/useOnViewport";
 import PropTypes from "prop-types";
-import { media } from "../../../styled/Responsive";
+import { media } from "../../../../styled/Responsive";
 
 function PhotoCard({ urls, onClick, user, sponsorship, width, height, color }) {
   const ratioHeight = (height / width) * 100;
@@ -26,7 +26,7 @@ function PhotoCard({ urls, onClick, user, sponsorship, width, height, color }) {
         <Image className="card-image" ref={imageRef}>
           {loaded && <img src={urls.regular} alt="" />}
         </Image>
-        <CardInfo {...user} sponsorship={sponsorship} />
+        <PhotoCardInfo {...user} sponsorship={sponsorship} />
       </Contents>
     </Container>
   );

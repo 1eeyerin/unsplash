@@ -1,12 +1,16 @@
 import React from "react";
 import InfiniteScroll from "../InfiniteScroll";
-import PhotoList from "../Photos/PhotoList";
-import EmptyPhotos from "../EmptyResults/EmptyPhotos";
+import EmptySearch from "../EmptyResults/EmptySearch";
+import MasonryPhotos from "../Photos/MasonryPhotos";
 
-function SearchPhotos({ getMoreItems, isLoading, photos }) {
+function SearchPhotos({ data, getMoreItems, isLoading }) {
   return (
     <InfiniteScroll getMoreItems={getMoreItems} isLoading={isLoading}>
-      {photos?.total ? <PhotoList data={photos.results} /> : !isLoading && <EmptyPhotos />}
+      {data?.total ? (
+        <MasonryPhotos data={data.results} />
+      ) : (
+        !isLoading && <EmptySearch category={"photos"} />
+      )}
     </InfiniteScroll>
   );
 }
