@@ -1,21 +1,33 @@
 import React from "react";
 import styled from "styled-components";
-import { IconPhotos } from "../../../../icons";
-import { Link } from "react-router-dom";
+import { IconCollections, IconPhotos } from "../../../../icons";
+import { Link, matchPath } from "react-router-dom";
 import PropTypes from "prop-types";
 import qs from "qs";
 
 function SearchMenu({ location: { pathname, search }, total }) {
   const parsed = qs.parse(search, { ignoreQueryPrefix: true });
   const searchQueryString = qs.stringify(parsed);
+  const {
+    params: { query }
+  } = matchPath(pathname, { path: "/s/:category/:query" });
+
   return (
     <Container>
       <Ul>
         <Li className={pathname.startsWith("/s/photos/") ? "active" : ""}>
-          <Link to={`${pathname}?${searchQueryString}`}>
+          <Link to={`/s/photos/${query}?${searchQueryString}`}>
             <IconPhotos />
             <span>
               Photos <em>{total ? total : ""}</em>
+            </span>
+          </Link>
+        </Li>
+        <Li className={pathname.startsWith("/s/collections/") ? "active" : ""}>
+          <Link to={`/s/collections/${query}?${searchQueryString}`}>
+            <IconCollections />
+            <span>
+              Collections <em>{total ? total : ""}</em>
             </span>
           </Link>
         </Li>
