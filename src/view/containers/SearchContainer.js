@@ -10,17 +10,13 @@ import SearchScrollMenu from "../components/Search/SearchScrollMenu";
 import { media } from "../../styled/Responsive";
 import { Route, Switch } from "react-router-dom";
 import SearchPhotos from "../components/Search/SearchPhotos";
-import SearchCollectionsPhotos from "../components/Search/SearchCollectionsPhotos";
+import SearchCollections from "../components/Search/SearchCollections";
 
-function SearchContainer({
-  match: {
-    params: { query }
-  },
-  location
-}) {
+function SearchContainer({ match, location }) {
   const parsed = qs.parse(location.search, { ignoreQueryPrefix: true });
+  const query = match.params.query;
   const {
-    searchResults: { photos, related_searches },
+    searchResults: { photos, related_searches, collections },
     isLoading
   } = useSelector(state => state.search);
   const [page, setPage] = useState(1);
@@ -56,10 +52,19 @@ function SearchContainer({
           <Route
             path="/s/photos/:query"
             render={() => (
-              <SearchPhotos photos={photos} getMoreItems={getMoreItems} isLoading={isLoading} />
+              <SearchPhotos data={photos} getMoreItems={getMoreItems} isLoading={isLoading} />
             )}
           />
-          <Route path="/s/collections/:query" render={() => SearchCollectionsPhotos} />
+          <Route
+            path="/s/collections/:query"
+            render={() => (
+              <SearchCollections
+                data={collections}
+                getMoreItems={getMoreItems}
+                isLoading={isLoading}
+              />
+            )}
+          />
         </Switch>
       </ContentContainer>
     </Container>
