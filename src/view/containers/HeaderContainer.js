@@ -14,7 +14,8 @@ function HeaderContainer({ location }) {
     topics,
     search: {
       searchResults: {
-        photos: { total }
+        photos: { total: photosTotal },
+        collections: { total: collectionsTotal }
       }
     }
   } = useSelector(state => state);
@@ -31,7 +32,7 @@ function HeaderContainer({ location }) {
     pathname: location.pathname
   });
   const activeSearchBar = isActivePath({
-    startsWith: ["/s/photos/"],
+    startsWith: ["/s/"],
     pathname: location.pathname
   });
 
@@ -46,7 +47,11 @@ function HeaderContainer({ location }) {
       <Header />
       {activeLnb && <Lnb topicNav={topics.list} pathname={location?.pathname} />}
       {activeSearchBar && (
-        <SearchBar location={location} total={total} handleFilterPopup={handleFilterPopup} />
+        <SearchBar
+          location={location}
+          total={[photosTotal, collectionsTotal]}
+          handleFilterPopup={handleFilterPopup}
+        />
       )}
     </Container>
   );
@@ -60,7 +65,8 @@ HeaderContainer.propTypes = {
     pathname: PropTypes.string,
     search: PropTypes.string
   }),
-  total: PropTypes.number
+  photosTotal: PropTypes.number,
+  collectionsTotal: PropTypes.number
 };
 
 const Container = styled.div`
