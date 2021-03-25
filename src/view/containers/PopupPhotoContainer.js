@@ -6,7 +6,7 @@ import Popup from "../components/Popup";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 
-function PopupPhotoContainer({ location }) {
+function PopupPhotoContainer({ location: { pathname, search } }) {
   const { popupPhoto } = useSelector(state => state.photos);
 
   const onClose = () => {
@@ -15,7 +15,7 @@ function PopupPhotoContainer({ location }) {
         show: false
       }
     });
-    window.history.pushState({}, null, location?.pathname);
+    window.history.pushState({}, null, pathname + search);
   };
 
   return (
