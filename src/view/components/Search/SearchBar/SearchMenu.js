@@ -3,13 +3,16 @@ import styled from "styled-components";
 import { IconPhotos } from "../../../../icons";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import qs from "qs";
 
-function SearchMenu({ location, total }) {
+function SearchMenu({ location: { pathname, search }, total }) {
+  const parsed = qs.parse(search, { ignoreQueryPrefix: true });
+  const searchQueryString = qs.stringify(parsed);
   return (
     <Container>
       <Ul>
-        <Li className={location?.pathname.startsWith("/s/photos/") ? "active" : ""}>
-          <Link to={location?.pathname}>
+        <Li className={pathname.startsWith("/s/photos/") ? "active" : ""}>
+          <Link to={`${pathname}?${searchQueryString}`}>
             <IconPhotos />
             <span>
               Photos <em>{total ? total : ""}</em>
