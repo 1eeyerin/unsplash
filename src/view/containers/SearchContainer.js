@@ -12,9 +12,13 @@ import SearchKeyword from "../components/Search/SearchKeyword";
 import SearchScrollMenu from "../components/Search/SearchScrollMenu";
 import { media } from "../../styled/Responsive";
 
-function SearchContainer({ match, location }) {
+function SearchContainer({
+  match: {
+    params: { query }
+  },
+  location
+}) {
   const parsed = qs.parse(location.search, { ignoreQueryPrefix: true });
-  const query = match.params.query;
   const {
     searchResults: { photos, related_searches },
     isLoading
