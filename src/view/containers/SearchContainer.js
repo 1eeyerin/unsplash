@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { searchActions } from "../../redux/ActionCreators";
-import PhotoList from "../components/Photos/PhotoList";
 import { ContentContainer } from "../../styled/Layout";
 import { useSelector } from "react-redux";
-import InfiniteScroll from "../components/InfiniteScroll";
 import PropTypes from "prop-types";
 import qs from "qs";
-import EmptyPhotos from "../components/EmptyResults/EmptyPhotos";
 import SearchKeyword from "../components/Search/SearchKeyword";
 import SearchScrollMenu from "../components/Search/SearchScrollMenu";
 import { media } from "../../styled/Responsive";
+import { Route, Switch } from "react-router-dom";
+import SearchPhotos from "../components/Search/SearchPhotos";
+import SearchCollectionsPhotos from "../components/Search/SearchCollectionsPhotos";
 
 function SearchContainer({
   match: {
@@ -51,9 +51,16 @@ function SearchContainer({
           <SearchKeyword query={query} />
           {related_searches && <SearchScrollMenu data={related_searches} parsed={parsed} />}
         </SearchInfo>
-        <InfiniteScroll getMoreItems={getMoreItems} isLoading={isLoading}>
-          {photos?.total ? <PhotoList data={photos.results} /> : !isLoading && <EmptyPhotos />}
-        </InfiniteScroll>
+
+        <Switch>
+          <Route
+            path="/s/photos/:query"
+            render={() => (
+              <SearchPhotos photos={photos} getMoreItems={getMoreItems} isLoading={isLoading} />
+            )}
+          />
+          <Route path="/s/collections/:query" render={() => SearchCollectionsPhotos} />
+        </Switch>
       </ContentContainer>
     </Container>
   );
