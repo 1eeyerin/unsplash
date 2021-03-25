@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { topicsActions } from "../../redux/ActionCreators";
-import PhotoList from "../components/Photos/PhotoList";
 import { ContentContainer } from "../../styled/Layout";
 import { useSelector } from "react-redux";
 import InfiniteScroll from "../components/InfiniteScroll";
 import PropTypes from "prop-types";
 import TopicInfoBox from "../components/Topic/InfoBox";
+import MasonryPhotos from "../components/Photos/MasonryPhotos";
 
 function TopicContainer({ match }) {
   const query = match.params.query;
@@ -37,7 +37,7 @@ function TopicContainer({ match }) {
       <ContentContainer>
         <TopicInfoBox data={list} query={query} />
         <InfiniteScroll getMoreItems={getMoreItems} isLoading={isLoading}>
-          <PhotoList data={topicData} />
+          <MasonryPhotos data={topicData} />
         </InfiniteScroll>
       </ContentContainer>
     </Container>

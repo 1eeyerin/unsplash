@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import { IconPhotoCardAdd, IconPhotoCardDownload, IconPhotoCardLike } from "../../../icons";
-import { Btn, Buttons } from "../../../styled/Button";
-import { UserBio, UserImage, UserInfo } from "../../../styled/User";
+import { IconPhotoCardAdd, IconPhotoCardDownload, IconPhotoCardLike } from "../../../../icons";
+import { Btn, Buttons } from "../../../../styled/Button";
+import { UserBio, UserImage, UserInfo } from "../../../../styled/User";
 import PropTypes from "prop-types";
 
-function CardInfo({ name, profile_image, sponsorship }) {
+function PhotoCardInfo({ name, profile_image, sponsorship }) {
   return (
     <Container>
       <Info>
@@ -41,7 +41,7 @@ function CardInfo({ name, profile_image, sponsorship }) {
   );
 }
 
-CardInfo.propTypes = {
+PhotoCardInfo.propTypes = {
   name: PropTypes.string,
   profile_image: PropTypes.shape({
     small: PropTypes.string
@@ -90,4 +90,4 @@ const UserAvatar = styled.div`
   display: flex;
   flex: 1;
 `;
-export default CardInfo;
+export default PhotoCardInfo;
