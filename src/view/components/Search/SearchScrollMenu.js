@@ -37,7 +37,7 @@ const Container = styled.div`
       text-transform: capitalize;
       transition: border-color 0.1s ease-in-out;
       border-radius: 5px;
-      width: 145px;
+      width: 141px;
       padding: 0;
       margin: 0 4px;
 

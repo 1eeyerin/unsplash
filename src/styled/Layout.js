@@ -6,7 +6,7 @@ export const ContentContainer = styled.div`
   position: relative;
   max-width: ${pxToRem(1320)};
   margin: 0 auto;
-  padding: 0 ${pxToRem(15)};
+  padding: 0 ${pxToRem(12)};
 
   ${media.lessThan("sm")`
     width: 100%;

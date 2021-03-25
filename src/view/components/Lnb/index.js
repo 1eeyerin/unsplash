@@ -30,6 +30,7 @@ const Container = styled.div`
   flex: 1;
   box-shadow: 0 4px 12px rgb(0 0 0 / 8%), 0 0 1px rgb(1 0 0 / 10%);
   font-family: ${font.en};
+  height: 56px;
 `;
 
 export default Lnb;

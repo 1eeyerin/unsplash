@@ -29,7 +29,8 @@ function App() {
 
 App.propTypes = {
   popupPhoto: PropTypes.shape({
-    show: PropTypes.bool
+    show: PropTypes.bool,
+    popupControl: PropTypes.bool
   })
 };
 

@@ -47,5 +47,7 @@ export const useSearchControl = ({ pathname, search, parsed }) => {
 useSearchControl.propTypes = {
   pathname: PropTypes.string,
   search: PropTypes.string,
-  parsed: PropTypes.object
+  parsed: PropTypes.object,
+  currentTarget: PropTypes.object,
+  type: PropTypes.string
 };
