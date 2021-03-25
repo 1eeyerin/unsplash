@@ -45,7 +45,7 @@ function SearchContainer({ match, location }) {
       <ContentContainer>
         <SearchInfo>
           <SearchKeyword query={query} />
-          {related_searches && <SearchScrollMenu data={related_searches} />}
+          {related_searches && <SearchScrollMenu data={related_searches} parsed={parsed} />}
         </SearchInfo>
         <InfiniteScroll getMoreItems={getMoreItems} isLoading={isLoading}>
           {photos?.total ? <PhotoList data={photos.results} /> : !isLoading && <EmptyPhotos />}
