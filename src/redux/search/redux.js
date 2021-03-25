@@ -6,7 +6,10 @@ const initialState = {
     photos: {
       results: []
     },
-    related_searches: []
+    related_searches: [],
+    collections: {
+      results: []
+    }
   },
   isLoading: false,
   popupControl: false
@@ -32,5 +35,6 @@ export default createReducer(initialState, {
   [Action.Types.DELETE_HISTORY]: (state, { props }) =>
     produce(state, draft => {
       draft.searchResults.photos.results = [];
+      draft.searchResults.collections.results = [];
     })
 });
