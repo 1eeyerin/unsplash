@@ -4,11 +4,14 @@ import { IconSearch } from "../../../../icons";
 import { navigate } from "../../../../lib/History";
 import cn from "classnames";
 import { font } from "../../../../styled/Font";
-import { useLocation } from "react-router-dom";
+import { useLocation, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { splitLastPath } from "../../../../lib/Common";
+import qs from "qs";
 
-function SearchBox({ shape }) {
+function SearchBox({ shape, location: { search } }) {
+  const parsed = qs.parse(search, { ignoreQueryPrefix: true });
+  const searchQueryString = qs.stringify(parsed);
   const { pathname } = useLocation();
   const initialValue = splitLastPath("/s/", pathname);
   const [value, setValue] = useState("");
@@ -23,7 +26,7 @@ function SearchBox({ shape }) {
 
   const onSubmit = e => {
     e.preventDefault();
-    navigate(`/s/photos/${value}`);
+    navigate(`/s/photos/${value}${search && `?${searchQueryString}`}`);
   };
 
   return (
@@ -123,4 +126,4 @@ const Input = styled.input`
   }
 `;
 
-export default SearchBox;
+export default withRouter(SearchBox);

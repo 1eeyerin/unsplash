@@ -3,15 +3,17 @@ import styled from "styled-components";
 import ScrollMenu from "../ScrollMenu";
 import { Link } from "react-router-dom";
 import { SlideList } from "../../../styled/SlideMenu";
+import qs from "qs";
 
-function SearchScrollMenu({ data }) {
+function SearchScrollMenu({ data, parsed }) {
+  const searchQueryString = qs.stringify(parsed);
   return (
     <Container>
       <ScrollMenu data={data}>
         {data?.map((item, idx) => {
           return (
             <li key={idx}>
-              <Link to={`/s/photos/${item.title}`}>
+              <Link to={`/s/photos/${item.title}?${searchQueryString}`}>
                 <span className="e_">{item.title}</span>
               </Link>
             </li>
