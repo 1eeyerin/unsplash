@@ -34,7 +34,7 @@ function SearchBar({ location, total, handleFilterPopup }) {
 
 SearchBar.propTypes = {
   location: PropTypes.object,
-  total: PropTypes.number,
+  total: PropTypes.array,
   handleFilterPopup: PropTypes.func
 };
 
