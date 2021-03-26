@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import _ from "lodash";
-import PhotoItemSkeleton from "./PhotoItemSkeleton";
 import PropTypes from "prop-types";
 import { media } from "../../../styled/Responsive";
+import Skeleton from "react-loading-skeleton";
 
-function PhotoListSkeleton() {
+function MasonryPhotosSkeleton() {
   const arr = _.range(30);
 
   return (
@@ -13,7 +13,7 @@ function PhotoListSkeleton() {
       <Row>
         {arr.map(i => (
           <Col key={i}>
-            <PhotoItemSkeleton />
+            <Thumb />
           </Col>
         ))}
       </Row>
@@ -21,7 +21,7 @@ function PhotoListSkeleton() {
   );
 }
 
-PhotoListSkeleton.propTypes = {
+MasonryPhotosSkeleton.propTypes = {
   arr: PropTypes.array
 };
 
@@ -46,6 +46,21 @@ const Col = styled.div`
   ${media.lessThan("xs")`
     padding: 5px;
   `};
+
+  > span {
+    height: 0;
+    padding-bottom: 65%;
+    position: relative;
+    display: block;
+  }
 `;
 
-export default PhotoListSkeleton;
+const Thumb = styled(Skeleton)`
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+`;
+
+export default MasonryPhotosSkeleton;
