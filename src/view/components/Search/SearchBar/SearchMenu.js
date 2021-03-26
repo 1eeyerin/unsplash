@@ -31,7 +31,7 @@ function SearchMenu({ location: { pathname, search }, total: [photosTotal, colle
     <Container>
       <Ul>
         {Item.map((item, idx) => (
-          <Li className={pathname.startsWith(`/s/${item.name}/`) ? "active" : ""}>
+          <Li className={pathname.startsWith(`/s/${item.name}/`) ? "active" : ""} key={idx}>
             <Link to={`/s/${item.name}/${query}?${searchQueryString}`}>
               {item.icon}
               <span>
