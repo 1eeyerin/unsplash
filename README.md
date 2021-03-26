@@ -1,5 +1,5 @@
 # unsplash-clone-app
-사진 공유사이트 "Unsplash(https://unsplash.com/)"의 Open API를 사용하여 클론한 웹 사이트
+사진 공유사이트 "Unsplash('https://unsplash.com/')"의 Open API를 사용하여 클론한 웹 사이트
 <br /><br />
 
 ## 사용한 기술
@@ -29,11 +29,8 @@
 
 ## 기능
 
-- [ ] <br />
-- [ ] <br />
-- [ ] <br />
-- [ ] <br />
-- [ ] <br />
-- [ ] <br />
-- [ ] <br />
-- [ ] <br />
+- [x] 사진 검색<br />
+- [x] 토픽 추천<br />
+- [x] 스크롤 메뉴<br />
+- [x] 로딩 스켈레톤<br />
+- [x] 사진 상세페이지<br />
