@@ -24,7 +24,6 @@ function InfiniteScroll({ children, getMoreItems, isLoading }) {
 }
 
 InfiniteScroll.propTypes = {
-  children: PropTypes.element.isRequired,
   getMoreItems: PropTypes.func,
   isLoading: PropTypes.bool,
   inView: PropTypes.bool
