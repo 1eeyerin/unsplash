@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { IconSearchFilterActive } from "../../../../icons";
 import PropTypes from "prop-types";
+import cn from "classnames";
 
 function Orientation({ Styled, activeMenu, handleClick, handleActiveMenu, parsed, popup }) {
   const [title, setTitle] = useState("Any orientation");
@@ -57,17 +58,15 @@ function Orientation({ Styled, activeMenu, handleClick, handleActiveMenu, parsed
             {Item.map((item, idx) => (
               <li
                 key={idx}
-                className={
-                  parsed.order_by === item.name || (!parsed.order_by && item.name === "")
-                    ? "active"
-                    : ""
-                }
+                className={cn({
+                  active: parsed.order_by === item.name || (!parsed.order_by && item.name === "")
+                })}
               >
                 <ControlItem onClick={e => handleClick(e, "order_by")} name={item.name}>
                   {(parsed.order_by === item.name || (!parsed.order_by && item.name === "")) && (
                     <IconSearchFilterActive />
                   )}
-                  {item.name !== "" ? <Icon className={`icon ${item.name}`} /> : ""}
+                  {item.name !== "" ? <Icon className={cn("icon", item.name)} /> : ""}
                   <span>{item.text}</span>
                 </ControlItem>
               </li>

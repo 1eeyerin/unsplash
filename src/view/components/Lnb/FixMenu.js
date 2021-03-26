@@ -3,12 +3,13 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { media } from "../../../styled/Responsive";
+import cn from "classnames";
 
 function FixMenu({ pathname }) {
   return (
     <Container>
       <List>
-        <li className={pathname === "/" ? "active" : ""}>
+        <li className={cn({ active: pathname === "/" })}>
           <Link to="/">
             <span>Editorial</span>
           </Link>
