@@ -29,14 +29,14 @@ function SearchContainer({ match, location }) {
   useEffect(() => {
     searchActions.searchPhotos({
       query,
-      per_page: 10,
+      per_page: 30,
       page,
       ...parsed
     });
   }, [query, page, location.search]);
 
   const getMoreItems = () => {
-    if (4 <= page) return;
+    if (3 <= page) return;
     setPage(prevPage => prevPage + 1);
   };
 
