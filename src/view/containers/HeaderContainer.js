@@ -22,7 +22,7 @@ function HeaderContainer({ location }) {
 
   useEffect(() => {
     topicsActions.getTopicList({
-      per_page: 20
+      per_page: 30
     });
   }, []);
 
