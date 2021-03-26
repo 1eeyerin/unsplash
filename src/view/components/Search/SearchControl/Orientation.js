@@ -31,7 +31,7 @@ function Orientation({ Styled, activeMenu, handleClick, handleActiveMenu, parsed
     if (popup) {
       setTitle("Orientation");
     } else {
-      switch (parsed.order_by) {
+      switch (parsed.orientation) {
         case "landscape":
           setTitle("Landscape");
           break;
@@ -45,7 +45,7 @@ function Orientation({ Styled, activeMenu, handleClick, handleActiveMenu, parsed
           setTitle("Any orientation");
       }
     }
-  }, [parsed.order_by]);
+  }, [parsed.orientation]);
 
   return (
     <ControlContents>
@@ -59,13 +59,13 @@ function Orientation({ Styled, activeMenu, handleClick, handleActiveMenu, parsed
               <li
                 key={idx}
                 className={cn({
-                  active: parsed.order_by === item.name || (!parsed.order_by && item.name === "")
+                  active:
+                    parsed.orientation === item.name || (!parsed.orientation && item.name === "")
                 })}
               >
-                <ControlItem onClick={e => handleClick(e, "order_by")} name={item.name}>
-                  {(parsed.order_by === item.name || (!parsed.order_by && item.name === "")) && (
-                    <IconSearchFilterActive />
-                  )}
+                <ControlItem onClick={e => handleClick(e, "orientation")} name={item.name}>
+                  {(parsed.orientation === item.name ||
+                    (!parsed.orientation && item.name === "")) && <IconSearchFilterActive />}
                   {item.name !== "" ? <Icon className={cn("icon", item.name)} /> : ""}
                   <span>{item.text}</span>
                 </ControlItem>
@@ -80,7 +80,7 @@ function Orientation({ Styled, activeMenu, handleClick, handleActiveMenu, parsed
 
 Orientation.propTypes = {
   parsed: PropTypes.shape({
-    order_by: PropTypes.string
+    orientation: PropTypes.string
   })
 };
 
