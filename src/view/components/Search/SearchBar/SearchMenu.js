@@ -5,6 +5,7 @@ import { Link, matchPath } from "react-router-dom";
 import PropTypes from "prop-types";
 import qs from "qs";
 import { media } from "../../../../styled/Responsive";
+import cn from "classnames";
 
 function SearchMenu({ location: { pathname, search }, total: [photosTotal, collectionsTotal] }) {
   const parsed = qs.parse(search, { ignoreQueryPrefix: true });
@@ -31,7 +32,7 @@ function SearchMenu({ location: { pathname, search }, total: [photosTotal, colle
     <Container>
       <Ul>
         {Item.map((item, idx) => (
-          <Li className={pathname.startsWith(`/s/${item.name}/`) ? "active" : ""} key={idx}>
+          <Li className={cn({ active: pathname.startsWith(`/s/${item.name}/`) })} key={idx}>
             <Link to={`/s/${item.name}/${query}?${searchQueryString}`}>
               {item.icon}
               <span>

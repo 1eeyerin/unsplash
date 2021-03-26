@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { IconSearchFilterActive } from "../../../../icons";
+import cn from "classnames";
 
 function Color({ Styled, activeMenu, handleClick, handleActiveMenu, parsed, popup }) {
   const [title, setTitle] = useState("Any Color");
@@ -84,9 +85,9 @@ function Color({ Styled, activeMenu, handleClick, handleActiveMenu, parsed, popu
             {Item.map((item, idx) => (
               <li
                 key={idx}
-                className={
-                  parsed.color === item.name || (!parsed.color && item.name === "") ? "active" : ""
-                }
+                className={cn({
+                  active: parsed.color === item.name || (!parsed.color && item.name === "")
+                })}
               >
                 <ControlItem onClick={e => handleClick(e, "color")} name={item.name}>
                   {(parsed.color === item.name || (!parsed.color && item.name === "")) && (
