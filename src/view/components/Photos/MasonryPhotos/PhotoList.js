@@ -8,7 +8,7 @@ import { breakPoint, media } from "../../../../styled/Responsive";
 import { useWindowDimensions } from "../../../../hooks/useWindowDimensions";
 import { navigate } from "../../../../lib/History";
 import _ from "lodash";
-import PhotoListSkeleton from "../../Loader/PhotoListSkeleton";
+import MasonryPhotosSkeleton from "../../Loader/MasonryPhotosSkeleton";
 
 function PhotoList({ data }) {
   const { width } = useWindowDimensions();
@@ -23,7 +23,7 @@ function PhotoList({ data }) {
     }
   };
 
-  if (_.isEmpty(data)) return <PhotoListSkeleton />;
+  if (_.isEmpty(data)) return <MasonryPhotosSkeleton />;
 
   return (
     <Container>
