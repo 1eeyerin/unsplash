@@ -4,13 +4,19 @@ import { media } from "../../../../styled/Responsive";
 import PropTypes from "prop-types";
 import PhotoCard from "./PhotoCard";
 import { font } from "../../../../styled/Font";
+import _ from "lodash";
+import CollectionPhotosSkeleton from "../../Loader/CollectionPhotosSkeleton";
 
 function PhotoList({ data }) {
+  if (_.isEmpty(data)) return <CollectionPhotosSkeleton />;
+
   return (
     <Container>
       <List>
         {data?.results.map((item, idx) => (
-          <PhotoCard item={item} idx={idx} />
+          <li key={idx}>
+            <PhotoCard item={item} />
+          </li>
         ))}
       </List>
     </Container>
