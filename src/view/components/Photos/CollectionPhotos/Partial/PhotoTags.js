@@ -1,17 +1,17 @@
 import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
+import _ from "lodash";
 
 function PhotoTags({ tags }) {
+  const arr = _.range(3);
   return (
     <Tags>
-      {[...Array(3)].map((n, i) => {
-        return (
-          <li key={i}>
-            <span>{tags[i]?.title}</span>
-          </li>
-        );
-      })}
+      {arr.map(i => (
+        <li key={i}>
+          <span>{tags[i]?.title}</span>
+        </li>
+      ))}
     </Tags>
   );
 }
